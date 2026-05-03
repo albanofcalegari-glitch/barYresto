@@ -1,0 +1,262 @@
+import Link from "next/link";
+import { prisma } from "@/db/client";
+import { requirePermission } from "@/lib/rbac";
+import { requireCurrentRestaurant } from "@/lib/tenant";
+import { SafeForm } from "@/components/safe-form";
+import {
+  safeConfirmReservation,
+  safeCancelReservation,
+  safeMarkArrived,
+  safeMarkNoShow,
+  safeCompleteReservation,
+} from "@/modules/reservations/safe-actions";
+import type { ReservationStatus } from "@prisma/client";
+
+export const metadata = { title: "Reservas" };
+
+const STATUS_STYLES: Record<
+  ReservationStatus,
+  { label: string; cls: string }
+> = {
+  PENDING: {
+    label: "Pendiente",
+    cls: "bg-amber-50 text-amber-700 border-amber-200",
+  },
+  CONFIRMED: {
+    label: "Confirmada",
+    cls: "bg-emerald-50 text-emerald-700 border-emerald-200",
+  },
+  ARRIVED: {
+    label: "Llegó",
+    cls: "bg-blue-50 text-blue-700 border-blue-200",
+  },
+  CANCELED: {
+    label: "Cancelada",
+    cls: "bg-zinc-100 text-zinc-500 border-zinc-200",
+  },
+  NO_SHOW: {
+    label: "No vino",
+    cls: "bg-red-50 text-red-700 border-red-200",
+  },
+  COMPLETED: {
+    label: "Completada",
+    cls: "bg-zinc-50 text-zinc-600 border-zinc-200",
+  },
+};
+
+const SOURCE_LABELS: Record<string, string> = {
+  WEB: "Web",
+  WHATSAPP: "WhatsApp",
+  BACKOFFICE: "Manual",
+  PHONE: "Teléfono",
+};
+
+function StatusBadge({ status }: { status: ReservationStatus }) {
+  const s = STATUS_STYLES[status];
+  return (
+    <span
+      className={`text-xs px-2 py-1 rounded-full border font-medium ${s.cls}`}
+    >
+      {s.label}
+    </span>
+  );
+}
+
+export default async function ReservasPage({
+  searchParams,
+}: {
+  searchParams: { fecha?: string; estado?: string };
+}) {
+  await requirePermission("reservation.create");
+  const { restaurant } = await requireCurrentRestaurant();
+
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  const selectedDate = searchParams.fecha ?? today.toISOString().split("T")[0];
+  const dayStart = new Date(`${selectedDate}T00:00:00`);
+  const dayEnd = new Date(`${selectedDate}T23:59:59`);
+
+  const statusFilter = searchParams.estado as ReservationStatus | undefined;
+
+  const reservations = await prisma.reservation.findMany({
+    where: {
+      restaurantId: restaurant.id,
+      startsAt: { gte: dayStart, lte: dayEnd },
+      ...(statusFilter ? { status: statusFilter } : {}),
+    },
+    orderBy: { startsAt: "asc" },
+    include: {
+      table: { select: { code: true } },
+      customer: { select: { visitsCount: true } },
+    },
+  });
+
+  const counts = {
+    total: reservations.length,
+    pending: reservations.filter((r) => r.status === "PENDING").length,
+    confirmed: reservations.filter((r) => r.status === "CONFIRMED").length,
+    pax: reservations
+      .filter((r) => ["PENDING", "CONFIRMED", "ARRIVED"].includes(r.status))
+      .reduce((s, r) => s + r.pax, 0),
+  };
+
+  return (
+    <div>
+      <div className="flex flex-wrap items-baseline justify-between gap-4 mb-6">
+        <h1 className="text-2xl font-bold">Reservas</h1>
+        <Link href="/admin/reservas/nueva" className="btn-primary">
+          + Nueva reserva
+        </Link>
+      </div>
+
+      {/* Filters */}
+      <form className="card mb-6 flex flex-wrap items-end gap-4">
+        <div>
+          <label className="label">Fecha</label>
+          <input
+            name="fecha"
+            type="date"
+            defaultValue={selectedDate}
+            className="input"
+          />
+        </div>
+        <div>
+          <label className="label">Estado</label>
+          <select name="estado" defaultValue={statusFilter ?? ""} className="input">
+            <option value="">Todos</option>
+            {Object.entries(STATUS_STYLES).map(([k, v]) => (
+              <option key={k} value={k}>
+                {v.label}
+              </option>
+            ))}
+          </select>
+        </div>
+        <button className="btn-secondary">Filtrar</button>
+      </form>
+
+      {/* Summary */}
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-6">
+        <div className="card text-center">
+          <div className="text-2xl font-bold">{counts.total}</div>
+          <div className="text-xs text-zinc-500">Total</div>
+        </div>
+        <div className="card text-center">
+          <div className="text-2xl font-bold text-amber-700">{counts.pending}</div>
+          <div className="text-xs text-zinc-500">Pendientes</div>
+        </div>
+        <div className="card text-center">
+          <div className="text-2xl font-bold text-emerald-700">{counts.confirmed}</div>
+          <div className="text-xs text-zinc-500">Confirmadas</div>
+        </div>
+        <div className="card text-center">
+          <div className="text-2xl font-bold">{counts.pax}</div>
+          <div className="text-xs text-zinc-500">Personas</div>
+        </div>
+      </div>
+
+      {reservations.length === 0 ? (
+        <div className="card text-center text-zinc-500">
+          Sin reservas para esta fecha.
+        </div>
+      ) : (
+        <div className="space-y-3">
+          {reservations.map((r) => (
+            <div key={r.id} className="card flex flex-wrap items-start gap-4">
+              {/* Time */}
+              <div className="w-16 text-center">
+                <div className="text-lg font-bold">
+                  {r.startsAt.toLocaleTimeString("es-AR", {
+                    hour: "2-digit",
+                    minute: "2-digit",
+                    hour12: false,
+                  })}
+                </div>
+                <div className="text-xs text-zinc-500">{r.pax} pax</div>
+              </div>
+
+              {/* Info */}
+              <div className="flex-1 min-w-0">
+                <div className="flex items-center gap-2 flex-wrap">
+                  <span className="font-semibold">{r.contactName}</span>
+                  <StatusBadge status={r.status} />
+                  <span className="text-xs text-zinc-400">
+                    {SOURCE_LABELS[r.source] ?? r.source}
+                  </span>
+                  {r.customer && r.customer.visitsCount > 0 && (
+                    <span className="text-xs text-brand-700">
+                      {r.customer.visitsCount} visita(s)
+                    </span>
+                  )}
+                </div>
+                <div className="text-sm text-zinc-600 mt-0.5">
+                  {r.contactPhone}
+                  {r.contactEmail && ` · ${r.contactEmail}`}
+                </div>
+                {r.table && (
+                  <div className="text-xs text-zinc-500 mt-0.5">
+                    Mesa {r.table.code}
+                  </div>
+                )}
+                {r.notes && (
+                  <div className="text-xs text-zinc-500 mt-1 italic">
+                    {r.notes}
+                  </div>
+                )}
+              </div>
+
+              {/* Actions */}
+              <div className="flex flex-wrap gap-2 items-center">
+                {r.status === "PENDING" && (
+                  <>
+                    <SafeForm action={safeConfirmReservation}>
+                      <input type="hidden" name="id" value={r.id} />
+                      <button className="text-xs px-3 py-1.5 rounded-md bg-emerald-600 text-white hover:bg-emerald-700">
+                        Confirmar
+                      </button>
+                    </SafeForm>
+                    <SafeForm action={safeCancelReservation}>
+                      <input type="hidden" name="id" value={r.id} />
+                      <button className="text-xs text-red-600 hover:underline">
+                        Cancelar
+                      </button>
+                    </SafeForm>
+                  </>
+                )}
+                {r.status === "CONFIRMED" && (
+                  <>
+                    <SafeForm action={safeMarkArrived}>
+                      <input type="hidden" name="id" value={r.id} />
+                      <button className="text-xs px-3 py-1.5 rounded-md bg-blue-600 text-white hover:bg-blue-700">
+                        Llegó
+                      </button>
+                    </SafeForm>
+                    <SafeForm action={safeMarkNoShow}>
+                      <input type="hidden" name="id" value={r.id} />
+                      <button className="text-xs text-zinc-600 hover:underline">
+                        No vino
+                      </button>
+                    </SafeForm>
+                    <SafeForm action={safeCancelReservation}>
+                      <input type="hidden" name="id" value={r.id} />
+                      <button className="text-xs text-red-600 hover:underline">
+                        Cancelar
+                      </button>
+                    </SafeForm>
+                  </>
+                )}
+                {r.status === "ARRIVED" && (
+                  <SafeForm action={safeCompleteReservation}>
+                    <input type="hidden" name="id" value={r.id} />
+                    <button className="text-xs px-3 py-1.5 rounded-md bg-zinc-700 text-white hover:bg-zinc-800">
+                      Completar
+                    </button>
+                  </SafeForm>
+                )}
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
