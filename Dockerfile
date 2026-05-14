@@ -2,7 +2,7 @@ FROM node:20-alpine AS base
 
 # --- Dependencies ---
 FROM base AS deps
-RUN apk add --no-cache libc6-compat
+RUN apk add --no-cache libc6-compat openssl
 WORKDIR /app
 RUN corepack enable pnpm
 
@@ -11,17 +11,24 @@ RUN pnpm install --frozen-lockfile
 
 # --- Builder ---
 FROM base AS builder
+RUN apk add --no-cache openssl
 WORKDIR /app
 RUN corepack enable pnpm
 
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 
+# Dummy env vars for build-time validation (overridden at runtime)
+ENV DATABASE_URL="postgresql://x:x@localhost:5432/x"
+ENV AUTH_SECRET="build-time-placeholder-min16chars"
+ENV AUTH_URL="http://localhost:3000"
+
 RUN npx prisma generate
 RUN pnpm build
 
 # --- Runner ---
 FROM base AS runner
+RUN apk add --no-cache openssl
 WORKDIR /app
 
 ENV NODE_ENV=production
