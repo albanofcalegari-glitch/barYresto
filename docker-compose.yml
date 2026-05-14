@@ -3,7 +3,7 @@ services:
     build: .
     restart: unless-stopped
     ports:
-      - "3002:3000"
+      - "3004:3000"
     env_file:
       - .env.production
     depends_on:

@@ -9,7 +9,7 @@
 - Docker + nginx
 
 ## Comandos
-- `pnpm dev` — Dev server (puerto 3002)
+- `pnpm dev` — Dev server (puerto 3004)
 - `npx prisma db push` — Sincronizar schema
 - `npx prisma db seed` — Seed de datos demo
 - `npx prisma studio` — UI de la DB
