@@ -29,8 +29,8 @@ export default async function EditClientePage({
   return (
     <div className="max-w-xl">
       <div className="flex items-baseline justify-between mb-6">
-        <h1 className="text-2xl font-bold">Editar cliente</h1>
-        <Link href="/admin/clientes" className="text-sm text-zinc-600 hover:underline">
+        <h1 className="text-2xl font-heading font-bold">Editar cliente</h1>
+        <Link href="/admin/clientes" className="text-sm text-zinc-400 hover:underline">
           ← volver
         </Link>
       </div>
@@ -42,12 +42,12 @@ export default async function EditClientePage({
           <input name="name" required defaultValue={customer.name} className="input" />
         </div>
         <div>
-          <label className="label">Teléfono *</label>
-          <input name="phone" required defaultValue={customer.phone} className="input" />
+          <label className="label">Email *</label>
+          <input name="email" type="email" required defaultValue={customer.email} className="input" />
         </div>
         <div>
-          <label className="label">Email</label>
-          <input name="email" type="email" defaultValue={customer.email ?? ""} className="input" />
+          <label className="label">Telefono</label>
+          <input name="phone" type="tel" defaultValue={customer.phone ?? ""} className="input" />
         </div>
         <div>
           <label className="label">Notas</label>
@@ -59,8 +59,8 @@ export default async function EditClientePage({
         </div>
       </form>
 
-      <div className="mt-6 card bg-zinc-50 text-sm">
-        <dl className="grid grid-cols-[120px_1fr] gap-y-1 text-zinc-600">
+      <div className="mt-6 card bg-white/[0.03] text-sm">
+        <dl className="grid grid-cols-[120px_1fr] gap-y-1 text-zinc-400">
           <dt>Visitas</dt>
           <dd>{customer.visitsCount}</dd>
           <dt>Última visita</dt>

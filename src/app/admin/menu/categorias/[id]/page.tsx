@@ -36,8 +36,8 @@ export default async function EditCategoryPage({
   return (
     <div className="max-w-xl">
       <div className="flex items-baseline justify-between mb-6">
-        <h1 className="text-2xl font-bold">Editar categoría</h1>
-        <Link href="/admin/menu" className="text-sm text-zinc-600 hover:underline">
+        <h1 className="text-2xl font-heading font-bold">Editar categoría</h1>
+        <Link href="/admin/menu" className="text-sm text-zinc-400 hover:underline">
           ← volver
         </Link>
       </div>
@@ -94,8 +94,8 @@ export default async function EditCategoryPage({
         </div>
       </form>
 
-      <form action={remove} className="mt-6 card bg-red-50 border-red-200 flex items-center justify-between">
-        <div className="text-sm text-red-800">
+      <form action={remove} className="mt-6 card bg-red-500/20 border-red-500/30 flex items-center justify-between">
+        <div className="text-sm text-red-400">
           <strong>Eliminar categoría</strong>
           <div className="text-xs">
             {cat._count.items > 0
@@ -106,7 +106,7 @@ export default async function EditCategoryPage({
         <input type="hidden" name="id" value={cat.id} />
         <button
           disabled={cat._count.items > 0}
-          className="text-sm text-red-700 border border-red-300 rounded-md px-3 py-2 hover:bg-red-100 disabled:opacity-40 disabled:cursor-not-allowed"
+          className="text-sm text-red-400 border border-red-500/30 rounded-md px-3 py-2 hover:bg-red-500/20 disabled:opacity-40 disabled:cursor-not-allowed"
         >
           Eliminar
         </button>

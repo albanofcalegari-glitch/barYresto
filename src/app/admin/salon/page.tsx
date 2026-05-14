@@ -25,7 +25,7 @@ export default async function SalonPage() {
 
   return (
     <div>
-      <h1 className="text-2xl font-bold mb-1">Salón</h1>
+      <h1 className="text-2xl font-heading font-bold mb-1">Salón</h1>
       <p className="text-sm text-zinc-500 mb-6">
         Organizá las zonas (salón, patio, barra) y las mesas con su capacidad.
       </p>
@@ -69,7 +69,7 @@ export default async function SalonPage() {
                 </div>
                 <SafeForm action={safeDeleteZone}>
                   <input type="hidden" name="id" value={zone.id} />
-                  <button className="text-sm text-red-600 hover:underline">
+                  <button className="text-sm text-red-400 hover:underline">
                     eliminar zona
                   </button>
                 </SafeForm>
@@ -115,13 +115,13 @@ export default async function SalonPage() {
                   {zone.tables.map((t) => (
                     <div
                       key={t.id}
-                      className="inline-flex items-center gap-2 border border-zinc-200 rounded-md px-3 py-2 bg-zinc-50"
+                      className="inline-flex items-center gap-2 border border-white/[0.08] rounded-md px-3 py-2 bg-white/[0.03]"
                     >
                       <span className="font-mono font-semibold">{t.code}</span>
                       <span className="text-xs text-zinc-500">{t.seats} lug.</span>
                       <SafeForm action={safeDeleteTable}>
                         <input type="hidden" name="id" value={t.id} />
-                        <button className="text-xs text-red-600 hover:underline ml-1">
+                        <button className="text-xs text-red-400 hover:underline ml-1">
                           ×
                         </button>
                       </SafeForm>

@@ -20,27 +20,27 @@ const STATUS_STYLES: Record<
 > = {
   PENDING: {
     label: "Pendiente",
-    cls: "bg-amber-50 text-amber-700 border-amber-200",
+    cls: "bg-amber-500/10 text-amber-400 border-amber-500/30",
   },
   CONFIRMED: {
     label: "Confirmada",
-    cls: "bg-emerald-50 text-emerald-700 border-emerald-200",
+    cls: "bg-emerald-500/10 text-emerald-400 border-emerald-500/30",
   },
   ARRIVED: {
     label: "Llegó",
-    cls: "bg-blue-50 text-blue-700 border-blue-200",
+    cls: "bg-blue-500/10 text-blue-400 border-blue-500/30",
   },
   CANCELED: {
     label: "Cancelada",
-    cls: "bg-zinc-100 text-zinc-500 border-zinc-200",
+    cls: "bg-white/[0.05] text-zinc-500 border-white/[0.08]",
   },
   NO_SHOW: {
     label: "No vino",
-    cls: "bg-red-50 text-red-700 border-red-200",
+    cls: "bg-red-500/10 text-red-400 border-red-500/30",
   },
   COMPLETED: {
     label: "Completada",
-    cls: "bg-zinc-50 text-zinc-600 border-zinc-200",
+    cls: "bg-white/[0.03] text-zinc-400 border-white/[0.08]",
   },
 };
 
@@ -103,7 +103,7 @@ export default async function ReservasPage({
   return (
     <div>
       <div className="flex flex-wrap items-baseline justify-between gap-4 mb-6">
-        <h1 className="text-2xl font-bold">Reservas</h1>
+        <h1 className="text-2xl font-heading font-bold">Reservas</h1>
         <Link href="/admin/reservas/nueva" className="btn-primary">
           + Nueva reserva
         </Link>
@@ -141,11 +141,11 @@ export default async function ReservasPage({
           <div className="text-xs text-zinc-500">Total</div>
         </div>
         <div className="card text-center">
-          <div className="text-2xl font-bold text-amber-700">{counts.pending}</div>
+          <div className="text-2xl font-bold text-amber-400">{counts.pending}</div>
           <div className="text-xs text-zinc-500">Pendientes</div>
         </div>
         <div className="card text-center">
-          <div className="text-2xl font-bold text-emerald-700">{counts.confirmed}</div>
+          <div className="text-2xl font-bold text-emerald-400">{counts.confirmed}</div>
           <div className="text-xs text-zinc-500">Confirmadas</div>
         </div>
         <div className="card text-center">
@@ -183,12 +183,12 @@ export default async function ReservasPage({
                     {SOURCE_LABELS[r.source] ?? r.source}
                   </span>
                   {r.customer && r.customer.visitsCount > 0 && (
-                    <span className="text-xs text-brand-700">
+                    <span className="text-xs text-brand-300">
                       {r.customer.visitsCount} visita(s)
                     </span>
                   )}
                 </div>
-                <div className="text-sm text-zinc-600 mt-0.5">
+                <div className="text-sm text-zinc-400 mt-0.5">
                   {r.contactPhone}
                   {r.contactEmail && ` · ${r.contactEmail}`}
                 </div>
@@ -216,7 +216,7 @@ export default async function ReservasPage({
                     </SafeForm>
                     <SafeForm action={safeCancelReservation}>
                       <input type="hidden" name="id" value={r.id} />
-                      <button className="text-xs text-red-600 hover:underline">
+                      <button className="text-xs text-red-400 hover:underline">
                         Cancelar
                       </button>
                     </SafeForm>
@@ -232,13 +232,13 @@ export default async function ReservasPage({
                     </SafeForm>
                     <SafeForm action={safeMarkNoShow}>
                       <input type="hidden" name="id" value={r.id} />
-                      <button className="text-xs text-zinc-600 hover:underline">
+                      <button className="text-xs text-zinc-400 hover:underline">
                         No vino
                       </button>
                     </SafeForm>
                     <SafeForm action={safeCancelReservation}>
                       <input type="hidden" name="id" value={r.id} />
-                      <button className="text-xs text-red-600 hover:underline">
+                      <button className="text-xs text-red-400 hover:underline">
                         Cancelar
                       </button>
                     </SafeForm>

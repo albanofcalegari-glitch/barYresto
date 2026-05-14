@@ -8,8 +8,8 @@ import { requireCurrentRestaurant } from "@/lib/tenant";
 
 const customerSchema = z.object({
   name: z.string().min(2).max(80),
-  phone: z.string().min(6).max(30),
-  email: z.string().email().or(z.literal("")).optional(),
+  email: z.string().email(),
+  phone: z.string().max(30).optional(),
   notes: z.string().max(500).optional(),
 });
 
@@ -19,8 +19,8 @@ export async function createCustomer(formData: FormData) {
 
   const parsed = customerSchema.parse({
     name: String(formData.get("name") ?? ""),
-    phone: String(formData.get("phone") ?? ""),
-    email: formData.get("email") ? String(formData.get("email")) : "",
+    email: String(formData.get("email") ?? ""),
+    phone: formData.get("phone") ? String(formData.get("phone")) : undefined,
     notes: formData.get("notes") ? String(formData.get("notes")) : undefined,
   });
 
@@ -28,8 +28,8 @@ export async function createCustomer(formData: FormData) {
     data: {
       restaurantId: restaurant.id,
       name: parsed.name,
-      phone: parsed.phone,
-      email: parsed.email || null,
+      email: parsed.email,
+      phone: parsed.phone || null,
       notes: parsed.notes ?? null,
     },
   });
@@ -43,8 +43,8 @@ export async function updateCustomer(formData: FormData) {
 
   const parsed = customerSchema.parse({
     name: String(formData.get("name") ?? ""),
-    phone: String(formData.get("phone") ?? ""),
-    email: formData.get("email") ? String(formData.get("email")) : "",
+    email: String(formData.get("email") ?? ""),
+    phone: formData.get("phone") ? String(formData.get("phone")) : undefined,
     notes: formData.get("notes") ? String(formData.get("notes")) : undefined,
   });
 
@@ -52,8 +52,8 @@ export async function updateCustomer(formData: FormData) {
     where: { id, restaurantId: restaurant.id },
     data: {
       name: parsed.name,
-      phone: parsed.phone,
-      email: parsed.email || null,
+      email: parsed.email,
+      phone: parsed.phone || null,
       notes: parsed.notes ?? null,
     },
   });

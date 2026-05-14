@@ -16,8 +16,11 @@ const siteSchema = z.object({
   openingInfo: z.string().max(500).optional().nullable(),
 });
 
+const slugRegex = /^[a-z0-9][a-z0-9-]*[a-z0-9]$/;
+
 const restaurantSchema = z.object({
   name: z.string().min(2).max(80),
+  slug: z.string().min(2).max(40).regex(slugRegex, "Solo minusculas, numeros y guiones"),
   phone: z.string().max(40).optional().nullable(),
   whatsappPhone: z.string().max(40).optional().nullable(),
   address: z.string().max(200).optional().nullable(),
@@ -69,10 +72,16 @@ export async function updateRestaurantInfo(formData: FormData) {
 
   const parsed = restaurantSchema.parse({
     name: String(formData.get("name") ?? ""),
+    slug: String(formData.get("slug") ?? ""),
     phone: nullable(formData.get("phone")),
     whatsappPhone: nullable(formData.get("whatsappPhone")),
     address: nullable(formData.get("address")),
   });
+
+  if (parsed.slug !== restaurant.slug) {
+    const taken = await prisma.restaurant.findUnique({ where: { slug: parsed.slug } });
+    if (taken) throw new Error(`El slug "${parsed.slug}" ya esta en uso.`);
+  }
 
   await prisma.restaurant.update({
     where: { id: restaurant.id },

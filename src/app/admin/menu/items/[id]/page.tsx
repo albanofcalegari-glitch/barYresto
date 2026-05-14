@@ -48,8 +48,8 @@ export default async function EditItemPage({
   return (
     <div className="max-w-2xl">
       <div className="flex items-baseline justify-between mb-6">
-        <h1 className="text-2xl font-bold">Editar plato</h1>
-        <Link href="/admin/menu" className="text-sm text-zinc-600 hover:underline">
+        <h1 className="text-2xl font-heading font-bold">Editar plato</h1>
+        <Link href="/admin/menu" className="text-sm text-zinc-400 hover:underline">
           ← volver
         </Link>
       </div>
@@ -155,13 +155,13 @@ export default async function EditItemPage({
         </div>
       </form>
 
-      <form action={remove} className="mt-6 card bg-red-50 border-red-200 flex items-center justify-between">
-        <div className="text-sm text-red-800">
+      <form action={remove} className="mt-6 card bg-red-500/20 border-red-500/30 flex items-center justify-between">
+        <div className="text-sm text-red-400">
           <strong>Eliminar plato</strong>
           <div className="text-xs">Esta acción no se puede deshacer.</div>
         </div>
         <input type="hidden" name="id" value={item.id} />
-        <button className="text-sm text-red-700 border border-red-300 rounded-md px-3 py-2 hover:bg-red-100">
+        <button className="text-sm text-red-400 border border-red-500/30 rounded-md px-3 py-2 hover:bg-red-500/20">
           Eliminar
         </button>
       </form>

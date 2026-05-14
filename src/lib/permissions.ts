@@ -55,6 +55,11 @@ export const PERMISSIONS = {
   // --- reports ---
   REPORT_VIEW: { code: "report.view", label: "Ver reportes" },
 
+  // --- inventory ---
+  INVENTORY_VIEW: { code: "inventory.view", label: "Ver inventario" },
+  INVENTORY_EDIT: { code: "inventory.edit", label: "ABM materias primas y recetas" },
+  INVENTORY_STOCK: { code: "inventory.stock", label: "Gestionar stock (entradas/ajustes)" },
+
   // --- audit ---
   AUDIT_VIEW: { code: "audit.view", label: "Ver audit log" },
 
@@ -97,6 +102,9 @@ export const ROLE_PERMISSIONS: Record<RoleCode, PermissionCode[]> = {
     P.PAYMENT_REFUND.code,
     P.PAYMENT_VIEW.code,
     P.CUSTOMER_EDIT.code,
+    P.INVENTORY_VIEW.code,
+    P.INVENTORY_EDIT.code,
+    P.INVENTORY_STOCK.code,
     P.REPORT_VIEW.code,
     P.AUDIT_VIEW.code,
   ],
@@ -122,6 +130,9 @@ export const ROLE_PERMISSIONS: Record<RoleCode, PermissionCode[]> = {
     P.PAYMENT_CREATE.code,
     P.PAYMENT_VIEW.code,
     P.CUSTOMER_EDIT.code,
+    P.INVENTORY_VIEW.code,
+    P.INVENTORY_EDIT.code,
+    P.INVENTORY_STOCK.code,
     P.REPORT_VIEW.code,
   ],
 
@@ -150,6 +161,24 @@ export const ROLE_LABELS: Record<RoleCode, string> = {
   OWNER: "Dueño",
   MANAGER: "Encargado",
   WAITER: "Mozo",
-  CASHIER: "Caja",
+  CASHIER: "Cajero",
   KITCHEN: "Cocina",
+};
+
+export const ROLE_DESCRIPTIONS: Record<RoleCode, string> = {
+  SUPER_ADMIN: "Acceso total a la plataforma y todos los restaurantes",
+  OWNER: "Acceso completo al restaurante: menú, reservas, órdenes, pagos, inventario, reportes, usuarios y configuración",
+  MANAGER: "Gestión operativa: menú, reservas, órdenes, pagos, inventario, reportes y clientes",
+  WAITER: "Operación de salón: ver mesas, abrir/editar órdenes, enviar comandas, check-in de reservas",
+  CASHIER: "Cobros y caja: ver salón, cerrar órdenes, registrar pagos",
+  KITCHEN: "Vista de cocina: ver estado del salón y comandas",
+};
+
+export const ROLE_MODULES: Record<RoleCode, string[]> = {
+  SUPER_ADMIN: ["Plataforma", "Restaurantes", "Usuarios globales"],
+  OWNER: ["Menú", "Reservas", "Órdenes", "Salón", "Pagos", "Clientes", "Inventario", "Reportes", "Usuarios", "Sitio web", "Configuración"],
+  MANAGER: ["Menú", "Reservas", "Órdenes", "Salón", "Pagos", "Clientes", "Inventario", "Reportes", "Sitio web"],
+  WAITER: ["Órdenes", "Salón", "Reservas (check-in)"],
+  CASHIER: ["Órdenes (cerrar)", "Pagos", "Salón"],
+  KITCHEN: ["Salón (vista)"],
 };

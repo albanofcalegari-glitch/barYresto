@@ -53,7 +53,7 @@ export default async function OrderDetailPage({
     <div className="max-w-3xl">
       <div className="flex items-baseline justify-between mb-6">
         <div>
-          <h1 className="text-2xl font-bold">
+          <h1 className="text-2xl font-heading font-bold">
             Orden #{order.code}
             {order.table && (
               <span className="text-zinc-500 font-normal ml-2">Mesa {order.table.code}</span>
@@ -64,7 +64,7 @@ export default async function OrderDetailPage({
             {order.type === "TAKEAWAY" ? "Para llevar" : "En salón"}
           </div>
         </div>
-        <Link href="/admin/ordenes" className="text-sm text-zinc-600 hover:underline">
+        <Link href="/admin/ordenes" className="text-sm text-zinc-400 hover:underline">
           ← volver
         </Link>
       </div>
@@ -72,11 +72,11 @@ export default async function OrderDetailPage({
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {/* Current items */}
         <div className="card">
-          <h2 className="font-semibold mb-3">Items de la orden</h2>
+          <h2 className="font-heading font-semibold mb-3">Items de la orden</h2>
           {order.items.length === 0 ? (
             <div className="text-sm text-zinc-500">Sin items todavía.</div>
           ) : (
-            <div className="divide-y">
+            <div className="divide-y divide-white/[0.06]">
               {order.items.map((oi) => (
                 <div key={oi.id} className="py-2 flex items-center justify-between gap-2">
                   <div className="flex-1 min-w-0">
@@ -93,7 +93,7 @@ export default async function OrderDetailPage({
                   {canEdit && (
                     <SafeForm action={safeRemoveItemFromOrder}>
                       <input type="hidden" name="orderItemId" value={oi.id} />
-                      <button className="text-xs text-red-600 hover:underline">
+                      <button className="text-xs text-red-400 hover:underline">
                         quitar
                       </button>
                     </SafeForm>
@@ -102,7 +102,7 @@ export default async function OrderDetailPage({
               ))}
             </div>
           )}
-          <div className="flex justify-between font-semibold border-t mt-3 pt-3">
+          <div className="flex justify-between font-semibold border-t border-white/[0.08] mt-3 pt-3">
             <span>Total</span>
             <span>{formatMoneyArs(order.totalCents)}</span>
           </div>
@@ -132,7 +132,7 @@ export default async function OrderDetailPage({
         {/* Add items */}
         {canEdit && (
           <div className="card">
-            <h2 className="font-semibold mb-3">Agregar platos</h2>
+            <h2 className="font-heading font-semibold mb-3">Agregar platos</h2>
             <div className="space-y-4 max-h-[60vh] overflow-y-auto">
               {categories
                 .filter((c) => c.items.length > 0)
@@ -165,7 +165,7 @@ export default async function OrderDetailPage({
                           <div className="text-xs text-zinc-500 whitespace-nowrap">
                             {formatMoneyArs(it.priceCents)}
                           </div>
-                          <button className="text-xs px-2 py-1 rounded bg-brand-600 text-white hover:bg-brand-700">
+                          <button className="text-xs px-2 py-1 rounded bg-brand-500 text-white hover:bg-brand-600">
                             +
                           </button>
                         </SafeForm>

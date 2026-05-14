@@ -37,7 +37,7 @@ export default async function ClientesPage({
   return (
     <div>
       <div className="flex flex-wrap items-baseline justify-between gap-4 mb-6">
-        <h1 className="text-2xl font-bold">Clientes</h1>
+        <h1 className="text-2xl font-heading font-bold">Clientes</h1>
       </div>
 
       {/* Search */}
@@ -61,12 +61,12 @@ export default async function ClientesPage({
           <input name="name" required minLength={2} className="input" />
         </div>
         <div>
-          <label className="label">Teléfono *</label>
-          <input name="phone" required className="input" />
+          <label className="label">Email *</label>
+          <input name="email" type="email" required className="input" />
         </div>
         <div>
-          <label className="label">Email</label>
-          <input name="email" type="email" className="input" />
+          <label className="label">Telefono</label>
+          <input name="phone" type="tel" className="input" />
         </div>
         <button className="btn-primary">Agregar cliente</button>
       </SafeForm>
@@ -78,22 +78,22 @@ export default async function ClientesPage({
       ) : (
         <div className="overflow-x-auto">
         <table className="min-w-full text-sm card p-0 overflow-hidden min-w-[600px]">
-          <thead className="bg-zinc-50">
+          <thead className="bg-white/[0.03]">
             <tr>
               <th className="text-left px-4 py-2">Nombre</th>
-              <th className="text-left px-4 py-2 hidden sm:table-cell">Teléfono</th>
-              <th className="text-left px-4 py-2 hidden md:table-cell">Email</th>
+              <th className="text-left px-4 py-2 hidden sm:table-cell">Email</th>
+              <th className="text-left px-4 py-2 hidden md:table-cell">Telefono</th>
               <th className="text-left px-4 py-2">Visitas</th>
               <th className="text-left px-4 py-2 hidden sm:table-cell">Última</th>
               <th className="px-4 py-2"></th>
             </tr>
           </thead>
-          <tbody className="divide-y">
+          <tbody className="divide-y divide-white/[0.06]">
             {customers.map((c) => (
               <tr key={c.id}>
                 <td className="px-4 py-2 font-medium">{c.name}</td>
-                <td className="px-4 py-2 hidden sm:table-cell">{c.phone}</td>
-                <td className="px-4 py-2 text-zinc-500 hidden md:table-cell">{c.email ?? "—"}</td>
+                <td className="px-4 py-2 hidden sm:table-cell">{c.email}</td>
+                <td className="px-4 py-2 text-zinc-500 hidden md:table-cell">{c.phone ?? "—"}</td>
                 <td className="px-4 py-2">{c.visitsCount}</td>
                 <td className="px-4 py-2 text-zinc-500 hidden sm:table-cell">
                   {c.lastVisitAt
@@ -104,13 +104,13 @@ export default async function ClientesPage({
                   <div className="flex justify-end gap-3">
                     <Link
                       href={`/admin/clientes/${c.id}`}
-                      className="text-zinc-600 hover:underline"
+                      className="text-zinc-400 hover:underline"
                     >
                       editar
                     </Link>
                     <SafeForm action={safeDeleteCustomer}>
                       <input type="hidden" name="id" value={c.id} />
-                      <button className="text-red-600 hover:underline">
+                      <button className="text-red-400 hover:underline">
                         eliminar
                       </button>
                     </SafeForm>

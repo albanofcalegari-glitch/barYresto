@@ -25,9 +25,9 @@ export default async function NewItemPage({
   if (categories.length === 0) {
     return (
       <div className="max-w-xl">
-        <h1 className="text-2xl font-bold mb-4">Nuevo plato</h1>
+        <h1 className="text-2xl font-heading font-bold mb-4">Nuevo plato</h1>
         <div className="card">
-          <p className="text-sm text-zinc-600 mb-4">
+          <p className="text-sm text-zinc-400 mb-4">
             Antes de crear platos, creá al menos una categoría.
           </p>
           <Link href="/admin/menu" className="btn-primary">
@@ -49,8 +49,8 @@ export default async function NewItemPage({
   return (
     <div className="max-w-2xl">
       <div className="flex items-baseline justify-between mb-6">
-        <h1 className="text-2xl font-bold">Nuevo plato</h1>
-        <Link href="/admin/menu" className="text-sm text-zinc-600 hover:underline">
+        <h1 className="text-2xl font-heading font-bold">Nuevo plato</h1>
+        <Link href="/admin/menu" className="text-sm text-zinc-400 hover:underline">
           ← volver
         </Link>
       </div>

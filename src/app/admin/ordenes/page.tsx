@@ -14,12 +14,12 @@ import type { OrderStatus } from "@prisma/client";
 export const metadata = { title: "Órdenes" };
 
 const STATUS_STYLES: Record<OrderStatus, { label: string; cls: string }> = {
-  OPEN: { label: "Abierta", cls: "bg-blue-50 text-blue-700 border-blue-200" },
-  FIRED: { label: "En cocina", cls: "bg-amber-50 text-amber-700 border-amber-200" },
-  SERVING: { label: "Sirviendo", cls: "bg-emerald-50 text-emerald-700 border-emerald-200" },
-  CLOSING: { label: "Pidió cuenta", cls: "bg-purple-50 text-purple-700 border-purple-200" },
-  CLOSED: { label: "Cerrada", cls: "bg-zinc-100 text-zinc-500 border-zinc-200" },
-  CANCELED: { label: "Cancelada", cls: "bg-red-50 text-red-600 border-red-200" },
+  OPEN: { label: "Abierta", cls: "bg-blue-500/10 text-blue-400 border-blue-500/30" },
+  FIRED: { label: "En cocina", cls: "bg-amber-500/10 text-amber-400 border-amber-500/30" },
+  SERVING: { label: "Sirviendo", cls: "bg-emerald-500/10 text-emerald-400 border-emerald-500/30" },
+  CLOSING: { label: "Pidió cuenta", cls: "bg-purple-500/10 text-purple-400 border-purple-500/30" },
+  CLOSED: { label: "Cerrada", cls: "bg-white/[0.05] text-zinc-500 border-white/[0.08]" },
+  CANCELED: { label: "Cancelada", cls: "bg-red-500/10 text-red-400 border-red-500/30" },
 };
 
 export default async function OrdenesPage({
@@ -59,7 +59,7 @@ export default async function OrdenesPage({
   return (
     <div>
       <div className="flex flex-wrap items-baseline justify-between gap-4 mb-6">
-        <h1 className="text-2xl font-bold">Órdenes</h1>
+        <h1 className="text-2xl font-heading font-bold">Órdenes</h1>
         <Link href="/admin/ordenes/nueva" className="btn-primary">
           + Abrir mesa
         </Link>
@@ -69,7 +69,7 @@ export default async function OrdenesPage({
       <div className="flex flex-wrap gap-2 mb-6">
         <Link
           href="/admin/ordenes"
-          className={`text-sm px-3 py-1.5 rounded-full border ${showActive ? "bg-zinc-900 text-white border-zinc-900" : "border-zinc-200 hover:bg-zinc-100"}`}
+          className={`text-sm px-3 py-1.5 rounded-full border ${showActive ? "bg-zinc-100 text-zinc-900 border-zinc-100" : "border-white/[0.08] hover:bg-white/[0.05]"}`}
         >
           Activas
         </Link>
@@ -77,7 +77,7 @@ export default async function OrdenesPage({
           <Link
             key={k}
             href={`/admin/ordenes?estado=${k}`}
-            className={`text-sm px-3 py-1.5 rounded-full border ${statusFilter === k ? "bg-zinc-900 text-white border-zinc-900" : "border-zinc-200 hover:bg-zinc-100"}`}
+            className={`text-sm px-3 py-1.5 rounded-full border ${statusFilter === k ? "bg-zinc-100 text-zinc-900 border-zinc-100" : "border-white/[0.08] hover:bg-white/[0.05]"}`}
           >
             {v.label}
           </Link>
@@ -115,7 +115,7 @@ export default async function OrdenesPage({
                 {o.items.length === 0 ? (
                   <div className="text-sm text-zinc-500 mb-3">Sin items todavía</div>
                 ) : (
-                  <div className="text-sm divide-y mb-3 flex-1">
+                  <div className="text-sm divide-y divide-white/[0.06] mb-3 flex-1">
                     {o.items.map((it) => (
                       <div key={it.id} className="py-1 flex justify-between">
                         <span>
@@ -126,7 +126,7 @@ export default async function OrdenesPage({
                             </span>
                           )}
                         </span>
-                        <span className="text-zinc-600">
+                        <span className="text-zinc-400">
                           {formatMoneyArs(it.priceCentsSnapshot * it.quantity)}
                         </span>
                       </div>
@@ -135,7 +135,7 @@ export default async function OrdenesPage({
                 )}
 
                 {/* Total */}
-                <div className="flex justify-between font-semibold border-t pt-2 mb-3">
+                <div className="flex justify-between font-semibold border-t border-white/[0.08] pt-2 mb-3">
                   <span>Total</span>
                   <span>{formatMoneyArs(o.totalCents)}</span>
                 </div>
@@ -162,7 +162,7 @@ export default async function OrdenesPage({
                     <>
                       <Link
                         href={`/admin/ordenes/${o.id}`}
-                        className="text-xs px-3 py-1.5 rounded-md border border-zinc-200 hover:bg-zinc-100"
+                        className="text-xs px-3 py-1.5 rounded-md border border-white/[0.08] hover:bg-white/[0.05]"
                       >
                         Ver / Editar
                       </Link>
@@ -185,7 +185,7 @@ export default async function OrdenesPage({
                   {["OPEN", "FIRED", "SERVING", "CLOSING"].includes(o.status) && (
                     <SafeForm action={safeCancelOrder}>
                       <input type="hidden" name="id" value={o.id} />
-                      <button className="text-xs text-red-600 hover:underline px-2 py-1.5">
+                      <button className="text-xs text-red-400 hover:underline px-2 py-1.5">
                         Cancelar
                       </button>
                     </SafeForm>

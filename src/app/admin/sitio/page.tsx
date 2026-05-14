@@ -23,21 +23,21 @@ export default async function SitePage() {
   return (
     <div>
       <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-3 mb-6">
-        <h1 className="text-2xl font-bold">Sitio web</h1>
+        <h1 className="text-2xl font-heading font-bold">Sitio web</h1>
         <div className="flex flex-wrap items-center gap-3 text-sm">
-          <Link href="/admin/sitio/galeria" className="text-brand-600 hover:underline">
+          <Link href="/admin/sitio/galeria" className="text-brand-400 hover:underline">
             Galería ({galleryCount} fotos) →
           </Link>
-          <Link href="/admin/sitio/horarios" className="text-brand-600 hover:underline">
+          <Link href="/admin/sitio/horarios" className="text-brand-400 hover:underline">
             Horarios y feriados →
           </Link>
-          <Link href="/admin/sitio/qr" className="text-brand-600 hover:underline">
+          <Link href="/admin/sitio/qr" className="text-brand-400 hover:underline">
             QR de la carta →
           </Link>
           <Link
             href={`/${restaurant.slug}`}
             target="_blank"
-            className="text-brand-600 hover:underline"
+            className="text-brand-400 hover:underline"
           >
             Ver sitio público ↗
           </Link>

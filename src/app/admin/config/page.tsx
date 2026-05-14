@@ -11,22 +11,37 @@ export default async function ConfigPage() {
 
   return (
     <div className="max-w-2xl">
-      <h1 className="text-2xl font-bold mb-1">Configuración</h1>
+      <h1 className="text-2xl font-heading font-bold mb-1">Configuración</h1>
       <p className="text-sm text-zinc-500 mb-6">
-        Datos del restaurante. El slug público (<code className="font-mono">{restaurant.slug}</code>) no se puede cambiar desde acá.
+        Datos del restaurante y URL publica.
       </p>
 
       <SafeForm action={safeUpdateRestaurantInfo} className="card space-y-4" successMessage="Guardado">
-        <div>
-          <label className="label">Nombre *</label>
-          <input
-            name="name"
-            required
-            defaultValue={restaurant.name}
-            maxLength={80}
-            minLength={2}
-            className="input"
-          />
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div>
+            <label className="label">Nombre *</label>
+            <input
+              name="name"
+              required
+              defaultValue={restaurant.name}
+              maxLength={80}
+              minLength={2}
+              className="input"
+            />
+          </div>
+          <div>
+            <label className="label">Slug (URL publica) *</label>
+            <input
+              name="slug"
+              required
+              defaultValue={restaurant.slug}
+              maxLength={40}
+              minLength={2}
+              pattern="[a-z0-9][a-z0-9\-]*[a-z0-9]"
+              className="input font-mono"
+            />
+            <p className="text-xs text-zinc-500 mt-1">baryresto.app/<strong>{restaurant.slug}</strong></p>
+          </div>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -66,11 +81,9 @@ export default async function ConfigPage() {
         </div>
       </SafeForm>
 
-      <div className="mt-8 card bg-zinc-50 border-zinc-200 text-sm">
+      <div className="mt-8 card bg-white/[0.03] border-white/[0.08] text-sm">
         <div className="font-semibold mb-2">Datos de la cuenta</div>
-        <dl className="grid grid-cols-[140px_1fr] gap-y-1 text-zinc-600">
-          <dt>Slug público</dt>
-          <dd className="font-mono">{restaurant.slug}</dd>
+        <dl className="grid grid-cols-[140px_1fr] gap-y-1 text-zinc-400">
           <dt>Zona horaria</dt>
           <dd>{restaurant.timezone}</dd>
           <dt>Moneda</dt>

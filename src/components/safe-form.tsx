@@ -31,12 +31,12 @@ export function SafeForm({
   return (
     <form ref={formRef} action={formAction} className={className}>
       {state.error && (
-        <div className="mb-3 rounded-md bg-red-50 border border-red-200 px-3 py-2 text-sm text-red-700">
+        <div className="mb-3 rounded-lg bg-red-500/10 border border-red-500/20 px-3 py-2 text-sm text-red-400">
           {state.error}
         </div>
       )}
       {state.success && successMessage && (
-        <div className="mb-3 rounded-md bg-emerald-50 border border-emerald-200 px-3 py-2 text-sm text-emerald-700">
+        <div className="mb-3 rounded-lg bg-emerald-500/10 border border-emerald-500/20 px-3 py-2 text-sm text-emerald-400">
           {successMessage}
         </div>
       )}

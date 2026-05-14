@@ -6,6 +6,7 @@ import { prisma } from "@/db/client";
 import { assertPermission } from "@/lib/rbac";
 import { requireCurrentRestaurant } from "@/lib/tenant";
 import type { PaymentMethod } from "@prisma/client";
+import { deductStockForOrder } from "@/modules/inventory/actions";
 
 // =============================================================================
 // OPEN ORDER
@@ -229,6 +230,8 @@ export async function registerPayment(formData: FormData) {
       },
     }),
   ]);
+
+  await deductStockForOrder(order.id, restaurant.id);
 
   revalidatePath("/admin/ordenes");
 }

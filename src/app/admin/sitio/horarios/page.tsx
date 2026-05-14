@@ -29,7 +29,7 @@ export default async function HoursPage() {
   return (
     <div className="space-y-10">
       <section>
-        <h1 className="text-2xl font-bold mb-1">Horarios</h1>
+        <h1 className="text-2xl font-heading font-bold mb-1">Horarios</h1>
         <p className="text-sm text-zinc-500 mb-6">
           Franjas por día de la semana. Podés tener varias por día (ej: mediodía + noche).
         </p>
@@ -46,7 +46,7 @@ export default async function HoursPage() {
       </section>
 
       <section>
-        <h2 className="text-xl font-bold mb-1">Días especiales / feriados</h2>
+        <h2 className="text-xl font-heading font-bold mb-1">Días especiales / feriados</h2>
         <p className="text-sm text-zinc-500 mb-6">
           Marcá días donde el local está cerrado o tiene horario distinto.
         </p>
@@ -76,7 +76,7 @@ export default async function HoursPage() {
           ) : (
             <div className="overflow-x-auto">
             <table className="min-w-full text-sm card p-0 overflow-hidden min-w-[440px]">
-              <thead className="bg-zinc-50">
+              <thead className="bg-white/[0.03]">
                 <tr>
                   <th className="text-left px-4 py-2">Fecha</th>
                   <th className="text-left px-4 py-2">Estado</th>
@@ -84,7 +84,7 @@ export default async function HoursPage() {
                   <th className="px-4 py-2"></th>
                 </tr>
               </thead>
-              <tbody className="divide-y">
+              <tbody className="divide-y divide-white/[0.06]">
                 {special.map((s) => (
                   <tr key={s.id}>
                     <td className="px-4 py-2">
@@ -101,7 +101,7 @@ export default async function HoursPage() {
                     <td className="px-4 py-2 text-right">
                       <SafeForm action={safeDeleteSpecialDay}>
                         <input type="hidden" name="id" value={s.id} />
-                        <button className="text-red-600 hover:underline text-xs">
+                        <button className="text-red-400 hover:underline text-xs">
                           Eliminar
                         </button>
                       </SafeForm>

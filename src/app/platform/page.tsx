@@ -12,7 +12,7 @@ export default async function PlatformHome() {
 
   return (
     <div>
-      <h1 className="text-2xl font-bold mb-6">Métricas</h1>
+      <h1 className="text-2xl font-heading font-bold mb-6">Métricas</h1>
       <div className="grid gap-4 md:grid-cols-4">
         <Metric label="Restaurantes" value={restaurants} />
         <Metric label="Usuarios" value={users} />
@@ -25,7 +25,7 @@ export default async function PlatformHome() {
 
 function Metric({ label, value }: { label: string; value: number }) {
   return (
-    <div className="rounded-lg border border-zinc-800 bg-zinc-900 p-4">
+    <div className="rounded-lg border border-white/[0.08] bg-surface-card p-4">
       <div className="text-xs uppercase tracking-wide text-zinc-400">{label}</div>
       <div className="text-3xl font-bold mt-2">{value}</div>
     </div>

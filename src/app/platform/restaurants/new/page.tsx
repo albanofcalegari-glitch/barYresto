@@ -63,7 +63,7 @@ async function createRestaurantAction(formData: FormData) {
 
     // Buscar o crear los roles tenant-scoped para este restaurant
     const roles = await tx.role.findMany({
-      where: { restaurantId: null, code: { in: ["OWNER", "MANAGER", "WAITER", "CASHIER"] } },
+      where: { restaurantId: null, code: { in: ["OWNER", "MANAGER", "WAITER", "CASHIER", "KITCHEN"] } },
       include: { permissions: true },
     });
 
@@ -119,8 +119,8 @@ export default async function NewRestaurantPage() {
 
   return (
     <div className="max-w-lg">
-      <h1 className="text-2xl font-bold mb-6">Nuevo restaurante</h1>
-      <form action={createRestaurantAction} className="space-y-5 rounded-lg border border-zinc-800 bg-zinc-900 p-6">
+      <h1 className="text-2xl font-heading font-bold mb-6">Nuevo restaurante</h1>
+      <form action={createRestaurantAction} className="space-y-5 rounded-lg border border-white/[0.08] bg-surface-card p-6">
         <Field name="name" label="Nombre del restaurante" required placeholder="La Parrilla del Bary" />
         <Field
           name="slug"
@@ -134,7 +134,7 @@ export default async function NewRestaurantPage() {
           <Field name="whatsappPhone" label="WhatsApp" placeholder="+54 9 11 1234-5678" />
         </div>
 
-        <div className="pt-4 border-t border-zinc-800">
+        <div className="pt-4 border-t border-white/[0.08]">
           <div className="text-sm font-semibold text-zinc-200 mb-3">Dueño inicial</div>
           <Field name="ownerName" label="Nombre" required placeholder="Juan Pérez" />
           <Field name="ownerEmail" label="Email" type="email" required placeholder="owner@parrilla.com" />
@@ -179,7 +179,7 @@ function Field({
         required={required}
         placeholder={placeholder}
         minLength={minLength}
-        className="input bg-zinc-950 border-zinc-800 text-zinc-100"
+        className="input bg-surface border-white/[0.08] text-zinc-100"
       />
       {hint && <p className="text-xs text-zinc-500 mt-1">{hint}</p>}
     </div>

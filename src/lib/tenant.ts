@@ -18,15 +18,25 @@ export async function getCurrentRestaurantId(): Promise<string | null> {
 export async function requireCurrentRestaurant() {
   const session = await auth();
   if (!session?.user) throw new RBACError(401, "No autenticado");
-  if (session.user.isPlatformAdmin && !session.user.restaurantId) {
-    throw new RBACError(400, "Super admin debe elegir un restaurante");
+
+  let restaurantId = session.user.restaurantId;
+
+  if (session.user.isPlatformAdmin && !restaurantId) {
+    const first = await prisma.restaurant.findFirst({
+      where: { status: "ACTIVE" },
+      orderBy: { createdAt: "asc" },
+      select: { id: true },
+    });
+    if (!first) throw new RBACError(404, "No hay restaurantes activos");
+    restaurantId = first.id;
   }
-  if (!session.user.restaurantId) {
+
+  if (!restaurantId) {
     throw new RBACError(400, "Sin restaurante asociado");
   }
 
   const restaurant = await prisma.restaurant.findUnique({
-    where: { id: session.user.restaurantId },
+    where: { id: restaurantId },
   });
   if (!restaurant) throw new RBACError(404, "Restaurante no encontrado");
 

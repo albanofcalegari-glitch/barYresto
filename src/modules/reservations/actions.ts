@@ -14,7 +14,7 @@ import type { ReservationSource } from "@prisma/client";
 const publicReservationSchema = z.object({
   contactName: z.string().min(2).max(80),
   contactPhone: z.string().min(6).max(30),
-  contactEmail: z.string().email().or(z.literal("")).optional(),
+  contactEmail: z.string().email(),
   pax: z.coerce.number().int().min(1).max(50),
   date: z.string().regex(/^\d{4}-\d{2}-\d{2}$/),
   time: z.string().regex(/^\d{2}:\d{2}$/),
@@ -60,20 +60,20 @@ export async function createPublicReservation(
 
   const customer = await prisma.customer.upsert({
     where: {
-      restaurantId_phone: {
+      restaurantId_email: {
         restaurantId: restaurant.id,
-        phone: parsed.contactPhone,
+        email: parsed.contactEmail,
       },
     },
     create: {
       restaurantId: restaurant.id,
       name: parsed.contactName,
-      phone: parsed.contactPhone,
-      email: parsed.contactEmail || null,
+      phone: parsed.contactPhone || null,
+      email: parsed.contactEmail,
     },
     update: {
       name: parsed.contactName,
-      ...(parsed.contactEmail ? { email: parsed.contactEmail } : {}),
+      ...(parsed.contactPhone ? { phone: parsed.contactPhone } : {}),
     },
   });
 
@@ -85,7 +85,7 @@ export async function createPublicReservation(
       pax: parsed.pax,
       contactName: parsed.contactName,
       contactPhone: parsed.contactPhone,
-      contactEmail: parsed.contactEmail || null,
+      contactEmail: parsed.contactEmail,
       notes: parsed.notes ?? null,
       source: "WEB",
       status: "PENDING",
@@ -122,20 +122,20 @@ export async function createBackofficeReservation(formData: FormData) {
 
   const customer = await prisma.customer.upsert({
     where: {
-      restaurantId_phone: {
+      restaurantId_email: {
         restaurantId: restaurant.id,
-        phone: parsed.contactPhone,
+        email: parsed.contactEmail,
       },
     },
     create: {
       restaurantId: restaurant.id,
       name: parsed.contactName,
-      phone: parsed.contactPhone,
-      email: parsed.contactEmail || null,
+      phone: parsed.contactPhone || null,
+      email: parsed.contactEmail,
     },
     update: {
       name: parsed.contactName,
-      ...(parsed.contactEmail ? { email: parsed.contactEmail } : {}),
+      ...(parsed.contactPhone ? { phone: parsed.contactPhone } : {}),
     },
   });
 
@@ -148,7 +148,7 @@ export async function createBackofficeReservation(formData: FormData) {
       pax: parsed.pax,
       contactName: parsed.contactName,
       contactPhone: parsed.contactPhone,
-      contactEmail: parsed.contactEmail || null,
+      contactEmail: parsed.contactEmail,
       notes: parsed.notes ?? null,
       source: parsed.source as ReservationSource,
       status: "CONFIRMED",

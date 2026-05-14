@@ -26,8 +26,8 @@ export default async function NuevaReservaPage() {
   return (
     <div className="max-w-2xl">
       <div className="flex items-baseline justify-between mb-6">
-        <h1 className="text-2xl font-bold">Nueva reserva</h1>
-        <Link href="/admin/reservas" className="text-sm text-zinc-600 hover:underline">
+        <h1 className="text-2xl font-heading font-bold">Nueva reserva</h1>
+        <Link href="/admin/reservas" className="text-sm text-zinc-400 hover:underline">
           ← volver
         </Link>
       </div>
@@ -45,19 +45,19 @@ export default async function NuevaReservaPage() {
             />
           </div>
           <div>
-            <label className="label">Teléfono *</label>
+            <label className="label">Email *</label>
             <input
-              name="contactPhone"
+              name="contactEmail"
               required
-              type="tel"
+              type="email"
               className="input"
             />
           </div>
         </div>
 
         <div>
-          <label className="label">Email (opcional)</label>
-          <input name="contactEmail" type="email" className="input" />
+          <label className="label">Telefono (opcional)</label>
+          <input name="contactPhone" type="tel" className="input" />
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -116,7 +116,7 @@ export default async function NuevaReservaPage() {
           />
         </div>
 
-        <div className="flex justify-end gap-3 pt-4 border-t">
+        <div className="flex justify-end gap-3 pt-4 border-t border-white/[0.08]">
           <Link href="/admin/reservas" className="btn-ghost">
             Cancelar
           </Link>

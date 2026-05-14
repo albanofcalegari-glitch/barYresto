@@ -1,0 +1,38 @@
+version: "3.9"
+
+services:
+  app:
+    build: .
+    restart: unless-stopped
+    ports:
+      - "3002:3000"
+    env_file:
+      - .env.production
+    depends_on:
+      db:
+        condition: service_healthy
+    networks:
+      - baryresto
+
+  db:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: baryresto
+      POSTGRES_USER: baryresto
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-baryresto_secret}
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U baryresto"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+    networks:
+      - baryresto
+
+volumes:
+  pgdata:
+
+networks:
+  baryresto:

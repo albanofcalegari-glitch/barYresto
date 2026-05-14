@@ -18,7 +18,7 @@ export default async function GalleryPage() {
 
   return (
     <div>
-      <h1 className="text-2xl font-bold mb-1">Galería de fotos</h1>
+      <h1 className="text-2xl font-heading font-bold mb-1">Galería de fotos</h1>
       <p className="text-sm text-zinc-500 mb-6">
         Las fotos se muestran en la página pública del restaurante. Podés subir hasta 12.
       </p>
@@ -27,7 +27,7 @@ export default async function GalleryPage() {
         <>
           <GalleryUploader />
           <details className="mt-3 card">
-            <summary className="text-xs text-brand-600 cursor-pointer">Agregar por URL (sin Cloudinary)</summary>
+            <summary className="text-xs text-brand-400 cursor-pointer">Agregar por URL (sin Cloudinary)</summary>
             <SafeForm
               action={safeAddMediaAsset}
               className="mt-3 flex flex-col sm:flex-row gap-2 items-end"
@@ -70,7 +70,7 @@ export default async function GalleryPage() {
                     <SafeForm action={safeReorderMediaAsset}>
                       <input type="hidden" name="id" value={img.id} />
                       <input type="hidden" name="direction" value="up" />
-                      <button className="text-xs text-zinc-500 hover:text-brand-600 px-1" title="Mover antes">
+                      <button className="text-xs text-zinc-500 hover:text-brand-400 px-1" title="Mover antes">
                         ←
                       </button>
                     </SafeForm>
@@ -79,7 +79,7 @@ export default async function GalleryPage() {
                     <SafeForm action={safeReorderMediaAsset}>
                       <input type="hidden" name="id" value={img.id} />
                       <input type="hidden" name="direction" value="down" />
-                      <button className="text-xs text-zinc-500 hover:text-brand-600 px-1" title="Mover después">
+                      <button className="text-xs text-zinc-500 hover:text-brand-400 px-1" title="Mover después">
                         →
                       </button>
                     </SafeForm>
@@ -87,7 +87,7 @@ export default async function GalleryPage() {
                 </div>
                 <SafeForm action={safeDeleteMediaAsset}>
                   <input type="hidden" name="id" value={img.id} />
-                  <button className="text-xs text-red-600 hover:underline">
+                  <button className="text-xs text-red-400 hover:underline">
                     Eliminar
                   </button>
                 </SafeForm>

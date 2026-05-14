@@ -28,7 +28,7 @@ export default async function MenuPage() {
   return (
     <div>
       <div className="flex items-baseline justify-between mb-6">
-        <h1 className="text-2xl font-bold">Menú</h1>
+        <h1 className="text-2xl font-heading font-bold">Menú</h1>
         <Link href="/admin/menu/items/nuevo" className="btn-primary">
           + Nuevo plato
         </Link>
@@ -44,7 +44,7 @@ export default async function MenuPage() {
           <input name="name" required placeholder="Ej: Postres" className="input" />
         </div>
         <div className="w-32">
-          <label className="label">Orden</label>
+          <label className="label">Posicion</label>
           <input name="orderIndex" type="number" defaultValue={categories.length} className="input" />
         </div>
         <button className="btn-secondary">Agregar</button>
@@ -67,25 +67,25 @@ export default async function MenuPage() {
                     )}
                   </h2>
                   <div className="text-xs text-zinc-500">
-                    {cat.items.length} producto(s) · orden {cat.orderIndex}
+                    {cat.items.length} producto(s) · posicion {cat.orderIndex}
                   </div>
                 </div>
                 <div className="flex gap-2 items-center">
                   <Link
                     href={`/admin/menu/items/nuevo?categoryId=${cat.id}`}
-                    className="text-sm text-brand-600 hover:underline"
+                    className="text-sm text-brand-400 hover:underline"
                   >
                     + plato
                   </Link>
                   <Link
                     href={`/admin/menu/categorias/${cat.id}`}
-                    className="text-sm text-zinc-600 hover:underline"
+                    className="text-sm text-zinc-400 hover:underline"
                   >
                     editar
                   </Link>
                   <SafeForm action={safeDeleteCategory}>
                     <input type="hidden" name="id" value={cat.id} />
-                    <button className="text-sm text-red-600 hover:underline">
+                    <button className="text-sm text-red-400 hover:underline">
                       eliminar
                     </button>
                   </SafeForm>
@@ -107,14 +107,14 @@ export default async function MenuPage() {
                       <th className="py-2"></th>
                     </tr>
                   </thead>
-                  <tbody className="divide-y">
+                  <tbody className="divide-y divide-white/[0.06]">
                     {cat.items.map((it) => (
                       <tr key={it.id}>
                         <td className="py-2">
                           <div className="font-medium">
                             {it.name}
                             {it.featured && (
-                              <span className="ml-2 text-xs text-amber-700">★ destacado</span>
+                              <span className="ml-2 text-xs text-amber-400">★ destacado</span>
                             )}
                           </div>
                           {it.description && (
@@ -130,8 +130,8 @@ export default async function MenuPage() {
                             <button
                               className={
                                 it.available
-                                  ? "text-xs px-2 py-1 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200"
-                                  : "text-xs px-2 py-1 rounded-full bg-zinc-100 text-zinc-500 border border-zinc-200"
+                                  ? "text-xs px-2 py-1 rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/30"
+                                  : "text-xs px-2 py-1 rounded-full bg-white/[0.05] text-zinc-500 border border-white/[0.08]"
                               }
                             >
                               {it.available ? "Disponible" : "Sin stock"}
@@ -142,13 +142,13 @@ export default async function MenuPage() {
                           <div className="flex justify-end gap-3">
                             <Link
                               href={`/admin/menu/items/${it.id}`}
-                              className="text-zinc-600 hover:underline"
+                              className="text-zinc-400 hover:underline"
                             >
                               editar
                             </Link>
                             <SafeForm action={safeDeleteItem}>
                               <input type="hidden" name="id" value={it.id} />
-                              <button className="text-red-600 hover:underline">
+                              <button className="text-red-400 hover:underline">
                                 eliminar
                               </button>
                             </SafeForm>

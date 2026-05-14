@@ -68,7 +68,7 @@ export default async function AdminHome({
     <div>
       <div className="flex items-baseline justify-between mb-8">
         <div>
-          <h1 className="text-2xl font-bold">Hola, {session.user.name}</h1>
+          <h1 className="text-2xl font-heading font-bold">Hola, {session.user.name}</h1>
           {restaurant && (
             <p className="text-sm text-zinc-500 mt-1">
               {restaurant.name} · <code>{restaurant.slug}</code>
@@ -78,15 +78,15 @@ export default async function AdminHome({
       </div>
 
       {searchParams.error === "forbidden" && (
-        <div className="mb-6 rounded-md bg-amber-50 border border-amber-200 p-3 text-sm text-amber-800">
+        <div className="mb-6 rounded-md bg-amber-500/10 border border-amber-500/30 p-3 text-sm text-amber-400">
           No tenés permisos para acceder a esa sección.
         </div>
       )}
 
       {!restaurant ? (
         <div className="card">
-          <h2 className="font-semibold">Sin restaurante asociado</h2>
-          <p className="mt-2 text-sm text-zinc-600">
+          <h2 className="font-heading font-semibold">Sin restaurante asociado</h2>
+          <p className="mt-2 text-sm text-zinc-400">
             Tu usuario aún no está vinculado a ningún restaurante. Contactá al
             super admin.
           </p>
@@ -152,9 +152,9 @@ function Stat({
   alert?: boolean;
 }) {
   return (
-    <div className={`card ${alert ? "border-amber-300 bg-amber-50" : ""}`}>
+    <div className={`card ${alert ? "border-amber-500/30 bg-amber-500/10" : ""}`}>
       <div className="text-xs uppercase tracking-wide text-zinc-500">{label}</div>
-      <div className={`text-3xl font-bold mt-2 ${alert ? "text-amber-700" : ""}`}>
+      <div className={`text-3xl font-bold mt-2 ${alert ? "text-amber-400" : ""}`}>
         {value}
       </div>
     </div>
@@ -172,7 +172,7 @@ function QuickLink({
 }) {
   return (
     <Link href={href} className="card hover:shadow-md transition-shadow group">
-      <div className="font-semibold group-hover:text-brand-700">{label}</div>
+      <div className="font-semibold group-hover:text-brand-300">{label}</div>
       <div className="text-sm text-zinc-500 mt-1">{description}</div>
     </Link>
   );

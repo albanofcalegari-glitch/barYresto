@@ -50,6 +50,9 @@ model Restaurant {
   specialDays   SpecialDay[]
   auditLogs     AuditLog[]
   payments      Payment[]
+  suppliers     Supplier[]
+  rawMaterials  RawMaterial[]
+  stockMovements StockMovement[]
 
   @@index([slug])
 }
@@ -235,9 +238,10 @@ model MenuItem {
   featured     Boolean      @default(false)
   available    Boolean      @default(true)
   orderIndex   Int          @default(0)
-  restaurant   Restaurant   @relation(fields: [restaurantId], references: [id], onDelete: Cascade)
-  category     MenuCategory @relation(fields: [categoryId], references: [id])
+  restaurant   Restaurant         @relation(fields: [restaurantId], references: [id], onDelete: Cascade)
+  category     MenuCategory       @relation(fields: [categoryId], references: [id])
   orderItems   OrderItem[]
+  recipe       RecipeIngredient[]
 
   @@index([restaurantId, categoryId])
 }
@@ -298,8 +302,8 @@ model Customer {
   id           String        @id @default(cuid())
   restaurantId String
   name         String
-  phone        String
-  email        String?
+  phone        String?
+  email        String
   notes        String?
   visitsCount  Int           @default(0)
   lastVisitAt  DateTime?
@@ -308,7 +312,7 @@ model Customer {
   reservations Reservation[]
   orders       Order[]
 
-  @@unique([restaurantId, phone])
+  @@unique([restaurantId, email])
   @@index([restaurantId])
 }
 
@@ -502,4 +506,89 @@ model AuditLog {
   restaurant   Restaurant? @relation(fields: [restaurantId], references: [id])
 
   @@index([restaurantId, createdAt])
+}
+
+// =============================================================================
+// INVENTORY
+// =============================================================================
+
+model Supplier {
+  id           String        @id @default(cuid())
+  restaurantId String
+  name         String
+  phone        String?
+  email        String?
+  notes        String?
+  createdAt    DateTime      @default(now())
+  restaurant   Restaurant    @relation(fields: [restaurantId], references: [id], onDelete: Cascade)
+  materials    RawMaterial[]
+
+  @@unique([restaurantId, name])
+  @@index([restaurantId])
+}
+
+model RawMaterial {
+  id             String             @id @default(cuid())
+  restaurantId   String
+  name           String
+  description    String?
+  unit           StockUnit
+  currentStock   Float              @default(0)
+  reorderPoint   Float              @default(0)
+  criticalPoint  Float              @default(0)
+  costPerUnit    Float              @default(0)
+  supplierId     String?
+  createdAt      DateTime           @default(now())
+  updatedAt      DateTime           @updatedAt
+  restaurant     Restaurant         @relation(fields: [restaurantId], references: [id], onDelete: Cascade)
+  supplier       Supplier?          @relation(fields: [supplierId], references: [id], onDelete: SetNull)
+  recipes        RecipeIngredient[]
+  stockMovements StockMovement[]
+
+  @@unique([restaurantId, name])
+  @@index([restaurantId])
+}
+
+enum StockUnit {
+  KG
+  G
+  LT
+  ML
+  UNIT
+}
+
+model RecipeIngredient {
+  id            String      @id @default(cuid())
+  menuItemId    String
+  rawMaterialId String
+  quantity      Float
+  menuItem      MenuItem    @relation(fields: [menuItemId], references: [id], onDelete: Cascade)
+  rawMaterial   RawMaterial @relation(fields: [rawMaterialId], references: [id], onDelete: Cascade)
+
+  @@unique([menuItemId, rawMaterialId])
+  @@index([menuItemId])
+}
+
+model StockMovement {
+  id            String        @id @default(cuid())
+  restaurantId  String
+  rawMaterialId String
+  type          MovementType
+  quantity      Float
+  reason        String?
+  orderId       String?
+  createdBy     String?
+  createdAt     DateTime      @default(now())
+  restaurant    Restaurant    @relation(fields: [restaurantId], references: [id], onDelete: Cascade)
+  rawMaterial   RawMaterial   @relation(fields: [rawMaterialId], references: [id], onDelete: Cascade)
+
+  @@index([restaurantId, createdAt])
+  @@index([rawMaterialId])
+}
+
+enum MovementType {
+  PURCHASE
+  SALE
+  ADJUSTMENT
+  WASTE
 }

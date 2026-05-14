@@ -132,7 +132,7 @@ async function main() {
   const globalRoles = await prisma.role.findMany({
     where: {
       restaurantId: null,
-      code: { in: ["OWNER", "MANAGER", "WAITER", "CASHIER"] },
+      code: { in: ["OWNER", "MANAGER", "WAITER", "CASHIER", "KITCHEN"] },
     },
     include: { permissions: true },
   });
@@ -347,10 +347,117 @@ async function main() {
     });
   }
 
+  // --- Proveedores ---
+  const frigorifico = await prisma.supplier.upsert({
+    where: { restaurantId_name: { restaurantId: demo.id, name: "Frigorífico Norte" } },
+    create: {
+      restaurantId: demo.id,
+      name: "Frigorífico Norte",
+      phone: "+54 11 5555-0001",
+      email: "ventas@frigorificonorte.test",
+      notes: "Entrega lunes y jueves. Pago a 30 días.",
+    },
+    update: {},
+  });
+
+  const distribuidora = await prisma.supplier.upsert({
+    where: { restaurantId_name: { restaurantId: demo.id, name: "Distribuidora Sur" } },
+    create: {
+      restaurantId: demo.id,
+      name: "Distribuidora Sur",
+      phone: "+54 11 5555-0002",
+      notes: "Bebidas, secos y lácteos. Entrega martes.",
+    },
+    update: {},
+  });
+
+  const verduleria = await prisma.supplier.upsert({
+    where: { restaurantId_name: { restaurantId: demo.id, name: "Verdulería Don Pedro" } },
+    create: {
+      restaurantId: demo.id,
+      name: "Verdulería Don Pedro",
+      phone: "+54 11 5555-0003",
+      notes: "Frutas y verduras frescas. Entrega diaria.",
+    },
+    update: {},
+  });
+
+  // --- Materias primas ---
+  const rawMats = [
+    { name: "Carne vacuna", unit: "KG" as const, cost: 5500, reorder: 20, critical: 5, supplier: frigorifico.id },
+    { name: "Pollo", unit: "KG" as const, cost: 3200, reorder: 10, critical: 3, supplier: frigorifico.id },
+    { name: "Chorizo parrillero", unit: "KG" as const, cost: 4000, reorder: 8, critical: 2, supplier: frigorifico.id },
+    { name: "Morcilla", unit: "KG" as const, cost: 3500, reorder: 5, critical: 1, supplier: frigorifico.id },
+    { name: "Harina 000", unit: "KG" as const, cost: 800, reorder: 25, critical: 5, supplier: distribuidora.id },
+    { name: "Huevos", unit: "UNIT" as const, cost: 120, reorder: 60, critical: 12, supplier: distribuidora.id },
+    { name: "Queso provolone", unit: "KG" as const, cost: 6500, reorder: 5, critical: 1, supplier: distribuidora.id },
+    { name: "Ricotta", unit: "KG" as const, cost: 4200, reorder: 4, critical: 1, supplier: distribuidora.id },
+    { name: "Jamón cocido", unit: "KG" as const, cost: 7000, reorder: 3, critical: 1, supplier: distribuidora.id },
+    { name: "Papa", unit: "KG" as const, cost: 600, reorder: 30, critical: 5, supplier: verduleria.id },
+    { name: "Lechuga", unit: "UNIT" as const, cost: 400, reorder: 10, critical: 3, supplier: verduleria.id },
+    { name: "Tomate", unit: "KG" as const, cost: 1200, reorder: 10, critical: 3, supplier: verduleria.id },
+    { name: "Limón", unit: "KG" as const, cost: 900, reorder: 5, critical: 1, supplier: verduleria.id },
+    { name: "Aceite girasol", unit: "LT" as const, cost: 1800, reorder: 10, critical: 2, supplier: distribuidora.id },
+    { name: "Dulce de leche", unit: "KG" as const, cost: 3800, reorder: 3, critical: 1, supplier: distribuidora.id },
+    { name: "Vino Malbec (caja 6)", unit: "UNIT" as const, cost: 30000, reorder: 3, critical: 1, supplier: distribuidora.id },
+    { name: "Agua mineral 500ml", unit: "UNIT" as const, cost: 350, reorder: 48, critical: 12, supplier: distribuidora.id },
+    { name: "Gaseosa Coca 1.5lt", unit: "UNIT" as const, cost: 1200, reorder: 24, critical: 6, supplier: distribuidora.id },
+  ];
+
+  const matMap: Record<string, string> = {};
+  for (const rm of rawMats) {
+    const mat = await prisma.rawMaterial.upsert({
+      where: { restaurantId_name: { restaurantId: demo.id, name: rm.name } },
+      create: {
+        restaurantId: demo.id,
+        name: rm.name,
+        unit: rm.unit,
+        costPerUnit: rm.cost,
+        currentStock: rm.reorder * 2,
+        reorderPoint: rm.reorder,
+        criticalPoint: rm.critical,
+        supplierId: rm.supplier,
+      },
+      update: {},
+    });
+    matMap[rm.name] = mat.id;
+  }
+
+  // --- Recetas (ingredientes por plato) ---
+  const recipes: { itemIdx: number; ingredients: { mat: string; qty: number }[] }[] = [
+    { itemIdx: 0, ingredients: [{ mat: "Queso provolone", qty: 0.25 }] }, // Provoleta
+    { itemIdx: 1, ingredients: [{ mat: "Carne vacuna", qty: 0.5 }, { mat: "Harina 000", qty: 0.15 }, { mat: "Huevos", qty: 1 }] }, // Empanadas
+    { itemIdx: 2, ingredients: [{ mat: "Lechuga", qty: 1 }, { mat: "Queso provolone", qty: 0.05 }] }, // César
+    { itemIdx: 3, ingredients: [{ mat: "Carne vacuna", qty: 0.4 }] }, // Bife de chorizo
+    { itemIdx: 4, ingredients: [{ mat: "Carne vacuna", qty: 0.35 }] }, // Ojo de bife
+    { itemIdx: 5, ingredients: [{ mat: "Carne vacuna", qty: 0.5 }] }, // Vacío
+    { itemIdx: 6, ingredients: [{ mat: "Carne vacuna", qty: 0.8 }, { mat: "Chorizo parrillero", qty: 0.3 }, { mat: "Morcilla", qty: 0.2 }] }, // Parrillada
+    { itemIdx: 7, ingredients: [{ mat: "Harina 000", qty: 0.2 }, { mat: "Jamón cocido", qty: 0.1 }, { mat: "Queso provolone", qty: 0.1 }, { mat: "Huevos", qty: 2 }] }, // Sorrentinos
+    { itemIdx: 8, ingredients: [{ mat: "Harina 000", qty: 0.2 }, { mat: "Ricotta", qty: 0.15 }, { mat: "Huevos", qty: 2 }] }, // Ravioles
+    { itemIdx: 9, ingredients: [{ mat: "Papa", qty: 0.5 }, { mat: "Harina 000", qty: 0.05 }, { mat: "Huevos", qty: 1 }] }, // Ñoquis
+    { itemIdx: 10, ingredients: [{ mat: "Huevos", qty: 3 }, { mat: "Dulce de leche", qty: 0.08 }] }, // Flan
+    { itemIdx: 11, ingredients: [{ mat: "Huevos", qty: 2 }, { mat: "Harina 000", qty: 0.05 }] }, // Tiramisú
+    { itemIdx: 14, ingredients: [{ mat: "Limón", qty: 0.15 }] }, // Limonada
+  ];
+
+  for (const recipe of recipes) {
+    const menuItemId = `${demo.id}-item-${recipe.itemIdx}`;
+    for (const ing of recipe.ingredients) {
+      const rawMaterialId = matMap[ing.mat];
+      if (!rawMaterialId) continue;
+      await prisma.recipeIngredient.upsert({
+        where: { menuItemId_rawMaterialId: { menuItemId, rawMaterialId } },
+        create: { menuItemId, rawMaterialId, quantity: ing.qty },
+        update: { quantity: ing.qty },
+      });
+    }
+  }
+
   console.log("✅ Seed listo");
   console.log("   super admin : admin@baryresto.app / admin123");
   console.log("   owner demo  : owner@parrilla-bary.test / owner123");
   console.log("   restaurante : /parrilla-bary");
+  console.log("   proveedores : 3 | materias primas: 18 | recetas: 13 platos");
 }
 
 main()

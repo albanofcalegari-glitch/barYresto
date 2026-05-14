@@ -101,12 +101,12 @@ export default async function ReportesPage() {
 
   return (
     <div>
-      <h1 className="text-2xl font-bold mb-1">Reportes</h1>
+      <h1 className="text-2xl font-heading font-bold mb-1">Reportes</h1>
       <p className="text-sm text-zinc-500 mb-6">Resumen de {monthName}</p>
 
       {/* Sales */}
       <section className="mb-8">
-        <h2 className="text-lg font-semibold mb-3">Ventas</h2>
+        <h2 className="text-lg font-heading font-semibold mb-3">Ventas</h2>
         <div className="grid gap-4 md:grid-cols-3">
           <StatCard
             label="Hoy"
@@ -125,7 +125,7 @@ export default async function ReportesPage() {
 
       {/* Reservations */}
       <section className="mb-8">
-        <h2 className="text-lg font-semibold mb-3">Reservas del mes</h2>
+        <h2 className="text-lg font-heading font-semibold mb-3">Reservas del mes</h2>
         <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
           <StatCard label="Total" value={reservationsMonth} />
           {reservationsByStatus.map((s) => (
@@ -149,17 +149,17 @@ export default async function ReportesPage() {
       {/* Top items */}
       {topItems.length > 0 && (
         <section>
-          <h2 className="text-lg font-semibold mb-3">Platos más pedidos</h2>
+          <h2 className="text-lg font-heading font-semibold mb-3">Platos más pedidos</h2>
           <div className="card p-0 overflow-hidden">
             <table className="w-full text-sm">
-              <thead className="bg-zinc-50">
+              <thead className="bg-white/[0.03]">
                 <tr>
                   <th className="text-left px-4 py-2">#</th>
                   <th className="text-left px-4 py-2">Plato</th>
                   <th className="text-right px-4 py-2">Cantidad</th>
                 </tr>
               </thead>
-              <tbody className="divide-y">
+              <tbody className="divide-y divide-white/[0.06]">
                 {topItems.map((item, i) => (
                   <tr key={item.nameSnapshot}>
                     <td className="px-4 py-2 text-zinc-500">{i + 1}</td>

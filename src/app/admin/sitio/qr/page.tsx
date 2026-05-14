@@ -14,7 +14,7 @@ export default async function QrPage() {
 
   return (
     <div className="max-w-2xl">
-      <h1 className="text-2xl font-bold mb-1">QR de la carta</h1>
+      <h1 className="text-2xl font-heading font-bold mb-1">QR de la carta</h1>
       <p className="text-sm text-zinc-500 mb-6">
         Descargá e imprimí este QR. Al escanearlo, tus clientes abren la carta en el navegador.
       </p>
@@ -24,7 +24,7 @@ export default async function QrPage() {
         <img
           src={qr}
           alt={`QR de ${restaurant.name}`}
-          className="w-72 h-72 rounded-md border border-zinc-200"
+          className="w-72 h-72 rounded-md border border-white/[0.08]"
         />
         <div className="text-center">
           <div className="font-semibold">{restaurant.name}</div>
@@ -51,8 +51,8 @@ export default async function QrPage() {
         </div>
       </div>
 
-      <div className="mt-6 card bg-amber-50 border-amber-200">
-        <div className="text-sm text-amber-900">
+      <div className="mt-6 card bg-amber-500/10 border-amber-500/20">
+        <div className="text-sm text-amber-400">
           <strong>Próximamente:</strong> QR por mesa con deep-link al autopedido (v1).
         </div>
       </div>

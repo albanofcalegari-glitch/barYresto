@@ -68,7 +68,7 @@ export function BusinessHoursEditor({
                   <button
                     type="button"
                     onClick={() => removeSlot(idx)}
-                    className="text-xs text-red-600 hover:underline ml-2"
+                    className="text-xs text-red-400 hover:underline ml-2"
                   >
                     Quitar
                   </button>
@@ -77,7 +77,7 @@ export function BusinessHoursEditor({
               <button
                 type="button"
                 onClick={() => addSlot(d)}
-                className="text-sm text-brand-600 hover:underline"
+                className="text-sm text-brand-400 hover:underline"
               >
                 + agregar franja
               </button>

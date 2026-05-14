@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
-import { Raleway, Playfair_Display } from "next/font/google";
+import { Syne, DM_Sans, Playfair_Display } from "next/font/google";
 import "./globals.css";
 
-const raleway = Raleway({ subsets: ["latin"], variable: "--font-raleway" });
+const syne = Syne({ subsets: ["latin"], variable: "--font-syne" });
+const dmSans = DM_Sans({ subsets: ["latin"], variable: "--font-dm-sans" });
 const playfair = Playfair_Display({
   subsets: ["latin"],
   variable: "--font-playfair",
@@ -23,7 +24,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="es" className={`${raleway.variable} ${playfair.variable}`}>
+    <html lang="es" className={`${syne.variable} ${dmSans.variable} ${playfair.variable}`}>
       <body className="font-sans antialiased">{children}</body>
     </html>
   );

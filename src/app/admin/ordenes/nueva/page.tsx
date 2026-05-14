@@ -26,8 +26,8 @@ export default async function NuevaOrdenPage() {
   return (
     <div className="max-w-md">
       <div className="flex items-baseline justify-between mb-6">
-        <h1 className="text-2xl font-bold">Abrir mesa</h1>
-        <Link href="/admin/ordenes" className="text-sm text-zinc-600 hover:underline">
+        <h1 className="text-2xl font-heading font-bold">Abrir mesa</h1>
+        <Link href="/admin/ordenes" className="text-sm text-zinc-400 hover:underline">
           ← volver
         </Link>
       </div>
@@ -58,7 +58,7 @@ export default async function NuevaOrdenPage() {
           </select>
         </div>
 
-        <div className="flex justify-end gap-3 pt-4 border-t">
+        <div className="flex justify-end gap-3 pt-4 border-t border-white/[0.08]">
           <Link href="/admin/ordenes" className="btn-ghost">Cancelar</Link>
           <button className="btn-primary">Abrir orden</button>
         </div>
