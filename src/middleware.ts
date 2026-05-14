@@ -1,7 +1,7 @@
 import { NextResponse, type NextRequest } from "next/server";
 import { getToken } from "next-auth/jwt";
 
-const ADMIN_HOST = process.env.ADMIN_HOST ?? "admin.baryresto.qngine.com.ar";
+const ADMIN_HOST = process.env.ADMIN_HOST ?? "baryresto-admin.qngine.com.ar";
 
 export async function middleware(req: NextRequest) {
   const { pathname } = req.nextUrl;

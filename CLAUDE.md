@@ -18,7 +18,7 @@
 
 ## URLs
 - **Publico**: `https://baryresto.qngine.com.ar/{slug}`
-- **Admin**: `https://admin.baryresto.qngine.com.ar`
+- **Admin**: `https://baryresto-admin.qngine.com.ar`
 - **Dev publico**: `http://localhost:3002/{slug}`
 - **Dev admin**: `http://localhost:3002/admin`
 
@@ -30,7 +30,7 @@
 
 ## Arquitectura
 - Multi-tenant: todas las tablas scoped por `restaurantId`
-- Middleware rutea por host: `baryresto.qngine.com.ar` (publico) vs `admin.baryresto.qngine.com.ar` (dashboard)
+- Middleware rutea por host: `baryresto.qngine.com.ar` (publico) vs `baryresto-admin.qngine.com.ar` (dashboard)
 - RBAC: 5 roles (OWNER, MANAGER, WAITER, CASHIER, KITCHEN) con permisos granulares
 - Platform admin (`/platform`): gestion global de restaurantes, usuarios, estados
 - Restaurant admin (`/admin`): gestion del restaurante propio
