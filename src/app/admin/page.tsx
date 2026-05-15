@@ -2,6 +2,8 @@ import Link from "next/link";
 import { requireSession } from "@/lib/rbac";
 import { prisma } from "@/db/client";
 import { formatMoneyArs } from "@/lib/utils";
+import { env } from "@/lib/env";
+import { CopyUrlBanner } from "@/components/copy-url-banner";
 
 export const metadata = { title: "Inicio" };
 
@@ -70,12 +72,17 @@ export default async function AdminHome({
         <div>
           <h1 className="text-2xl font-heading font-bold">Hola, {session.user.name}</h1>
           {restaurant && (
-            <p className="text-sm text-zinc-500 mt-1">
-              {restaurant.name} · <code>{restaurant.slug}</code>
-            </p>
+            <p className="text-sm text-zinc-500 mt-1">{restaurant.name}</p>
           )}
         </div>
       </div>
+
+      {restaurant && (
+        <CopyUrlBanner
+          url={`${env.APP_BASE_URL}/${restaurant.slug}`}
+          slug={restaurant.slug}
+        />
+      )}
 
       {searchParams.error === "forbidden" && (
         <div className="mb-6 rounded-md bg-amber-500/10 border border-amber-500/30 p-3 text-sm text-amber-400">

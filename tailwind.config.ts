@@ -24,10 +24,16 @@ const config: Config = {
           dark: "#9b7f3f",
         },
         surface: {
-          DEFAULT: "#07070f",
-          card: "#0f0f18",
-          elevated: "#1a1a26",
+          DEFAULT: "rgb(var(--color-surface) / <alpha-value>)",
+          card: "rgb(var(--color-surface-card) / <alpha-value>)",
+          elevated: "rgb(var(--color-surface-elevated) / <alpha-value>)",
         },
+        "th-text": {
+          primary: "rgb(var(--color-text-primary) / <alpha-value>)",
+          secondary: "rgb(var(--color-text-secondary) / <alpha-value>)",
+          muted: "rgb(var(--color-text-muted) / <alpha-value>)",
+        },
+        "th-border": "rgb(var(--color-border) / var(--color-border-alpha))",
       },
       fontFamily: {
         sans: ["var(--font-dm-sans)", "system-ui", "sans-serif"],
@@ -40,8 +46,8 @@ const config: Config = {
         "3xl": "22px",
       },
       boxShadow: {
-        glow: "0 0 20px rgba(124, 92, 252, 0.15)",
-        "glow-lg": "0 0 40px rgba(124, 92, 252, 0.2)",
+        glow: "var(--shadow-glow)",
+        "glow-lg": "var(--shadow-glow-lg)",
       },
     },
   },

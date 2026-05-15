@@ -2,6 +2,7 @@ import Link from "next/link";
 import { requirePlatformAdmin } from "@/lib/rbac";
 import { signOut } from "@/lib/auth";
 import { BrandIcon } from "@/components/brand";
+import { ThemeToggle } from "@/components/theme-toggle";
 
 export const dynamic = "force-dynamic";
 
@@ -35,6 +36,7 @@ export default async function PlatformLayout({
             <Link href="/platform/users" className="text-zinc-400 hover:bg-brand-500/10 hover:text-brand-300 px-2 py-1 rounded">
               Usuarios
             </Link>
+            <ThemeToggle />
             <span className="text-zinc-500">· {session.user.email}</span>
             <form action={logoutAction}>
               <button className="text-zinc-400 hover:text-zinc-100">salir</button>

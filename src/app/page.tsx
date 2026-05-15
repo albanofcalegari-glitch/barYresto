@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { BrandLogo } from "@/components/brand";
+import { ThemeToggle } from "@/components/theme-toggle";
 
 export const dynamic = "force-dynamic";
 
@@ -19,6 +20,7 @@ export default function LandingPage() {
             <BrandLogo size="md" />
           </Link>
           <nav className="flex items-center gap-6">
+            <ThemeToggle />
             <a
               href={loginUrl}
               className="text-sm text-zinc-400 hover:text-white transition-colors"

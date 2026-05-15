@@ -2,40 +2,92 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ── Theme CSS variables ── */
+@layer base {
+  :root {
+    /* Light mode (default vars, overridden by .dark) */
+    --color-surface: 250 250 250;          /* #fafafa */
+    --color-surface-card: 255 255 255;     /* #ffffff */
+    --color-surface-elevated: 243 243 246; /* #f3f3f6 */
+    --color-text-primary: 24 24 27;        /* zinc-900 */
+    --color-text-secondary: 63 63 70;      /* zinc-700 */
+    --color-text-muted: 113 113 122;       /* zinc-500 */
+    --color-border: 0 0 0;                 /* black base for alpha */
+    --color-border-alpha: 0.08;
+    --color-overlay-bg: 255 255 255;       /* white for cards */
+    --color-overlay-alpha: 0.7;
+    --shadow-glow: 0 0 20px rgba(124, 92, 252, 0.1);
+    --shadow-glow-lg: 0 0 40px rgba(124, 92, 252, 0.15);
+  }
+
+  .dark {
+    --color-surface: 7 7 15;               /* #07070f */
+    --color-surface-card: 15 15 24;        /* #0f0f18 */
+    --color-surface-elevated: 26 26 38;    /* #1a1a26 */
+    --color-text-primary: 255 255 255;     /* white */
+    --color-text-secondary: 228 228 231;   /* zinc-200 */
+    --color-text-muted: 161 161 170;       /* zinc-400 */
+    --color-border: 255 255 255;           /* white base for alpha */
+    --color-border-alpha: 0.06;
+    --color-overlay-bg: 255 255 255;
+    --color-overlay-alpha: 0.03;
+    --shadow-glow: 0 0 20px rgba(124, 92, 252, 0.15);
+    --shadow-glow-lg: 0 0 40px rgba(124, 92, 252, 0.2);
+  }
+}
+
 html,
 body {
   min-height: 100%;
 }
 
+/* ── Theme-aware base styles ── */
+@layer base {
+  body {
+    color: rgb(var(--color-text-primary));
+  }
+}
+
 @layer components {
-  /* ── Admin components (Qngine dark theme) ── */
+  /* ── Admin components (Qngine theme) ── */
   .btn {
     @apply inline-flex items-center justify-center rounded-lg px-4 py-2 text-sm font-medium transition-all duration-200 outline-none focus-visible:ring-2 focus-visible:ring-brand-500/50 disabled:opacity-50 disabled:pointer-events-none;
   }
   .btn-primary {
     @apply btn bg-brand-500 text-white hover:bg-brand-600;
-    box-shadow: 0 0 20px rgba(124, 92, 252, 0.15);
+    box-shadow: var(--shadow-glow);
   }
   .btn-primary:hover {
-    box-shadow: 0 0 40px rgba(124, 92, 252, 0.25);
+    box-shadow: var(--shadow-glow-lg);
   }
   .btn-secondary {
-    @apply btn bg-surface-elevated text-zinc-300 border border-brand-500/20 hover:bg-brand-500/10 hover:border-brand-500/40;
+    @apply btn border border-brand-500/20 hover:bg-brand-500/10 hover:border-brand-500/40;
+    background: rgb(var(--color-surface-elevated));
+    color: rgb(var(--color-text-secondary));
   }
   .btn-ghost {
-    @apply btn bg-transparent text-zinc-400 hover:bg-white/5 hover:text-zinc-200;
+    @apply btn bg-transparent hover:text-zinc-200;
+    color: rgb(var(--color-text-muted));
+  }
+  .btn-ghost:hover {
+    background: rgb(var(--color-overlay-bg) / var(--color-overlay-alpha));
   }
   .btn-danger {
     @apply btn bg-red-500/10 text-red-400 border border-red-500/20 hover:bg-red-500/20;
   }
   .input {
-    @apply w-full rounded-lg border border-brand-500/20 bg-surface-card px-3 py-2 text-sm text-zinc-200 placeholder:text-zinc-500 outline-none focus:border-brand-500/50 focus:ring-2 focus:ring-brand-500/30 disabled:opacity-50 transition-colors;
+    @apply w-full rounded-lg border border-brand-500/20 px-3 py-2 text-sm placeholder:text-zinc-500 outline-none focus:border-brand-500/50 focus:ring-2 focus:ring-brand-500/30 disabled:opacity-50 transition-colors;
+    background: rgb(var(--color-surface-card));
+    color: rgb(var(--color-text-secondary));
   }
   .label {
-    @apply block text-sm font-medium mb-1 text-zinc-400;
+    @apply block text-sm font-medium mb-1;
+    color: rgb(var(--color-text-muted));
   }
   .card {
-    @apply rounded-xl border border-white/[0.08] bg-surface-card p-4 backdrop-blur-sm;
+    @apply rounded-xl p-4 backdrop-blur-sm;
+    background: rgb(var(--color-surface-card));
+    border: 1px solid rgb(var(--color-border) / var(--color-border-alpha));
   }
 
   /* ── Public site components ── */

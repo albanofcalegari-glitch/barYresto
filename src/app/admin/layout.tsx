@@ -6,6 +6,8 @@ import { ROLE_LABELS } from "@/lib/permissions";
 import type { RoleCode } from "@prisma/client";
 import { MobileSidebar } from "./mobile-sidebar";
 import { BrandLogo } from "@/components/brand";
+import { ThemeToggle } from "@/components/theme-toggle";
+import { env } from "@/lib/env";
 
 export const dynamic = "force-dynamic";
 
@@ -72,10 +74,26 @@ export default async function AdminLayout({
             </Link>
           ))}
         </nav>
+        {session.user.restaurantSlug && (
+          <div className="mt-auto pt-4 border-t border-white/[0.06]">
+            <a
+              href={`${env.APP_BASE_URL}/${session.user.restaurantSlug}`}
+              target="_blank"
+              rel="noreferrer"
+              className="flex items-center gap-2 px-3 py-2 rounded-lg text-xs text-zinc-500 hover:text-brand-300 hover:bg-brand-500/10 transition-all"
+            >
+              <svg className="w-4 h-4 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" />
+              </svg>
+              <span className="truncate">Ver sitio publico</span>
+            </a>
+          </div>
+        )}
       </MobileSidebar>
 
       <div className="flex-1 flex flex-col">
         <header className="hidden md:flex items-center justify-end gap-4 px-8 py-3 border-b border-white/[0.06] bg-surface-card/80 backdrop-blur-sm">
+          <ThemeToggle />
           <div className="text-sm text-zinc-200 font-medium">{session.user.name}</div>
           <div className="text-xs text-zinc-500">
             {session.user.role
