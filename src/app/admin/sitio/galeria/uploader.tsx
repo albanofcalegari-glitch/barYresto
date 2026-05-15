@@ -70,17 +70,17 @@ export function GalleryUploader() {
         onDrop={handleDrop}
         onDragOver={(e) => e.preventDefault()}
         onClick={() => inputRef.current?.click()}
-        className="mt-3 border-2 border-dashed border-white/[0.08] rounded-lg p-6 text-center cursor-pointer hover:border-brand-500/40 transition-colors"
+        className="mt-3 border-2 border-dashed border-th-border rounded-lg p-6 text-center cursor-pointer hover:border-brand-500/40 transition-colors"
       >
         {uploading || pending ? (
-          <div className="text-sm text-zinc-500">Subiendo...</div>
+          <div className="text-sm text-th-text-muted">Subiendo...</div>
         ) : (
           <>
-            <svg className="w-8 h-8 mx-auto text-zinc-400 mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5">
+            <svg className="w-8 h-8 mx-auto text-th-text-muted mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5">
               <path strokeLinecap="round" strokeLinejoin="round" d="M12 16.5V9.75m0 0l3 3m-3-3l-3 3M6.75 19.5a4.5 4.5 0 01-1.41-8.775 5.25 5.25 0 0110.233-2.33 3 3 0 013.758 3.848A3.752 3.752 0 0118 19.5H6.75z" />
             </svg>
-            <div className="text-sm text-zinc-400">Click o arrastrá fotos para subir</div>
-            <div className="text-xs text-zinc-400 mt-1">JPG, PNG o WebP. Máx 5 MB cada una.</div>
+            <div className="text-sm text-th-text-muted">Click o arrastrá fotos para subir</div>
+            <div className="text-xs text-th-text-muted mt-1">JPG, PNG o WebP. Máx 5 MB cada una.</div>
           </>
         )}
       </div>
@@ -98,7 +98,7 @@ export function GalleryUploader() {
         <div className="text-xs text-red-400 mt-2">{error}</div>
       )}
 
-      <p className="text-xs text-zinc-500 mt-3">
+      <p className="text-xs text-th-text-muted mt-3">
         Si Cloudinary no está configurado, podés agregar fotos por URL desde el formulario de abajo.
       </p>
     </div>

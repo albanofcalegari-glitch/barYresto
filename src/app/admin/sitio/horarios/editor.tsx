@@ -48,7 +48,7 @@ export function BusinessHoursEditor({
             <div className="w-28 pt-2 font-medium">{label}</div>
             <div className="flex-1 space-y-2">
               {daySlots.length === 0 && (
-                <div className="text-sm text-zinc-500">Cerrado</div>
+                <div className="text-sm text-th-text-muted">Cerrado</div>
               )}
               {daySlots.map(({ s, idx }) => (
                 <div key={idx} className="flex items-center gap-2">

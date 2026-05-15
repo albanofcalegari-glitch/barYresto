@@ -51,9 +51,9 @@ export default async function LoginPage({
           </div>
         )}
 
-        <form action={loginAction} className="rounded-xl bg-surface-card border border-white/[0.08] p-6 space-y-5 backdrop-blur-sm">
+        <form action={loginAction} className="rounded-xl bg-surface-card border border-th-border p-6 space-y-5 backdrop-blur-sm">
           <div>
-            <label className="block text-xs uppercase tracking-widest text-zinc-400 mb-2" htmlFor="email">
+            <label className="block text-xs uppercase tracking-widest text-th-text-muted mb-2" htmlFor="email">
               Email
             </label>
             <input
@@ -67,7 +67,7 @@ export default async function LoginPage({
             />
           </div>
           <div>
-            <label className="block text-xs uppercase tracking-widest text-zinc-400 mb-2" htmlFor="password">
+            <label className="block text-xs uppercase tracking-widest text-th-text-muted mb-2" htmlFor="password">
               Contrasena
             </label>
             <input

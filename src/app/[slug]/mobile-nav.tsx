@@ -27,7 +27,7 @@ export function MobileNav({ items }: { items: NavItem[] }) {
     <>
       <button
         onClick={() => setOpen(true)}
-        className="sm:hidden p-1 text-zinc-400 hover:text-white"
+        className="sm:hidden p-1 text-th-text-muted hover:text-th-text-primary"
         aria-label="Abrir menú"
       >
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round">
@@ -38,12 +38,12 @@ export function MobileNav({ items }: { items: NavItem[] }) {
       {open && (
         <div className="fixed inset-0 z-[60] bg-black/90 backdrop-blur-md" onClick={() => setOpen(false)}>
           <div
-            className="absolute top-0 right-0 w-64 h-full bg-zinc-950 border-l border-white/10 p-6"
+            className="absolute top-0 right-0 w-64 h-full bg-zinc-950 border-l border-th-border p-6"
             onClick={(e) => e.stopPropagation()}
           >
             <button
               onClick={() => setOpen(false)}
-              className="absolute top-4 right-4 text-zinc-400 hover:text-white"
+              className="absolute top-4 right-4 text-th-text-muted hover:text-th-text-primary"
               aria-label="Cerrar"
             >
               <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round">
@@ -59,7 +59,7 @@ export function MobileNav({ items }: { items: NavItem[] }) {
                     href={item.href}
                     target="_blank"
                     rel="noreferrer"
-                    className="block py-3 text-sm uppercase tracking-widest text-zinc-400 hover:text-gold border-b border-white/5 transition-colors"
+                    className="block py-3 text-sm uppercase tracking-widest text-th-text-muted hover:text-gold border-b border-th-border transition-colors"
                   >
                     {item.label}
                   </a>
@@ -67,7 +67,7 @@ export function MobileNav({ items }: { items: NavItem[] }) {
                   <Link
                     key={item.href}
                     href={item.href}
-                    className="block py-3 text-sm uppercase tracking-widest text-zinc-400 hover:text-gold border-b border-white/5 transition-colors"
+                    className="block py-3 text-sm uppercase tracking-widest text-th-text-muted hover:text-gold border-b border-th-border transition-colors"
                   >
                     {item.label}
                   </Link>

@@ -72,13 +72,13 @@ export default async function ClientesPage({
       </SafeForm>
 
       {customers.length === 0 ? (
-        <div className="card text-center text-zinc-500">
+        <div className="card text-center text-th-text-muted">
           {search ? "Sin resultados." : "Todavía no hay clientes."}
         </div>
       ) : (
         <div className="overflow-x-auto">
         <table className="min-w-full text-sm card p-0 overflow-hidden min-w-[600px]">
-          <thead className="bg-white/[0.03]">
+          <thead className="bg-surface-elevated">
             <tr>
               <th className="text-left px-4 py-2">Nombre</th>
               <th className="text-left px-4 py-2 hidden sm:table-cell">Email</th>
@@ -88,14 +88,14 @@ export default async function ClientesPage({
               <th className="px-4 py-2"></th>
             </tr>
           </thead>
-          <tbody className="divide-y divide-white/[0.06]">
+          <tbody className="divide-y divide-th-border">
             {customers.map((c) => (
               <tr key={c.id}>
                 <td className="px-4 py-2 font-medium">{c.name}</td>
                 <td className="px-4 py-2 hidden sm:table-cell">{c.email}</td>
-                <td className="px-4 py-2 text-zinc-500 hidden md:table-cell">{c.phone ?? "—"}</td>
+                <td className="px-4 py-2 text-th-text-muted hidden md:table-cell">{c.phone ?? "—"}</td>
                 <td className="px-4 py-2">{c.visitsCount}</td>
-                <td className="px-4 py-2 text-zinc-500 hidden sm:table-cell">
+                <td className="px-4 py-2 text-th-text-muted hidden sm:table-cell">
                   {c.lastVisitAt
                     ? c.lastVisitAt.toLocaleDateString("es-AR")
                     : "—"}
@@ -104,7 +104,7 @@ export default async function ClientesPage({
                   <div className="flex justify-end gap-3">
                     <Link
                       href={`/admin/clientes/${c.id}`}
-                      className="text-zinc-400 hover:underline"
+                      className="text-th-text-muted hover:underline"
                     >
                       editar
                     </Link>

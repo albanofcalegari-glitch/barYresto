@@ -14,8 +14,8 @@
     --color-text-muted: 113 113 122;       /* zinc-500 */
     --color-border: 0 0 0;                 /* black base for alpha */
     --color-border-alpha: 0.08;
-    --color-overlay-bg: 255 255 255;       /* white for cards */
-    --color-overlay-alpha: 0.7;
+    --color-overlay-bg: 0 0 0;              /* black for hover overlays */
+    --color-overlay-alpha: 0.04;
     --shadow-glow: 0 0 20px rgba(124, 92, 252, 0.1);
     --shadow-glow-lg: 0 0 40px rgba(124, 92, 252, 0.15);
   }
@@ -66,11 +66,12 @@ body {
     color: rgb(var(--color-text-secondary));
   }
   .btn-ghost {
-    @apply btn bg-transparent hover:text-zinc-200;
+    @apply btn bg-transparent;
     color: rgb(var(--color-text-muted));
   }
   .btn-ghost:hover {
     background: rgb(var(--color-overlay-bg) / var(--color-overlay-alpha));
+    color: rgb(var(--color-text-primary));
   }
   .btn-danger {
     @apply btn bg-red-500/10 text-red-400 border border-red-500/20 hover:bg-red-500/20;

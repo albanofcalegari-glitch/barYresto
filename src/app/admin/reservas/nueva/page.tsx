@@ -27,7 +27,7 @@ export default async function NuevaReservaPage() {
     <div className="max-w-2xl">
       <div className="flex items-baseline justify-between mb-6">
         <h1 className="text-2xl font-heading font-bold">Nueva reserva</h1>
-        <Link href="/admin/reservas" className="text-sm text-zinc-400 hover:underline">
+        <Link href="/admin/reservas" className="text-sm text-th-text-muted hover:underline">
           ← volver
         </Link>
       </div>
@@ -116,7 +116,7 @@ export default async function NuevaReservaPage() {
           />
         </div>
 
-        <div className="flex justify-end gap-3 pt-4 border-t border-white/[0.08]">
+        <div className="flex justify-end gap-3 pt-4 border-t border-th-border">
           <Link href="/admin/reservas" className="btn-ghost">
             Cancelar
           </Link>

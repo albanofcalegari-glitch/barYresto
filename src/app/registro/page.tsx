@@ -51,7 +51,7 @@ export default function RegistroPage() {
 
         <form
           action={formAction}
-          className="rounded-xl bg-surface-card border border-white/[0.08] p-6 space-y-5 backdrop-blur-sm"
+          className="rounded-xl bg-surface-card border border-th-border p-6 space-y-5 backdrop-blur-sm"
         >
           <fieldset className="space-y-4">
             <legend className="text-xs uppercase tracking-widest text-brand-400 font-semibold mb-2">
@@ -60,7 +60,7 @@ export default function RegistroPage() {
 
             <div>
               <label
-                className="block text-xs uppercase tracking-widest text-zinc-400 mb-2"
+                className="block text-xs uppercase tracking-widest text-th-text-muted mb-2"
                 htmlFor="restaurantName"
               >
                 Nombre del negocio
@@ -79,13 +79,13 @@ export default function RegistroPage() {
 
             <div>
               <label
-                className="block text-xs uppercase tracking-widest text-zinc-400 mb-2"
+                className="block text-xs uppercase tracking-widest text-th-text-muted mb-2"
                 htmlFor="slug"
               >
                 URL de tu sitio
               </label>
               <div className="flex items-stretch">
-                <span className="inline-flex items-center text-xs text-zinc-600 bg-white/[0.03] border border-white/[0.08] border-r-0 rounded-l-lg px-3 whitespace-nowrap">
+                <span className="inline-flex items-center text-xs text-th-text-muted bg-surface-elevated border border-th-border border-r-0 rounded-l-lg px-3 whitespace-nowrap">
                   baryresto.com/
                 </span>
                 <input
@@ -106,7 +106,7 @@ export default function RegistroPage() {
 
             <div>
               <label
-                className="block text-xs uppercase tracking-widest text-zinc-400 mb-2"
+                className="block text-xs uppercase tracking-widest text-th-text-muted mb-2"
                 htmlFor="phone"
               >
                 Telefono (opcional)
@@ -128,7 +128,7 @@ export default function RegistroPage() {
 
             <div>
               <label
-                className="block text-xs uppercase tracking-widest text-zinc-400 mb-2"
+                className="block text-xs uppercase tracking-widest text-th-text-muted mb-2"
                 htmlFor="ownerName"
               >
                 Tu nombre
@@ -145,7 +145,7 @@ export default function RegistroPage() {
 
             <div>
               <label
-                className="block text-xs uppercase tracking-widest text-zinc-400 mb-2"
+                className="block text-xs uppercase tracking-widest text-th-text-muted mb-2"
                 htmlFor="email"
               >
                 Email
@@ -163,7 +163,7 @@ export default function RegistroPage() {
 
             <div>
               <label
-                className="block text-xs uppercase tracking-widest text-zinc-400 mb-2"
+                className="block text-xs uppercase tracking-widest text-th-text-muted mb-2"
                 htmlFor="password"
               >
                 Contraseña

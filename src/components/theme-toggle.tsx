@@ -18,7 +18,7 @@ export function ThemeToggle() {
   return (
     <button
       onClick={() => setTheme(isDark ? "light" : "dark")}
-      className="p-1.5 rounded-lg text-zinc-400 hover:text-zinc-200 dark:hover:text-zinc-200 hover:bg-zinc-200/60 dark:hover:bg-white/5 transition-colors"
+      className="p-1.5 rounded-lg text-th-text-muted hover:text-th-text-primary hover:bg-surface-elevated transition-colors"
       aria-label={isDark ? "Cambiar a modo claro" : "Cambiar a modo oscuro"}
     >
       {isDark ? (

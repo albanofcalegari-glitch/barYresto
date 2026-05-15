@@ -43,17 +43,17 @@ export default async function CobrarPage({
         <h1 className="text-2xl font-heading font-bold">
           Cobrar #{order.code}
           {order.table && (
-            <span className="text-zinc-500 font-normal ml-2">Mesa {order.table.code}</span>
+            <span className="text-th-text-muted font-normal ml-2">Mesa {order.table.code}</span>
           )}
         </h1>
-        <Link href={`/admin/ordenes/${order.id}`} className="text-sm text-zinc-400 hover:underline">
+        <Link href={`/admin/ordenes/${order.id}`} className="text-sm text-th-text-muted hover:underline">
           ← volver
         </Link>
       </div>
 
       <div className="card mb-6">
         <h2 className="font-heading font-semibold mb-2">Resumen</h2>
-        <div className="divide-y divide-white/[0.06] text-sm">
+        <div className="divide-y divide-th-border text-sm">
           {order.items.map((oi) => (
             <div key={oi.id} className="py-1 flex justify-between">
               <span>{oi.quantity}x {oi.nameSnapshot}</span>
@@ -61,7 +61,7 @@ export default async function CobrarPage({
             </div>
           ))}
         </div>
-        <div className="flex justify-between font-bold text-lg border-t border-white/[0.08] mt-3 pt-3">
+        <div className="flex justify-between font-bold text-lg border-t border-th-border mt-3 pt-3">
           <span>Subtotal</span>
           <span>{formatMoneyArs(order.subtotalCents)}</span>
         </div>
@@ -101,7 +101,7 @@ export default async function CobrarPage({
           />
         </div>
 
-        <div className="flex justify-end gap-3 pt-4 border-t border-white/[0.08]">
+        <div className="flex justify-end gap-3 pt-4 border-t border-th-border">
           <Link href={`/admin/ordenes/${order.id}`} className="btn-ghost">
             Volver
           </Link>

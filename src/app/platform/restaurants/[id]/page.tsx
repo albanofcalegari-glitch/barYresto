@@ -47,17 +47,17 @@ export default async function RestaurantDetailPage({
       {/* Header */}
       <div className="flex flex-wrap items-start justify-between gap-4">
         <div>
-          <Link href="/platform/restaurants" className="text-sm text-zinc-400 hover:text-zinc-200">
+          <Link href="/platform/restaurants" className="text-sm text-th-text-muted hover:text-th-text-primary">
             ← Restaurantes
           </Link>
           <h1 className="text-2xl font-heading font-bold mt-2">{restaurant.name}</h1>
           <div className="flex items-center gap-3 mt-2">
-            <code className="text-sm text-zinc-400">/{restaurant.slug}</code>
+            <code className="text-sm text-th-text-muted">/{restaurant.slug}</code>
             <span className={`inline-flex px-2 py-0.5 rounded-full text-xs font-medium ${s.cls}`}>
               {s.label}
             </span>
             {restaurant.plan && (
-              <span className="text-xs text-zinc-500">Plan: {restaurant.plan.name}</span>
+              <span className="text-xs text-th-text-muted">Plan: {restaurant.plan.name}</span>
             )}
           </div>
         </div>
@@ -72,9 +72,9 @@ export default async function RestaurantDetailPage({
           { label: "Reservas", value: restaurant._count.reservations },
           { label: "Órdenes", value: restaurant._count.orders },
         ].map((m) => (
-          <div key={m.label} className="rounded-lg border border-white/[0.08] bg-surface-card p-3 text-center">
+          <div key={m.label} className="rounded-lg border border-th-border bg-surface-card p-3 text-center">
             <div className="text-xl font-bold">{m.value}</div>
-            <div className="text-xs text-zinc-400">{m.label}</div>
+            <div className="text-xs text-th-text-muted">{m.label}</div>
           </div>
         ))}
       </div>
@@ -85,33 +85,33 @@ export default async function RestaurantDetailPage({
           <h2 className="text-lg font-heading font-semibold mb-3">Datos del restaurante</h2>
           <SafeForm
             action={safeUpdateRestaurant}
-            className="rounded-lg border border-white/[0.08] bg-surface-card p-5 space-y-4"
+            className="rounded-lg border border-th-border bg-surface-card p-5 space-y-4"
             successMessage="Actualizado"
           >
             <input type="hidden" name="id" value={restaurant.id} />
             <div className="grid grid-cols-2 gap-3">
               <div>
-                <label className="label text-zinc-300">Nombre *</label>
-                <input name="name" required defaultValue={restaurant.name} className="input bg-surface border-white/[0.08] text-zinc-100" />
+                <label className="label text-th-text-primary">Nombre *</label>
+                <input name="name" required defaultValue={restaurant.name} className="input bg-surface border-th-border text-th-text-primary" />
               </div>
               <div>
-                <label className="label text-zinc-300">Slug (URL) *</label>
-                <input name="slug" required defaultValue={restaurant.slug} pattern="[a-z0-9][a-z0-9\-]*[a-z0-9]" minLength={2} maxLength={40} className="input bg-surface border-white/[0.08] text-zinc-100 font-mono" />
+                <label className="label text-th-text-primary">Slug (URL) *</label>
+                <input name="slug" required defaultValue={restaurant.slug} pattern="[a-z0-9][a-z0-9\-]*[a-z0-9]" minLength={2} maxLength={40} className="input bg-surface border-th-border text-th-text-primary font-mono" />
               </div>
             </div>
             <div className="grid grid-cols-2 gap-3">
               <div>
-                <label className="label text-zinc-300">Teléfono</label>
-                <input name="phone" defaultValue={restaurant.phone ?? ""} className="input bg-surface border-white/[0.08] text-zinc-100" />
+                <label className="label text-th-text-primary">Teléfono</label>
+                <input name="phone" defaultValue={restaurant.phone ?? ""} className="input bg-surface border-th-border text-th-text-primary" />
               </div>
               <div>
-                <label className="label text-zinc-300">WhatsApp</label>
-                <input name="whatsappPhone" defaultValue={restaurant.whatsappPhone ?? ""} className="input bg-surface border-white/[0.08] text-zinc-100" />
+                <label className="label text-th-text-primary">WhatsApp</label>
+                <input name="whatsappPhone" defaultValue={restaurant.whatsappPhone ?? ""} className="input bg-surface border-th-border text-th-text-primary" />
               </div>
             </div>
             <div>
-              <label className="label text-zinc-300">Dirección</label>
-              <input name="address" defaultValue={restaurant.address ?? ""} className="input bg-surface border-white/[0.08] text-zinc-100" />
+              <label className="label text-th-text-primary">Dirección</label>
+              <input name="address" defaultValue={restaurant.address ?? ""} className="input bg-surface border-th-border text-th-text-primary" />
             </div>
             <button className="btn-primary bg-brand-500 hover:bg-brand-600">Guardar</button>
           </SafeForm>
@@ -123,13 +123,13 @@ export default async function RestaurantDetailPage({
             <h2 className="text-lg font-heading font-semibold mb-3">Estado</h2>
             <SafeForm
               action={safeChangeRestaurantStatus}
-              className="rounded-lg border border-white/[0.08] bg-surface-card p-5 flex items-end gap-3"
+              className="rounded-lg border border-th-border bg-surface-card p-5 flex items-end gap-3"
               successMessage="Estado actualizado"
             >
               <input type="hidden" name="id" value={restaurant.id} />
               <div className="flex-1">
-                <label className="label text-zinc-300">Estado actual</label>
-                <select name="status" defaultValue={restaurant.status} className="input bg-surface border-white/[0.08] text-zinc-100">
+                <label className="label text-th-text-primary">Estado actual</label>
+                <select name="status" defaultValue={restaurant.status} className="input bg-surface border-th-border text-th-text-primary">
                   <option value="ACTIVE">Activo</option>
                   <option value="TRIAL">Prueba</option>
                   <option value="SUSPENDED">Suspendido</option>
@@ -141,7 +141,7 @@ export default async function RestaurantDetailPage({
 
           <div>
             <h2 className="text-lg font-heading font-semibold mb-3">Acceso rápido</h2>
-            <div className="rounded-lg border border-white/[0.08] bg-surface-card p-5 space-y-3">
+            <div className="rounded-lg border border-th-border bg-surface-card p-5 space-y-3">
               <a
                 href={`/${restaurant.slug}`}
                 target="_blank"
@@ -169,13 +169,13 @@ export default async function RestaurantDetailPage({
           Usuarios ({restaurant.users.length})
         </h2>
         {restaurant.users.length === 0 ? (
-          <div className="rounded-lg border border-white/[0.08] bg-surface-card p-6 text-center text-zinc-400">
+          <div className="rounded-lg border border-th-border bg-surface-card p-6 text-center text-th-text-muted">
             Sin usuarios asignados.
           </div>
         ) : (
-          <div className="overflow-x-auto rounded-lg border border-white/[0.08]">
+          <div className="overflow-x-auto rounded-lg border border-th-border">
             <table className="min-w-full text-sm">
-              <thead className="bg-white/[0.03] text-zinc-300">
+              <thead className="bg-surface-elevated text-th-text-primary">
                 <tr>
                   <th className="text-left px-4 py-3">Nombre</th>
                   <th className="text-left px-4 py-3">Email</th>
@@ -183,17 +183,17 @@ export default async function RestaurantDetailPage({
                   <th className="text-left px-4 py-3">Desde</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-white/[0.06]">
+              <tbody className="divide-y divide-th-border">
                 {restaurant.users.map((m) => (
-                  <tr key={m.id} className="hover:bg-white/[0.03]">
+                  <tr key={m.id} className="hover:bg-surface-elevated">
                     <td className="px-4 py-3 font-medium">{m.user.name}</td>
-                    <td className="px-4 py-3 text-zinc-400">{m.user.email}</td>
+                    <td className="px-4 py-3 text-th-text-muted">{m.user.email}</td>
                     <td className="px-4 py-3">
-                      <span className="text-xs px-2 py-0.5 rounded-full bg-white/[0.05] text-zinc-300">
+                      <span className="text-xs px-2 py-0.5 rounded-full bg-surface-elevated text-th-text-primary">
                         {ROLE_LABELS[m.role.code as RoleCode] ?? m.role.name}
                       </span>
                     </td>
-                    <td className="px-4 py-3 text-zinc-500">
+                    <td className="px-4 py-3 text-th-text-muted">
                       {m.createdAt.toLocaleDateString("es-AR")}
                     </td>
                   </tr>

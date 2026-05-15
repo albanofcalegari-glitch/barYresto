@@ -57,9 +57,9 @@ export default async function RecetaDetailPage({
       <div className="flex items-baseline justify-between mb-6">
         <div>
           <h1 className="text-2xl font-heading font-bold">{menuItem.name}</h1>
-          <div className="text-sm text-zinc-500">{menuItem.category.name}</div>
+          <div className="text-sm text-th-text-muted">{menuItem.category.name}</div>
         </div>
-        <Link href="/admin/inventario/recetas" className="text-sm text-zinc-400 hover:underline">
+        <Link href="/admin/inventario/recetas" className="text-sm text-th-text-muted hover:underline">
           ← volver
         </Link>
       </div>
@@ -68,19 +68,19 @@ export default async function RecetaDetailPage({
         <div className="card p-0 overflow-x-auto mb-6">
           <table className="w-full text-sm">
             <thead>
-              <tr className="border-b border-white/[0.08] bg-white/[0.03] text-left text-xs uppercase tracking-wide text-zinc-500">
+              <tr className="border-b border-th-border bg-surface-elevated text-left text-xs uppercase tracking-wide text-th-text-muted">
                 <th className="px-4 py-3">Materia prima</th>
                 <th className="px-4 py-3">Cantidad</th>
                 <th className="px-4 py-3">Unidad</th>
                 <th className="px-4 py-3" />
               </tr>
             </thead>
-            <tbody className="divide-y divide-white/[0.06]">
+            <tbody className="divide-y divide-th-border">
               {menuItem.recipe.map((r) => (
-                <tr key={r.id} className="hover:bg-white/[0.03]">
+                <tr key={r.id} className="hover:bg-surface-elevated">
                   <td className="px-4 py-3 font-medium">{r.rawMaterial.name}</td>
                   <td className="px-4 py-3">{r.quantity}</td>
-                  <td className="px-4 py-3 text-zinc-500">
+                  <td className="px-4 py-3 text-th-text-muted">
                     {UNIT_LABELS[r.rawMaterial.unit]}
                   </td>
                   <td className="px-4 py-3 text-right">
@@ -126,7 +126,7 @@ export default async function RecetaDetailPage({
           </div>
         </form>
       ) : (
-        <div className="card text-center text-zinc-500">
+        <div className="card text-center text-th-text-muted">
           {allMaterials.length === 0 ? (
             <>
               No hay materias primas cargadas.{" "}

@@ -26,7 +26,7 @@ export default async function SalonPage() {
   return (
     <div>
       <h1 className="text-2xl font-heading font-bold mb-1">Salón</h1>
-      <p className="text-sm text-zinc-500 mb-6">
+      <p className="text-sm text-th-text-muted mb-6">
         Organizá las zonas (salón, patio, barra) y las mesas con su capacidad.
       </p>
 
@@ -53,7 +53,7 @@ export default async function SalonPage() {
       </SafeForm>
 
       {zones.length === 0 ? (
-        <div className="card text-center text-zinc-500">
+        <div className="card text-center text-th-text-muted">
           Todavía no hay zonas. Creá la primera arriba (ej: Salón, Patio, Barra).
         </div>
       ) : (
@@ -63,7 +63,7 @@ export default async function SalonPage() {
               <div className="flex items-center justify-between mb-4">
                 <div>
                   <h2 className="text-lg font-semibold">{zone.name}</h2>
-                  <div className="text-xs text-zinc-500">
+                  <div className="text-xs text-th-text-muted">
                     {zone.tables.length} mesa(s) · orden {zone.orderIndex}
                   </div>
                 </div>
@@ -107,7 +107,7 @@ export default async function SalonPage() {
               </SafeForm>
 
               {zone.tables.length === 0 ? (
-                <div className="text-sm text-zinc-500">
+                <div className="text-sm text-th-text-muted">
                   Sin mesas en esta zona. Agregá la primera arriba.
                 </div>
               ) : (
@@ -115,10 +115,10 @@ export default async function SalonPage() {
                   {zone.tables.map((t) => (
                     <div
                       key={t.id}
-                      className="inline-flex items-center gap-2 border border-white/[0.08] rounded-md px-3 py-2 bg-white/[0.03]"
+                      className="inline-flex items-center gap-2 border border-th-border rounded-md px-3 py-2 bg-surface-elevated"
                     >
                       <span className="font-mono font-semibold">{t.code}</span>
-                      <span className="text-xs text-zinc-500">{t.seats} lug.</span>
+                      <span className="text-xs text-th-text-muted">{t.seats} lug.</span>
                       <SafeForm action={safeDeleteTable}>
                         <input type="hidden" name="id" value={t.id} />
                         <button className="text-xs text-red-400 hover:underline ml-1">

@@ -51,7 +51,7 @@ export default async function MenuPage() {
       </SafeForm>
 
       {categories.length === 0 ? (
-        <div className="card text-center text-zinc-500">
+        <div className="card text-center text-th-text-muted">
           Todavía no hay categorías. Creá la primera arriba.
         </div>
       ) : (
@@ -63,10 +63,10 @@ export default async function MenuPage() {
                   <h2 className="text-lg font-semibold">
                     {cat.name}
                     {!cat.visible && (
-                      <span className="ml-2 text-xs text-zinc-500">(oculta)</span>
+                      <span className="ml-2 text-xs text-th-text-muted">(oculta)</span>
                     )}
                   </h2>
-                  <div className="text-xs text-zinc-500">
+                  <div className="text-xs text-th-text-muted">
                     {cat.items.length} producto(s) · posicion {cat.orderIndex}
                   </div>
                 </div>
@@ -79,7 +79,7 @@ export default async function MenuPage() {
                   </Link>
                   <Link
                     href={`/admin/menu/categorias/${cat.id}`}
-                    className="text-sm text-zinc-400 hover:underline"
+                    className="text-sm text-th-text-muted hover:underline"
                   >
                     editar
                   </Link>
@@ -93,13 +93,13 @@ export default async function MenuPage() {
               </div>
 
               {cat.items.length === 0 ? (
-                <div className="text-sm text-zinc-500">
+                <div className="text-sm text-th-text-muted">
                   Sin productos. Agregá el primero.
                 </div>
               ) : (
                 <div className="overflow-x-auto">
                 <table className="w-full text-sm min-w-[480px]">
-                  <thead className="text-left text-xs uppercase text-zinc-500 border-b">
+                  <thead className="text-left text-xs uppercase text-th-text-muted border-b">
                     <tr>
                       <th className="py-2">Plato</th>
                       <th className="py-2">Precio</th>
@@ -107,7 +107,7 @@ export default async function MenuPage() {
                       <th className="py-2"></th>
                     </tr>
                   </thead>
-                  <tbody className="divide-y divide-white/[0.06]">
+                  <tbody className="divide-y divide-th-border">
                     {cat.items.map((it) => (
                       <tr key={it.id}>
                         <td className="py-2">
@@ -118,7 +118,7 @@ export default async function MenuPage() {
                             )}
                           </div>
                           {it.description && (
-                            <div className="text-xs text-zinc-500 truncate max-w-[200px] md:max-w-md">
+                            <div className="text-xs text-th-text-muted truncate max-w-[200px] md:max-w-md">
                               {it.description}
                             </div>
                           )}
@@ -131,7 +131,7 @@ export default async function MenuPage() {
                               className={
                                 it.available
                                   ? "text-xs px-2 py-1 rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/30"
-                                  : "text-xs px-2 py-1 rounded-full bg-white/[0.05] text-zinc-500 border border-white/[0.08]"
+                                  : "text-xs px-2 py-1 rounded-full bg-surface-elevated text-th-text-muted border border-th-border"
                               }
                             >
                               {it.available ? "Disponible" : "Sin stock"}
@@ -142,7 +142,7 @@ export default async function MenuPage() {
                           <div className="flex justify-end gap-3">
                             <Link
                               href={`/admin/menu/items/${it.id}`}
-                              className="text-zinc-400 hover:underline"
+                              className="text-th-text-muted hover:underline"
                             >
                               editar
                             </Link>

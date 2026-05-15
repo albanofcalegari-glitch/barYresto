@@ -19,27 +19,27 @@ export default async function PlatformLayout({
   }
 
   return (
-    <div className="min-h-screen bg-surface text-zinc-100">
-      <header className="border-b border-white/[0.06] bg-surface-card">
+    <div className="min-h-screen bg-surface text-th-text-primary">
+      <header className="border-b border-th-border bg-surface-card">
         <div className="mx-auto max-w-6xl px-6 py-4 flex items-center justify-between">
           <Link href="/platform" className="inline-flex items-center gap-2">
             <BrandIcon size={28} />
             <span className="font-heading font-semibold text-base tracking-tight">
               bary<span className="text-brand-400">resto</span>
-              <span className="text-zinc-500 font-normal"> · plataforma</span>
+              <span className="text-th-text-muted font-normal"> · plataforma</span>
             </span>
           </Link>
           <nav className="flex items-center gap-4 text-sm">
-            <Link href="/platform/restaurants" className="text-zinc-400 hover:bg-brand-500/10 hover:text-brand-300 px-2 py-1 rounded">
+            <Link href="/platform/restaurants" className="text-th-text-muted hover:bg-brand-500/10 hover:text-brand-300 px-2 py-1 rounded">
               Restaurantes
             </Link>
-            <Link href="/platform/users" className="text-zinc-400 hover:bg-brand-500/10 hover:text-brand-300 px-2 py-1 rounded">
+            <Link href="/platform/users" className="text-th-text-muted hover:bg-brand-500/10 hover:text-brand-300 px-2 py-1 rounded">
               Usuarios
             </Link>
             <ThemeToggle />
-            <span className="text-zinc-500">· {session.user.email}</span>
+            <span className="text-th-text-muted">· {session.user.email}</span>
             <form action={logoutAction}>
-              <button className="text-zinc-400 hover:text-zinc-100">salir</button>
+              <button className="text-th-text-muted hover:text-red-400 transition-colors">salir</button>
             </form>
           </nav>
         </div>

@@ -30,7 +30,7 @@ export default async function HoursPage() {
     <div className="space-y-10">
       <section>
         <h1 className="text-2xl font-heading font-bold mb-1">Horarios</h1>
-        <p className="text-sm text-zinc-500 mb-6">
+        <p className="text-sm text-th-text-muted mb-6">
           Franjas por día de la semana. Podés tener varias por día (ej: mediodía + noche).
         </p>
 
@@ -47,7 +47,7 @@ export default async function HoursPage() {
 
       <section>
         <h2 className="text-xl font-heading font-bold mb-1">Días especiales / feriados</h2>
-        <p className="text-sm text-zinc-500 mb-6">
+        <p className="text-sm text-th-text-muted mb-6">
           Marcá días donde el local está cerrado o tiene horario distinto.
         </p>
 
@@ -72,11 +72,11 @@ export default async function HoursPage() {
 
         <div className="mt-6">
           {special.length === 0 ? (
-            <div className="text-sm text-zinc-500">Sin días especiales cargados.</div>
+            <div className="text-sm text-th-text-muted">Sin días especiales cargados.</div>
           ) : (
             <div className="overflow-x-auto">
             <table className="min-w-full text-sm card p-0 overflow-hidden min-w-[440px]">
-              <thead className="bg-white/[0.03]">
+              <thead className="bg-surface-elevated">
                 <tr>
                   <th className="text-left px-4 py-2">Fecha</th>
                   <th className="text-left px-4 py-2">Estado</th>
@@ -84,7 +84,7 @@ export default async function HoursPage() {
                   <th className="px-4 py-2"></th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-white/[0.06]">
+              <tbody className="divide-y divide-th-border">
                 {special.map((s) => (
                   <tr key={s.id}>
                     <td className="px-4 py-2">
@@ -97,7 +97,7 @@ export default async function HoursPage() {
                     <td className="px-4 py-2">
                       {s.closed ? "Cerrado" : `${s.openTime} a ${s.closeTime}`}
                     </td>
-                    <td className="px-4 py-2 text-zinc-500">{s.note ?? ""}</td>
+                    <td className="px-4 py-2 text-th-text-muted">{s.note ?? ""}</td>
                     <td className="px-4 py-2 text-right">
                       <SafeForm action={safeDeleteSpecialDay}>
                         <input type="hidden" name="id" value={s.id} />

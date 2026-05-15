@@ -30,7 +30,7 @@ export default async function EditClientePage({
     <div className="max-w-xl">
       <div className="flex items-baseline justify-between mb-6">
         <h1 className="text-2xl font-heading font-bold">Editar cliente</h1>
-        <Link href="/admin/clientes" className="text-sm text-zinc-400 hover:underline">
+        <Link href="/admin/clientes" className="text-sm text-th-text-muted hover:underline">
           ← volver
         </Link>
       </div>
@@ -59,8 +59,8 @@ export default async function EditClientePage({
         </div>
       </form>
 
-      <div className="mt-6 card bg-white/[0.03] text-sm">
-        <dl className="grid grid-cols-[120px_1fr] gap-y-1 text-zinc-400">
+      <div className="mt-6 card bg-surface-elevated text-sm">
+        <dl className="grid grid-cols-[120px_1fr] gap-y-1 text-th-text-muted">
           <dt>Visitas</dt>
           <dd>{customer.visitsCount}</dd>
           <dt>Última visita</dt>

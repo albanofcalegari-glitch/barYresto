@@ -19,7 +19,7 @@ export default async function GalleryPage() {
   return (
     <div>
       <h1 className="text-2xl font-heading font-bold mb-1">Galería de fotos</h1>
-      <p className="text-sm text-zinc-500 mb-6">
+      <p className="text-sm text-th-text-muted mb-6">
         Las fotos se muestran en la página pública del restaurante. Podés subir hasta 12.
       </p>
 
@@ -51,7 +51,7 @@ export default async function GalleryPage() {
       )}
 
       {images.length === 0 ? (
-        <div className="card text-center text-sm text-zinc-500 py-8">
+        <div className="card text-center text-sm text-th-text-muted py-8">
           Sin fotos cargadas todavía.
         </div>
       ) : (
@@ -70,7 +70,7 @@ export default async function GalleryPage() {
                     <SafeForm action={safeReorderMediaAsset}>
                       <input type="hidden" name="id" value={img.id} />
                       <input type="hidden" name="direction" value="up" />
-                      <button className="text-xs text-zinc-500 hover:text-brand-400 px-1" title="Mover antes">
+                      <button className="text-xs text-th-text-muted hover:text-brand-400 px-1" title="Mover antes">
                         ←
                       </button>
                     </SafeForm>
@@ -79,7 +79,7 @@ export default async function GalleryPage() {
                     <SafeForm action={safeReorderMediaAsset}>
                       <input type="hidden" name="id" value={img.id} />
                       <input type="hidden" name="direction" value="down" />
-                      <button className="text-xs text-zinc-500 hover:text-brand-400 px-1" title="Mover después">
+                      <button className="text-xs text-th-text-muted hover:text-brand-400 px-1" title="Mover después">
                         →
                       </button>
                     </SafeForm>
@@ -93,7 +93,7 @@ export default async function GalleryPage() {
                 </SafeForm>
               </div>
               {img.alt && (
-                <div className="text-xs text-zinc-500 mt-1 truncate">{img.alt}</div>
+                <div className="text-xs text-th-text-muted mt-1 truncate">{img.alt}</div>
               )}
             </div>
           ))}

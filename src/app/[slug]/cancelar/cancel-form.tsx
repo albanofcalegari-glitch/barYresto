@@ -30,10 +30,10 @@ export function CancelForm({
 
   if (done) {
     return (
-      <div className="text-center space-y-4 bg-white/5 border border-white/10 p-8">
+      <div className="text-center space-y-4 bg-surface-elevated border border-th-border p-8">
         <div className="text-gold text-4xl font-serif">✓</div>
         <h2 className="font-serif text-2xl">Reserva cancelada</h2>
-        <p className="text-zinc-400 font-light text-sm">
+        <p className="text-th-text-muted font-light text-sm">
           Tu reserva fue cancelada correctamente.
         </p>
       </div>
@@ -41,7 +41,7 @@ export function CancelForm({
   }
 
   return (
-    <form action={handleSubmit} className="bg-white/5 border border-white/10 p-6 space-y-5">
+    <form action={handleSubmit} className="bg-surface-elevated border border-th-border p-6 space-y-5">
       {error && (
         <div className="text-sm text-red-400 bg-red-500/10 border border-red-500/20 p-3">
           {error}
@@ -49,14 +49,14 @@ export function CancelForm({
       )}
 
       <div>
-        <label className="block text-xs uppercase tracking-widest text-zinc-400 mb-2">
+        <label className="block text-xs uppercase tracking-widest text-th-text-muted mb-2">
           Código de reserva
         </label>
         <input
           name="token"
           required
           defaultValue={defaultToken ?? ""}
-          className="w-full bg-white/5 border border-white/15 px-4 py-3 text-sm text-white placeholder:text-zinc-600 focus:outline-none focus:border-gold transition-colors font-mono"
+          className="w-full bg-surface-elevated border border-th-border px-4 py-3 text-sm text-th-text-primary placeholder:text-zinc-600 focus:outline-none focus:border-gold transition-colors font-mono"
           placeholder="ABC123XY"
         />
       </div>

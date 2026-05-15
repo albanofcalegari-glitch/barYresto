@@ -15,7 +15,7 @@ export default async function QrPage() {
   return (
     <div className="max-w-2xl">
       <h1 className="text-2xl font-heading font-bold mb-1">QR de la carta</h1>
-      <p className="text-sm text-zinc-500 mb-6">
+      <p className="text-sm text-th-text-muted mb-6">
         Descargá e imprimí este QR. Al escanearlo, tus clientes abren la carta en el navegador.
       </p>
 
@@ -24,11 +24,11 @@ export default async function QrPage() {
         <img
           src={qr}
           alt={`QR de ${restaurant.name}`}
-          className="w-72 h-72 rounded-md border border-white/[0.08]"
+          className="w-72 h-72 rounded-md border border-th-border"
         />
         <div className="text-center">
           <div className="font-semibold">{restaurant.name}</div>
-          <div className="text-xs text-zinc-500 break-all max-w-sm mt-1">
+          <div className="text-xs text-th-text-muted break-all max-w-sm mt-1">
             {menuUrl}
           </div>
         </div>

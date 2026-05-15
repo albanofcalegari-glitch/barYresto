@@ -18,7 +18,7 @@ export default async function NuevoProveedorPage() {
     <div className="max-w-lg">
       <div className="flex items-baseline justify-between mb-6">
         <h1 className="text-2xl font-heading font-bold">Nuevo proveedor</h1>
-        <Link href="/admin/inventario/proveedores" className="text-sm text-zinc-400 hover:underline">
+        <Link href="/admin/inventario/proveedores" className="text-sm text-th-text-muted hover:underline">
           ← volver
         </Link>
       </div>
@@ -43,7 +43,7 @@ export default async function NuevoProveedorPage() {
           <textarea name="notes" maxLength={500} rows={2} className="input" placeholder="Días de entrega, condiciones, etc." />
         </div>
 
-        <div className="flex justify-end gap-3 pt-4 border-t border-white/[0.08]">
+        <div className="flex justify-end gap-3 pt-4 border-t border-th-border">
           <Link href="/admin/inventario/proveedores" className="btn-ghost">Cancelar</Link>
           <button className="btn-primary">Crear</button>
         </div>

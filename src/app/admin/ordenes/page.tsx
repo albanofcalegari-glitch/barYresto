@@ -18,7 +18,7 @@ const STATUS_STYLES: Record<OrderStatus, { label: string; cls: string }> = {
   FIRED: { label: "En cocina", cls: "bg-amber-500/10 text-amber-400 border-amber-500/30" },
   SERVING: { label: "Sirviendo", cls: "bg-emerald-500/10 text-emerald-400 border-emerald-500/30" },
   CLOSING: { label: "Pidió cuenta", cls: "bg-purple-500/10 text-purple-400 border-purple-500/30" },
-  CLOSED: { label: "Cerrada", cls: "bg-white/[0.05] text-zinc-500 border-white/[0.08]" },
+  CLOSED: { label: "Cerrada", cls: "bg-surface-elevated text-th-text-muted border-th-border" },
   CANCELED: { label: "Cancelada", cls: "bg-red-500/10 text-red-400 border-red-500/30" },
 };
 
@@ -69,7 +69,7 @@ export default async function OrdenesPage({
       <div className="flex flex-wrap gap-2 mb-6">
         <Link
           href="/admin/ordenes"
-          className={`text-sm px-3 py-1.5 rounded-full border ${showActive ? "bg-zinc-100 text-zinc-900 border-zinc-100" : "border-white/[0.08] hover:bg-white/[0.05]"}`}
+          className={`text-sm px-3 py-1.5 rounded-full border ${showActive ? "bg-zinc-100 text-zinc-900 border-zinc-100" : "border-th-border hover:bg-surface-elevated"}`}
         >
           Activas
         </Link>
@@ -77,7 +77,7 @@ export default async function OrdenesPage({
           <Link
             key={k}
             href={`/admin/ordenes?estado=${k}`}
-            className={`text-sm px-3 py-1.5 rounded-full border ${statusFilter === k ? "bg-zinc-100 text-zinc-900 border-zinc-100" : "border-white/[0.08] hover:bg-white/[0.05]"}`}
+            className={`text-sm px-3 py-1.5 rounded-full border ${statusFilter === k ? "bg-zinc-100 text-zinc-900 border-zinc-100" : "border-th-border hover:bg-surface-elevated"}`}
           >
             {v.label}
           </Link>
@@ -85,7 +85,7 @@ export default async function OrdenesPage({
       </div>
 
       {orders.length === 0 ? (
-        <div className="card text-center text-zinc-500">
+        <div className="card text-center text-th-text-muted">
           {showActive ? "Sin órdenes activas." : "Sin órdenes con ese estado."}
         </div>
       ) : (
@@ -101,7 +101,7 @@ export default async function OrdenesPage({
                       #{o.code}
                     </span>
                     {o.table && (
-                      <span className="text-sm text-zinc-500">
+                      <span className="text-sm text-th-text-muted">
                         Mesa {o.table.code}
                       </span>
                     )}
@@ -113,20 +113,20 @@ export default async function OrdenesPage({
 
                 {/* Items */}
                 {o.items.length === 0 ? (
-                  <div className="text-sm text-zinc-500 mb-3">Sin items todavía</div>
+                  <div className="text-sm text-th-text-muted mb-3">Sin items todavía</div>
                 ) : (
-                  <div className="text-sm divide-y divide-white/[0.06] mb-3 flex-1">
+                  <div className="text-sm divide-y divide-th-border mb-3 flex-1">
                     {o.items.map((it) => (
                       <div key={it.id} className="py-1 flex justify-between">
                         <span>
                           {it.quantity}x {it.nameSnapshot}
                           {it.notes && (
-                            <span className="text-xs text-zinc-500 ml-1">
+                            <span className="text-xs text-th-text-muted ml-1">
                               ({it.notes})
                             </span>
                           )}
                         </span>
-                        <span className="text-zinc-400">
+                        <span className="text-th-text-muted">
                           {formatMoneyArs(it.priceCentsSnapshot * it.quantity)}
                         </span>
                       </div>
@@ -135,7 +135,7 @@ export default async function OrdenesPage({
                 )}
 
                 {/* Total */}
-                <div className="flex justify-between font-semibold border-t border-white/[0.08] pt-2 mb-3">
+                <div className="flex justify-between font-semibold border-t border-th-border pt-2 mb-3">
                   <span>Total</span>
                   <span>{formatMoneyArs(o.totalCents)}</span>
                 </div>
@@ -162,7 +162,7 @@ export default async function OrdenesPage({
                     <>
                       <Link
                         href={`/admin/ordenes/${o.id}`}
-                        className="text-xs px-3 py-1.5 rounded-md border border-white/[0.08] hover:bg-white/[0.05]"
+                        className="text-xs px-3 py-1.5 rounded-md border border-th-border hover:bg-surface-elevated"
                       >
                         Ver / Editar
                       </Link>

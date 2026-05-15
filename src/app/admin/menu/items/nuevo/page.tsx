@@ -27,7 +27,7 @@ export default async function NewItemPage({
       <div className="max-w-xl">
         <h1 className="text-2xl font-heading font-bold mb-4">Nuevo plato</h1>
         <div className="card">
-          <p className="text-sm text-zinc-400 mb-4">
+          <p className="text-sm text-th-text-muted mb-4">
             Antes de crear platos, creá al menos una categoría.
           </p>
           <Link href="/admin/menu" className="btn-primary">
@@ -50,7 +50,7 @@ export default async function NewItemPage({
     <div className="max-w-2xl">
       <div className="flex items-baseline justify-between mb-6">
         <h1 className="text-2xl font-heading font-bold">Nuevo plato</h1>
-        <Link href="/admin/menu" className="text-sm text-zinc-400 hover:underline">
+        <Link href="/admin/menu" className="text-sm text-th-text-muted hover:underline">
           ← volver
         </Link>
       </div>
@@ -96,7 +96,7 @@ export default async function NewItemPage({
               placeholder="12500 o 12.500"
               inputMode="decimal"
             />
-            <p className="text-xs text-zinc-500 mt-1">Sin símbolo. Podés usar punto como separador de miles.</p>
+            <p className="text-xs text-th-text-muted mt-1">Sin símbolo. Podés usar punto como separador de miles.</p>
           </div>
           <div>
             <label className="label">Orden</label>

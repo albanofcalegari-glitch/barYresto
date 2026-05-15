@@ -43,13 +43,13 @@ export default async function AdminLayout({
   }
 
   return (
-    <div className="min-h-screen bg-surface text-zinc-200 md:flex">
+    <div className="min-h-screen bg-surface text-th-text-primary md:flex">
       <MobileSidebar
         userName={session.user.name ?? ""}
         userRole={session.user.role ? ROLE_LABELS[session.user.role as RoleCode] : undefined}
         logoutButton={
           <form action={logoutAction}>
-            <button className="p-1.5 text-zinc-500 hover:text-red-400 transition-colors">
+            <button className="p-1.5 text-th-text-muted hover:text-red-400 transition-colors">
               <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15m3 0l3-3m0 0l-3-3m3 3H9" />
               </svg>
@@ -65,7 +65,7 @@ export default async function AdminLayout({
             <Link
               key={item.href}
               href={item.href}
-              className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-zinc-400 hover:bg-brand-500/10 hover:text-brand-300 transition-all duration-200"
+              className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-th-text-muted hover:bg-brand-500/10 hover:text-brand-300 transition-all duration-200"
             >
               <svg className="w-[18px] h-[18px] shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
                 <path d={item.icon} />
@@ -75,12 +75,12 @@ export default async function AdminLayout({
           ))}
         </nav>
         {session.user.restaurantSlug && (
-          <div className="mt-auto pt-4 border-t border-white/[0.06]">
+          <div className="mt-auto pt-4 border-t border-th-border">
             <a
               href={`${env.APP_BASE_URL}/${session.user.restaurantSlug}`}
               target="_blank"
               rel="noreferrer"
-              className="flex items-center gap-2 px-3 py-2 rounded-lg text-xs text-zinc-500 hover:text-brand-300 hover:bg-brand-500/10 transition-all"
+              className="flex items-center gap-2 px-3 py-2 rounded-lg text-xs text-th-text-muted hover:text-brand-300 hover:bg-brand-500/10 transition-all"
             >
               <svg className="w-4 h-4 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" />
@@ -92,16 +92,16 @@ export default async function AdminLayout({
       </MobileSidebar>
 
       <div className="flex-1 flex flex-col">
-        <header className="hidden md:flex items-center justify-end gap-4 px-8 py-3 border-b border-white/[0.06] bg-surface-card/80 backdrop-blur-sm">
+        <header className="hidden md:flex items-center justify-end gap-4 px-8 py-3 border-b border-th-border bg-surface-card/80 backdrop-blur-sm">
           <ThemeToggle />
-          <div className="text-sm text-zinc-200 font-medium">{session.user.name}</div>
-          <div className="text-xs text-zinc-500">
+          <div className="text-sm text-th-text-primary font-medium">{session.user.name}</div>
+          <div className="text-xs text-th-text-muted">
             {session.user.role
               ? ROLE_LABELS[session.user.role as RoleCode]
               : "Sin rol"}
           </div>
           <form action={logoutAction}>
-            <button className="flex items-center gap-1.5 text-sm text-zinc-500 hover:text-red-400 transition-colors">
+            <button className="flex items-center gap-1.5 text-sm text-th-text-muted hover:text-red-400 transition-colors">
               <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15m3 0l3-3m0 0l-3-3m3 3H9" />
               </svg>

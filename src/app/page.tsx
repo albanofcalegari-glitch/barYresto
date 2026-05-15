@@ -12,7 +12,7 @@ export default function LandingPage() {
   const platformLoginUrl = platformUrl ? `${platformUrl}/login` : "/login";
 
   return (
-    <main className="min-h-screen bg-surface text-white font-sans overflow-hidden">
+    <main className="min-h-screen bg-surface text-th-text-primary font-sans overflow-hidden">
       {/* ── Navbar ── */}
       <header className="fixed top-0 w-full z-50 bg-surface/80 backdrop-blur-md border-b border-brand-500/10">
         <div className="mx-auto max-w-7xl px-6 md:px-[8%] h-16 flex items-center justify-between">
@@ -23,7 +23,7 @@ export default function LandingPage() {
             <ThemeToggle />
             <a
               href={loginUrl}
-              className="text-sm text-zinc-400 hover:text-white transition-colors"
+              className="text-sm text-th-text-muted hover:text-th-text-primary transition-colors"
             >
               Ingresar
             </a>
@@ -105,18 +105,18 @@ export default function LandingPage() {
         <div className="relative z-10 mx-auto max-w-5xl px-6 text-center">
           <div className="inline-flex items-center gap-2 bg-brand-500/10 border border-brand-500/20 rounded-full px-4 py-1.5 mb-8">
             <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-            <span className="text-xs text-zinc-400 font-medium tracking-wide">Plataforma activa</span>
+            <span className="text-xs text-th-text-muted font-medium tracking-wide">Plataforma activa</span>
           </div>
 
           <h1 className="font-heading font-bold text-5xl sm:text-6xl md:text-7xl lg:text-8xl tracking-tight leading-[0.95]">
-            <span className="bg-gradient-to-r from-white via-white to-zinc-400 bg-clip-text text-transparent">Restaurantes</span>
+            <span className="bg-gradient-to-r from-zinc-900 via-zinc-900 to-zinc-500 dark:from-white dark:via-white dark:to-zinc-400 bg-clip-text text-transparent">Restaurantes</span>
             <span className="text-brand-400"> & </span>
-            <span className="bg-gradient-to-r from-white via-white to-zinc-400 bg-clip-text text-transparent">Bares.</span>
+            <span className="bg-gradient-to-r from-zinc-900 via-zinc-900 to-zinc-500 dark:from-white dark:via-white dark:to-zinc-400 bg-clip-text text-transparent">Bares.</span>
             <br />
             <span className="bg-gradient-to-r from-brand-400 to-brand-300 bg-clip-text text-transparent">Una sola plataforma.</span>
           </h1>
 
-          <p className="mx-auto mt-8 max-w-2xl text-lg md:text-xl text-zinc-400 font-light leading-relaxed">
+          <p className="mx-auto mt-8 max-w-2xl text-lg md:text-xl text-th-text-muted font-light leading-relaxed">
             Sitio web, carta por QR, reservas, salón y cobros. Simple, en español,
             pensado para Argentina y LATAM.
           </p>
@@ -131,7 +131,7 @@ export default function LandingPage() {
             </a>
             <a
               href="#features"
-              className="inline-flex items-center justify-center gap-2 bg-white/5 border border-white/10 hover:border-brand-500/30 text-zinc-300 hover:text-white font-heading font-medium px-8 py-4 rounded-xl text-base transition-all"
+              className="inline-flex items-center justify-center gap-2 bg-surface-elevated border border-th-border hover:border-brand-500/30 text-th-text-secondary hover:text-th-text-primary font-heading font-medium px-8 py-4 rounded-xl text-base transition-all"
             >
               Conocer mas
             </a>
@@ -148,7 +148,7 @@ export default function LandingPage() {
                 <div className="font-heading font-bold text-2xl md:text-3xl bg-gradient-to-r from-brand-400 to-brand-300 bg-clip-text text-transparent">
                   {s.value}
                 </div>
-                <div className="text-xs text-zinc-500 mt-1 tracking-wide uppercase">{s.label}</div>
+                <div className="text-xs text-th-text-muted mt-1 tracking-wide uppercase">{s.label}</div>
               </div>
             ))}
           </div>
@@ -229,13 +229,13 @@ export default function LandingPage() {
             ].map((f) => (
               <div
                 key={f.title}
-                className="group bg-white/[0.03] border border-brand-500/[0.08] rounded-xl p-6 hover:border-brand-500/25 hover:-translate-y-1 transition-all duration-300"
+                className="group bg-surface-card border border-th-border rounded-xl p-6 hover:border-brand-500/25 hover:-translate-y-1 transition-all duration-300"
               >
                 <div className="w-10 h-10 rounded-lg bg-brand-500/10 border border-brand-500/20 flex items-center justify-center text-brand-400 mb-4 group-hover:bg-brand-500/20 transition-colors">
                   {f.icon}
                 </div>
                 <h3 className="font-heading font-semibold text-lg mb-2 tracking-tight">{f.title}</h3>
-                <p className="text-sm text-zinc-500 leading-relaxed">{f.body}</p>
+                <p className="text-sm text-th-text-muted leading-relaxed">{f.body}</p>
               </div>
             ))}
           </div>
@@ -252,7 +252,7 @@ export default function LandingPage() {
               siguiente nivel
             </span>
           </h2>
-          <p className="text-zinc-400 text-lg mb-10 max-w-xl mx-auto">
+          <p className="text-th-text-muted text-lg mb-10 max-w-xl mx-auto">
             Registrate, configura tu restaurante y empeza a recibir reservas en minutos.
           </p>
           <a
@@ -266,11 +266,11 @@ export default function LandingPage() {
       </section>
 
       {/* ── Footer ── */}
-      <footer className="border-t border-brand-500/10 py-10">
+      <footer className="border-t border-th-border py-10">
         <div className="mx-auto max-w-7xl px-6 md:px-[8%] flex flex-col sm:flex-row items-center justify-between gap-4">
           <BrandLogo size="sm" />
 
-          <div className="text-sm text-zinc-600 flex items-center gap-1.5">
+          <div className="text-sm text-th-text-muted flex items-center gap-1.5">
             Un producto de{" "}
             <a
               href="https://qngine.com.ar"
@@ -285,11 +285,11 @@ export default function LandingPage() {
           <div className="flex items-center gap-4">
             <a
               href={platformLoginUrl}
-              className="text-xs text-zinc-700 hover:text-zinc-500 transition-colors"
+              className="text-xs text-th-text-muted hover:text-th-text-secondary transition-colors"
             >
               Plataforma
             </a>
-            <span className="text-xs text-zinc-700">
+            <span className="text-xs text-th-text-muted">
               &copy; {new Date().getFullYear()}
             </span>
           </div>

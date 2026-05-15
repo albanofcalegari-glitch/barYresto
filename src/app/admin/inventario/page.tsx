@@ -37,15 +37,15 @@ export default async function InventarioPage() {
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
         <Link href="/admin/inventario/materias-primas" className="card hover:border-brand-500/40 transition-colors">
           <div className="text-3xl font-heading font-bold text-brand-400">{materialsCount}</div>
-          <div className="text-sm text-zinc-500">Materias primas</div>
+          <div className="text-sm text-th-text-muted">Materias primas</div>
         </Link>
         <Link href="/admin/inventario/proveedores" className="card hover:border-brand-500/40 transition-colors">
           <div className="text-3xl font-heading font-bold text-brand-400">{suppliersCount}</div>
-          <div className="text-sm text-zinc-500">Proveedores</div>
+          <div className="text-sm text-th-text-muted">Proveedores</div>
         </Link>
         <Link href="/admin/inventario/recetas" className="card hover:border-brand-500/40 transition-colors">
           <div className="text-3xl font-heading font-bold text-brand-400">{recipesCount}</div>
-          <div className="text-sm text-zinc-500">Ingredientes en recetas</div>
+          <div className="text-sm text-th-text-muted">Ingredientes en recetas</div>
         </Link>
       </div>
 
@@ -66,7 +66,7 @@ export default async function InventarioPage() {
                 >
                   <div>
                     <span className="font-semibold">{m.name}</span>
-                    <span className="text-sm text-zinc-500 ml-2">
+                    <span className="text-sm text-th-text-muted ml-2">
                       {m.currentStock} {m.unit.toLowerCase()}
                     </span>
                   </div>

@@ -120,7 +120,7 @@ export default async function NewRestaurantPage() {
   return (
     <div className="max-w-lg">
       <h1 className="text-2xl font-heading font-bold mb-6">Nuevo restaurante</h1>
-      <form action={createRestaurantAction} className="space-y-5 rounded-lg border border-white/[0.08] bg-surface-card p-6">
+      <form action={createRestaurantAction} className="space-y-5 rounded-lg border border-th-border bg-surface-card p-6">
         <Field name="name" label="Nombre del restaurante" required placeholder="La Parrilla del Bary" />
         <Field
           name="slug"
@@ -134,8 +134,8 @@ export default async function NewRestaurantPage() {
           <Field name="whatsappPhone" label="WhatsApp" placeholder="+54 9 11 1234-5678" />
         </div>
 
-        <div className="pt-4 border-t border-white/[0.08]">
-          <div className="text-sm font-semibold text-zinc-200 mb-3">Dueño inicial</div>
+        <div className="pt-4 border-t border-th-border">
+          <div className="text-sm font-semibold text-th-text-primary mb-3">Dueño inicial</div>
           <Field name="ownerName" label="Nombre" required placeholder="Juan Pérez" />
           <Field name="ownerEmail" label="Email" type="email" required placeholder="owner@parrilla.com" />
           <Field name="ownerPassword" label="Contraseña temporal" type="password" required minLength={6} />
@@ -168,7 +168,7 @@ function Field({
 }) {
   return (
     <div>
-      <label className="label text-zinc-300" htmlFor={name}>
+      <label className="label text-th-text-primary" htmlFor={name}>
         {label}
         {required && <span className="text-red-400"> *</span>}
       </label>
@@ -179,9 +179,9 @@ function Field({
         required={required}
         placeholder={placeholder}
         minLength={minLength}
-        className="input bg-surface border-white/[0.08] text-zinc-100"
+        className="input bg-surface border-th-border text-th-text-primary"
       />
-      {hint && <p className="text-xs text-zinc-500 mt-1">{hint}</p>}
+      {hint && <p className="text-xs text-th-text-muted mt-1">{hint}</p>}
     </div>
   );
 }

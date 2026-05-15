@@ -32,7 +32,7 @@ export default async function UsuariosPage() {
   return (
     <div>
       <h1 className="text-2xl font-heading font-bold mb-1">Usuarios</h1>
-      <p className="text-sm text-zinc-500 mb-6">
+      <p className="text-sm text-th-text-muted mb-6">
         Equipo de {restaurant.name}. Invitá nuevos miembros o cambiá roles.
       </p>
 
@@ -69,11 +69,11 @@ export default async function UsuariosPage() {
 
       {/* Members table */}
       {members.length === 0 ? (
-        <div className="card text-center text-zinc-500">Sin usuarios.</div>
+        <div className="card text-center text-th-text-muted">Sin usuarios.</div>
       ) : (
         <div className="overflow-x-auto">
           <table className="min-w-full text-sm card p-0 overflow-hidden">
-            <thead className="bg-white/[0.03]">
+            <thead className="bg-surface-elevated">
               <tr>
                 <th className="text-left px-4 py-2">Nombre</th>
                 <th className="text-left px-4 py-2 hidden sm:table-cell">Email</th>
@@ -82,7 +82,7 @@ export default async function UsuariosPage() {
                 <th className="px-4 py-2"></th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-white/[0.06]">
+            <tbody className="divide-y divide-th-border">
               {members.map((m) => (
                 <tr key={m.id}>
                   <td className="px-4 py-2 font-medium">
@@ -91,7 +91,7 @@ export default async function UsuariosPage() {
                       <span className="ml-2 text-xs text-brand-300">admin</span>
                     )}
                   </td>
-                  <td className="px-4 py-2 text-zinc-400 hidden sm:table-cell">{m.user.email}</td>
+                  <td className="px-4 py-2 text-th-text-muted hidden sm:table-cell">{m.user.email}</td>
                   <td className="px-4 py-2">
                     <SafeForm action={safeChangeUserRole} className="flex items-center gap-2">
                       <input type="hidden" name="membershipId" value={m.id} />
@@ -111,7 +111,7 @@ export default async function UsuariosPage() {
                       </button>
                     </SafeForm>
                   </td>
-                  <td className="px-4 py-2 text-zinc-500 hidden md:table-cell">
+                  <td className="px-4 py-2 text-th-text-muted hidden md:table-cell">
                     {m.createdAt.toLocaleDateString("es-AR")}
                   </td>
                   <td className="px-4 py-2 text-right">
@@ -141,13 +141,13 @@ export default async function UsuariosPage() {
                 <div className="font-semibold text-brand-300">
                   {ROLE_LABELS[code] ?? r.name}
                 </div>
-                <p className="text-xs text-zinc-500 mt-1">
+                <p className="text-xs text-th-text-muted mt-1">
                   {ROLE_DESCRIPTIONS[code] ?? ""}
                 </p>
                 {modules.length > 0 && (
                   <div className="flex flex-wrap gap-1 mt-2">
                     {modules.map((mod) => (
-                      <span key={mod} className="text-xs px-2 py-0.5 rounded-full bg-white/[0.05] text-zinc-400 border border-white/[0.08]">
+                      <span key={mod} className="text-xs px-2 py-0.5 rounded-full bg-surface-elevated text-th-text-muted border border-th-border">
                         {mod}
                       </span>
                     ))}

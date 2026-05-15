@@ -84,7 +84,7 @@ export default async function PublicHome({
             <span className="text-xs uppercase tracking-[0.3em] text-gold font-light">Nuestra historia</span>
             <h2 className="font-serif text-3xl md:text-4xl mt-4 mb-8">Sobre nosotros</h2>
             <div className="w-12 h-px bg-gold/40 mx-auto mb-8" />
-            <p className="text-zinc-400 leading-relaxed whitespace-pre-line text-base md:text-lg font-light">
+            <p className="text-th-text-muted leading-relaxed whitespace-pre-line text-base md:text-lg font-light">
               {site.aboutText}
             </p>
           </div>
@@ -130,7 +130,7 @@ export default async function PublicHome({
               {featured.map((it) => (
                 <article
                   key={it.id}
-                  className="group bg-white/5 border border-white/10 overflow-hidden hover:border-gold/30 transition-colors duration-300"
+                  className="group bg-surface-elevated border border-th-border overflow-hidden hover:border-gold/30 transition-colors duration-300"
                 >
                   {it.imageUrl && (
                     // eslint-disable-next-line @next/next/no-img-element
@@ -180,10 +180,10 @@ export default async function PublicHome({
                   return (
                     <div
                       key={d}
-                      className="flex items-center justify-between py-3 border-b border-white/10"
+                      className="flex items-center justify-between py-3 border-b border-th-border"
                     >
                       <span className="text-sm font-light">{WEEKDAYS[d]}</span>
-                      <span className="text-sm text-zinc-400 font-light">
+                      <span className="text-sm text-th-text-muted font-light">
                         {slots.length === 0
                           ? "Cerrado"
                           : slots
@@ -197,7 +197,7 @@ export default async function PublicHome({
 
               {restaurant.address && (
                 <div className="mt-8">
-                  <div className="flex items-start gap-3 text-zinc-400">
+                  <div className="flex items-start gap-3 text-th-text-muted">
                     <svg className="w-5 h-5 text-gold mt-0.5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5">
                       <path strokeLinecap="round" strokeLinejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
                       <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
@@ -209,7 +209,7 @@ export default async function PublicHome({
 
               {restaurant.phone && (
                 <div className="mt-3">
-                  <div className="flex items-center gap-3 text-zinc-400">
+                  <div className="flex items-center gap-3 text-th-text-muted">
                     <svg className="w-5 h-5 text-gold shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5">
                       <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z" />
                     </svg>
@@ -222,7 +222,7 @@ export default async function PublicHome({
             {/* Mapa */}
             {site?.addressMapUrl ? (
               <div className="flex flex-col justify-center">
-                <div className="aspect-[4/3] w-full overflow-hidden border border-white/10">
+                <div className="aspect-[4/3] w-full overflow-hidden border border-th-border">
                   <iframe
                     src={site.addressMapUrl}
                     className="w-full h-full grayscale contrast-125 opacity-80 hover:grayscale-0 hover:opacity-100 transition-all duration-500"
@@ -249,7 +249,7 @@ export default async function PublicHome({
         <div className="max-w-2xl mx-auto px-4">
           <div className="w-16 h-px bg-gold mx-auto mb-8" />
           <h2 className="font-serif text-3xl md:text-4xl mb-4">Te esperamos</h2>
-          <p className="text-zinc-400 font-light mb-10">
+          <p className="text-th-text-muted font-light mb-10">
             Reservá tu mesa y disfrutá de una experiencia gastronómica única.
           </p>
           <Link href={`${base}/reservar`} className="pub-btn-gold">

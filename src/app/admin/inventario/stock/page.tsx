@@ -58,7 +58,7 @@ export default async function StockPage({
       <div className="card p-0 overflow-x-auto mb-8">
         <table className="w-full text-sm">
           <thead>
-            <tr className="border-b border-white/[0.08] bg-white/[0.03] text-left text-xs uppercase tracking-wide text-zinc-500">
+            <tr className="border-b border-th-border bg-surface-elevated text-left text-xs uppercase tracking-wide text-th-text-muted">
               <th className="px-4 py-3">Materia prima</th>
               <th className="px-4 py-3 text-right">Stock actual</th>
               <th className="px-4 py-3 text-right">Reposición</th>
@@ -66,24 +66,24 @@ export default async function StockPage({
               <th className="px-4 py-3 text-center">Estado</th>
             </tr>
           </thead>
-          <tbody className="divide-y divide-white/[0.06]">
+          <tbody className="divide-y divide-th-border">
             {materials.map((m) => {
               const isCritical = m.currentStock <= m.criticalPoint && m.criticalPoint > 0;
               const isLow = !isCritical && m.currentStock <= m.reorderPoint && m.reorderPoint > 0;
               const pct = m.reorderPoint > 0 ? Math.min(100, (m.currentStock / m.reorderPoint) * 100) : 100;
               return (
-                <tr key={m.id} className="hover:bg-white/[0.03]">
+                <tr key={m.id} className="hover:bg-surface-elevated">
                   <td className="px-4 py-3 font-medium">{m.name}</td>
                   <td className="px-4 py-3 text-right">
                     <span className={isCritical ? "text-red-400 font-bold" : isLow ? "text-amber-400 font-semibold" : ""}>
                       {m.currentStock} {UNIT_LABELS[m.unit]}
                     </span>
                   </td>
-                  <td className="px-4 py-3 text-right text-zinc-500">{m.reorderPoint} {UNIT_LABELS[m.unit]}</td>
-                  <td className="px-4 py-3 text-right text-zinc-500">{m.criticalPoint} {UNIT_LABELS[m.unit]}</td>
+                  <td className="px-4 py-3 text-right text-th-text-muted">{m.reorderPoint} {UNIT_LABELS[m.unit]}</td>
+                  <td className="px-4 py-3 text-right text-th-text-muted">{m.criticalPoint} {UNIT_LABELS[m.unit]}</td>
                   <td className="px-4 py-3">
                     <div className="flex items-center justify-center gap-2">
-                      <div className="w-20 h-2 bg-white/[0.08] rounded-full overflow-hidden">
+                      <div className="w-20 h-2 bg-th-border rounded-full overflow-hidden">
                         <div
                           className={`h-full rounded-full ${isCritical ? "bg-red-500" : isLow ? "bg-amber-500" : "bg-emerald-500"}`}
                           style={{ width: `${pct}%` }}
@@ -155,7 +155,7 @@ export default async function StockPage({
                 key={d}
                 href={`/admin/inventario/stock?dias=${d}`}
                 className={`px-2 py-1 rounded ${
-                  days === d ? "bg-zinc-100 text-zinc-900" : "bg-white/[0.05] text-zinc-400 hover:bg-white/[0.08]"
+                  days === d ? "bg-zinc-100 text-zinc-900" : "bg-surface-elevated text-th-text-muted hover:bg-th-border"
                 }`}
               >
                 {d}d
@@ -165,12 +165,12 @@ export default async function StockPage({
         </div>
 
         {movements.length === 0 ? (
-          <div className="card text-center text-zinc-500">Sin movimientos en los últimos {days} días.</div>
+          <div className="card text-center text-th-text-muted">Sin movimientos en los últimos {days} días.</div>
         ) : (
           <div className="card p-0 overflow-x-auto">
             <table className="w-full text-sm">
               <thead>
-                <tr className="border-b border-white/[0.08] bg-white/[0.03] text-left text-xs uppercase tracking-wide text-zinc-500">
+                <tr className="border-b border-th-border bg-surface-elevated text-left text-xs uppercase tracking-wide text-th-text-muted">
                   <th className="px-4 py-3">Fecha</th>
                   <th className="px-4 py-3">Materia prima</th>
                   <th className="px-4 py-3">Tipo</th>
@@ -178,12 +178,12 @@ export default async function StockPage({
                   <th className="px-4 py-3">Motivo</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-white/[0.06]">
+              <tbody className="divide-y divide-th-border">
                 {movements.map((mv) => {
                   const t = TYPE_LABELS[mv.type] ?? { label: mv.type, cls: "" };
                   return (
-                    <tr key={mv.id} className="hover:bg-white/[0.03]">
-                      <td className="px-4 py-3 text-zinc-500 whitespace-nowrap">
+                    <tr key={mv.id} className="hover:bg-surface-elevated">
+                      <td className="px-4 py-3 text-th-text-muted whitespace-nowrap">
                         {mv.createdAt.toLocaleDateString("es-AR")} {mv.createdAt.toLocaleTimeString("es-AR", { hour: "2-digit", minute: "2-digit" })}
                       </td>
                       <td className="px-4 py-3 font-medium">{mv.rawMaterial.name}</td>
@@ -197,7 +197,7 @@ export default async function StockPage({
                           {mv.type === "WASTE" || mv.type === "SALE" ? "-" : "+"}{mv.quantity} {UNIT_LABELS[mv.rawMaterial.unit]}
                         </span>
                       </td>
-                      <td className="px-4 py-3 text-zinc-500 text-xs">
+                      <td className="px-4 py-3 text-th-text-muted text-xs">
                         {mv.reason || (mv.orderId ? `Orden #${mv.orderId.slice(-6)}` : "—")}
                       </td>
                     </tr>

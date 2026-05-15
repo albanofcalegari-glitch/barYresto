@@ -27,7 +27,7 @@ export default async function ProveedoresPage() {
       </div>
 
       {suppliers.length === 0 ? (
-        <div className="card text-center text-zinc-500">
+        <div className="card text-center text-th-text-muted">
           No hay proveedores cargados.{" "}
           <Link href="/admin/inventario/proveedores/nuevo" className="text-brand-400 hover:underline">
             Crear el primero
@@ -39,11 +39,11 @@ export default async function ProveedoresPage() {
             <div key={s.id} className="card flex flex-wrap items-start justify-between gap-4">
               <div>
                 <div className="font-semibold">{s.name}</div>
-                <div className="text-sm text-zinc-500">
+                <div className="text-sm text-th-text-muted">
                   {[s.phone, s.email].filter(Boolean).join(" · ") || "Sin contacto"}
                 </div>
-                {s.notes && <div className="text-xs text-zinc-400 mt-1">{s.notes}</div>}
-                <div className="text-xs text-zinc-400 mt-1">
+                {s.notes && <div className="text-xs text-th-text-muted mt-1">{s.notes}</div>}
+                <div className="text-xs text-th-text-muted mt-1">
                   {s._count.materials} materia(s) prima(s)
                 </div>
               </div>

@@ -27,7 +27,7 @@ export default async function NuevaMateriaPage() {
     <div className="max-w-lg">
       <div className="flex items-baseline justify-between mb-6">
         <h1 className="text-2xl font-heading font-bold">Nueva materia prima</h1>
-        <Link href="/admin/inventario/materias-primas" className="text-sm text-zinc-400 hover:underline">
+        <Link href="/admin/inventario/materias-primas" className="text-sm text-th-text-muted hover:underline">
           ← volver
         </Link>
       </div>
@@ -74,16 +74,16 @@ export default async function NuevaMateriaPage() {
           <div>
             <label className="label">Punto de reposición</label>
             <input name="reorderPoint" type="number" step="0.01" min="0" defaultValue="0" className="input" />
-            <p className="text-xs text-zinc-400 mt-1">Alerta amarilla</p>
+            <p className="text-xs text-th-text-muted mt-1">Alerta amarilla</p>
           </div>
           <div>
             <label className="label">Punto crítico</label>
             <input name="criticalPoint" type="number" step="0.01" min="0" defaultValue="0" className="input" />
-            <p className="text-xs text-zinc-400 mt-1">Alerta roja</p>
+            <p className="text-xs text-th-text-muted mt-1">Alerta roja</p>
           </div>
         </div>
 
-        <div className="flex justify-end gap-3 pt-4 border-t border-white/[0.08]">
+        <div className="flex justify-end gap-3 pt-4 border-t border-th-border">
           <Link href="/admin/inventario/materias-primas" className="btn-ghost">Cancelar</Link>
           <button className="btn-primary">Crear</button>
         </div>

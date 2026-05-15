@@ -72,7 +72,7 @@ export default async function AdminHome({
         <div>
           <h1 className="text-2xl font-heading font-bold">Hola, {session.user.name}</h1>
           {restaurant && (
-            <p className="text-sm text-zinc-500 mt-1">{restaurant.name}</p>
+            <p className="text-sm text-th-text-muted mt-1">{restaurant.name}</p>
           )}
         </div>
       </div>
@@ -93,7 +93,7 @@ export default async function AdminHome({
       {!restaurant ? (
         <div className="card">
           <h2 className="font-heading font-semibold">Sin restaurante asociado</h2>
-          <p className="mt-2 text-sm text-zinc-400">
+          <p className="mt-2 text-sm text-th-text-muted">
             Tu usuario aún no está vinculado a ningún restaurante. Contactá al
             super admin.
           </p>
@@ -160,7 +160,7 @@ function Stat({
 }) {
   return (
     <div className={`card ${alert ? "border-amber-500/30 bg-amber-500/10" : ""}`}>
-      <div className="text-xs uppercase tracking-wide text-zinc-500">{label}</div>
+      <div className="text-xs uppercase tracking-wide text-th-text-muted">{label}</div>
       <div className={`text-3xl font-bold mt-2 ${alert ? "text-amber-400" : ""}`}>
         {value}
       </div>
@@ -180,7 +180,7 @@ function QuickLink({
   return (
     <Link href={href} className="card hover:shadow-md transition-shadow group">
       <div className="font-semibold group-hover:text-brand-300">{label}</div>
-      <div className="text-sm text-zinc-500 mt-1">{description}</div>
+      <div className="text-sm text-th-text-muted mt-1">{description}</div>
     </Link>
   );
 }

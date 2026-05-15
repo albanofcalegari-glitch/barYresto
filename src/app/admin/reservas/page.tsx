@@ -32,7 +32,7 @@ const STATUS_STYLES: Record<
   },
   CANCELED: {
     label: "Cancelada",
-    cls: "bg-white/[0.05] text-zinc-500 border-white/[0.08]",
+    cls: "bg-surface-elevated text-th-text-muted border-th-border",
   },
   NO_SHOW: {
     label: "No vino",
@@ -40,7 +40,7 @@ const STATUS_STYLES: Record<
   },
   COMPLETED: {
     label: "Completada",
-    cls: "bg-white/[0.03] text-zinc-400 border-white/[0.08]",
+    cls: "bg-surface-elevated text-th-text-muted border-th-border",
   },
 };
 
@@ -138,24 +138,24 @@ export default async function ReservasPage({
       <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-6">
         <div className="card text-center">
           <div className="text-2xl font-bold">{counts.total}</div>
-          <div className="text-xs text-zinc-500">Total</div>
+          <div className="text-xs text-th-text-muted">Total</div>
         </div>
         <div className="card text-center">
           <div className="text-2xl font-bold text-amber-400">{counts.pending}</div>
-          <div className="text-xs text-zinc-500">Pendientes</div>
+          <div className="text-xs text-th-text-muted">Pendientes</div>
         </div>
         <div className="card text-center">
           <div className="text-2xl font-bold text-emerald-400">{counts.confirmed}</div>
-          <div className="text-xs text-zinc-500">Confirmadas</div>
+          <div className="text-xs text-th-text-muted">Confirmadas</div>
         </div>
         <div className="card text-center">
           <div className="text-2xl font-bold">{counts.pax}</div>
-          <div className="text-xs text-zinc-500">Personas</div>
+          <div className="text-xs text-th-text-muted">Personas</div>
         </div>
       </div>
 
       {reservations.length === 0 ? (
-        <div className="card text-center text-zinc-500">
+        <div className="card text-center text-th-text-muted">
           Sin reservas para esta fecha.
         </div>
       ) : (
@@ -171,7 +171,7 @@ export default async function ReservasPage({
                     hour12: false,
                   })}
                 </div>
-                <div className="text-xs text-zinc-500">{r.pax} pax</div>
+                <div className="text-xs text-th-text-muted">{r.pax} pax</div>
               </div>
 
               {/* Info */}
@@ -179,7 +179,7 @@ export default async function ReservasPage({
                 <div className="flex items-center gap-2 flex-wrap">
                   <span className="font-semibold">{r.contactName}</span>
                   <StatusBadge status={r.status} />
-                  <span className="text-xs text-zinc-400">
+                  <span className="text-xs text-th-text-muted">
                     {SOURCE_LABELS[r.source] ?? r.source}
                   </span>
                   {r.customer && r.customer.visitsCount > 0 && (
@@ -188,17 +188,17 @@ export default async function ReservasPage({
                     </span>
                   )}
                 </div>
-                <div className="text-sm text-zinc-400 mt-0.5">
+                <div className="text-sm text-th-text-muted mt-0.5">
                   {r.contactPhone}
                   {r.contactEmail && ` · ${r.contactEmail}`}
                 </div>
                 {r.table && (
-                  <div className="text-xs text-zinc-500 mt-0.5">
+                  <div className="text-xs text-th-text-muted mt-0.5">
                     Mesa {r.table.code}
                   </div>
                 )}
                 {r.notes && (
-                  <div className="text-xs text-zinc-500 mt-1 italic">
+                  <div className="text-xs text-th-text-muted mt-1 italic">
                     {r.notes}
                   </div>
                 )}
@@ -232,7 +232,7 @@ export default async function ReservasPage({
                     </SafeForm>
                     <SafeForm action={safeMarkNoShow}>
                       <input type="hidden" name="id" value={r.id} />
-                      <button className="text-xs text-zinc-400 hover:underline">
+                      <button className="text-xs text-th-text-muted hover:underline">
                         No vino
                       </button>
                     </SafeForm>

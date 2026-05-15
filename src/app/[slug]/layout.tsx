@@ -36,7 +36,7 @@ export default async function PublicSiteLayout({
   return (
     <div className="min-h-screen flex flex-col bg-zinc-950 text-white">
       {/* Header */}
-      <header className="fixed top-0 w-full z-50 bg-black/80 backdrop-blur-sm border-b border-white/10">
+      <header className="fixed top-0 w-full z-50 bg-black/80 backdrop-blur-sm border-b border-th-border">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
           <Link href={base} className="font-serif text-xl sm:text-2xl tracking-wide text-gold">
             {restaurant.name}
@@ -82,17 +82,17 @@ export default async function PublicSiteLayout({
       <main className="flex-1 pt-16">{children}</main>
 
       {/* Footer */}
-      <footer className="bg-black border-t border-white/10">
+      <footer className="bg-black border-t border-th-border">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 py-12">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
             {/* Brand */}
             <div>
               <div className="font-serif text-2xl text-gold mb-3">{restaurant.name}</div>
               {restaurant.address && (
-                <p className="text-sm text-zinc-400 leading-relaxed">{restaurant.address}</p>
+                <p className="text-sm text-th-text-muted leading-relaxed">{restaurant.address}</p>
               )}
               {restaurant.phone && (
-                <p className="text-sm text-zinc-400 mt-2">Tel: {restaurant.phone}</p>
+                <p className="text-sm text-th-text-muted mt-2">Tel: {restaurant.phone}</p>
               )}
             </div>
 
@@ -100,7 +100,7 @@ export default async function PublicSiteLayout({
             <div>
               <h3 className="text-xs uppercase tracking-widest text-gold mb-3">Horarios</h3>
               {site?.openingInfo ? (
-                <p className="text-sm text-zinc-400 whitespace-pre-line leading-relaxed">
+                <p className="text-sm text-th-text-muted whitespace-pre-line leading-relaxed">
                   {site.openingInfo}
                 </p>
               ) : (
@@ -117,7 +117,7 @@ export default async function PublicSiteLayout({
                     href={site.instagramUrl}
                     target="_blank"
                     rel="noreferrer"
-                    className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center hover:border-gold hover:text-gold transition-colors"
+                    className="w-10 h-10 rounded-full border border-th-border flex items-center justify-center hover:border-gold hover:text-gold transition-colors"
                     aria-label="Instagram"
                   >
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -132,7 +132,7 @@ export default async function PublicSiteLayout({
                     href={waLink}
                     target="_blank"
                     rel="noreferrer"
-                    className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center hover:border-gold hover:text-gold transition-colors"
+                    className="w-10 h-10 rounded-full border border-th-border flex items-center justify-center hover:border-gold hover:text-gold transition-colors"
                     aria-label="WhatsApp"
                   >
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
@@ -144,7 +144,7 @@ export default async function PublicSiteLayout({
             </div>
           </div>
 
-          <div className="mt-10 pt-6 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-3">
+          <div className="mt-10 pt-6 border-t border-th-border flex flex-col sm:flex-row items-center justify-between gap-3">
             <div className="text-xs text-zinc-600">
               © {new Date().getFullYear()} {restaurant.name}
             </div>

@@ -57,12 +57,12 @@ export default async function PublicMenuPage({
       </div>
 
       {/* Category nav */}
-      <nav className="mb-12 flex flex-wrap gap-2 justify-center sticky top-16 bg-zinc-950/90 backdrop-blur-sm py-4 z-10 border-b border-white/10">
+      <nav className="mb-12 flex flex-wrap gap-2 justify-center sticky top-16 bg-zinc-950/90 backdrop-blur-sm py-4 z-10 border-b border-th-border">
         {nonEmpty.map((c) => (
           <a
             key={c.id}
             href={`#cat-${c.id}`}
-            className="text-xs uppercase tracking-widest px-4 py-2 border border-white/15 hover:border-gold hover:text-gold transition-colors duration-300"
+            className="text-xs uppercase tracking-widest px-4 py-2 border border-th-border hover:border-gold hover:text-gold transition-colors duration-300"
           >
             {c.name}
           </a>
@@ -81,7 +81,7 @@ export default async function PublicMenuPage({
               <div className="w-8 h-px bg-gold/40 mt-3" />
             </div>
 
-            <div className="divide-y divide-white/10">
+            <div className="divide-y divide-th-border">
               {cat.items.map((it) => (
                 <article key={it.id} className="py-5 flex gap-4 items-start group">
                   {it.imageUrl && (
@@ -89,7 +89,7 @@ export default async function PublicMenuPage({
                     <img
                       src={it.imageUrl}
                       alt={it.name}
-                      className="w-16 h-16 sm:w-20 sm:h-20 object-cover border border-white/10 flex-shrink-0"
+                      className="w-16 h-16 sm:w-20 sm:h-20 object-cover border border-th-border flex-shrink-0"
                     />
                   )}
                   <div className="flex-1 min-w-0">
@@ -114,7 +114,7 @@ export default async function PublicMenuPage({
                         {it.tags.map((t) => (
                           <span
                             key={t}
-                            className="text-[10px] uppercase tracking-wide text-zinc-500 border border-white/15 px-2 py-0.5"
+                            className="text-[10px] uppercase tracking-wide text-zinc-500 border border-th-border px-2 py-0.5"
                           >
                             {t}
                           </span>

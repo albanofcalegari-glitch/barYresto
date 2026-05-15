@@ -102,7 +102,7 @@ export default async function ReportesPage() {
   return (
     <div>
       <h1 className="text-2xl font-heading font-bold mb-1">Reportes</h1>
-      <p className="text-sm text-zinc-500 mb-6">Resumen de {monthName}</p>
+      <p className="text-sm text-th-text-muted mb-6">Resumen de {monthName}</p>
 
       {/* Sales */}
       <section className="mb-8">
@@ -152,17 +152,17 @@ export default async function ReportesPage() {
           <h2 className="text-lg font-heading font-semibold mb-3">Platos más pedidos</h2>
           <div className="card p-0 overflow-hidden">
             <table className="w-full text-sm">
-              <thead className="bg-white/[0.03]">
+              <thead className="bg-surface-elevated">
                 <tr>
                   <th className="text-left px-4 py-2">#</th>
                   <th className="text-left px-4 py-2">Plato</th>
                   <th className="text-right px-4 py-2">Cantidad</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-white/[0.06]">
+              <tbody className="divide-y divide-th-border">
                 {topItems.map((item, i) => (
                   <tr key={item.nameSnapshot}>
-                    <td className="px-4 py-2 text-zinc-500">{i + 1}</td>
+                    <td className="px-4 py-2 text-th-text-muted">{i + 1}</td>
                     <td className="px-4 py-2 font-medium">{item.nameSnapshot}</td>
                     <td className="px-4 py-2 text-right">{item._sum.quantity ?? 0}</td>
                   </tr>
@@ -179,7 +179,7 @@ export default async function ReportesPage() {
 function StatCard({ label, value }: { label: string; value: string | number }) {
   return (
     <div className="card">
-      <div className="text-xs uppercase tracking-wide text-zinc-500">{label}</div>
+      <div className="text-xs uppercase tracking-wide text-th-text-muted">{label}</div>
       <div className="text-2xl font-bold mt-1">{value}</div>
     </div>
   );

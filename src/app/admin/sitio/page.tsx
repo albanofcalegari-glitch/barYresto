@@ -136,7 +136,7 @@ function Field({
         maxLength={maxLength}
         className="input"
       />
-      {hint && <p className="text-xs text-zinc-500 mt-1">{hint}</p>}
+      {hint && <p className="text-xs text-th-text-muted mt-1">{hint}</p>}
     </div>
   );
 }

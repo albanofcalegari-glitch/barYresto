@@ -49,7 +49,7 @@ export default async function EditItemPage({
     <div className="max-w-2xl">
       <div className="flex items-baseline justify-between mb-6">
         <h1 className="text-2xl font-heading font-bold">Editar plato</h1>
-        <Link href="/admin/menu" className="text-sm text-zinc-400 hover:underline">
+        <Link href="/admin/menu" className="text-sm text-th-text-muted hover:underline">
           ← volver
         </Link>
       </div>

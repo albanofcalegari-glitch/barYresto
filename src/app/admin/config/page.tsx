@@ -12,7 +12,7 @@ export default async function ConfigPage() {
   return (
     <div className="max-w-2xl">
       <h1 className="text-2xl font-heading font-bold mb-1">Configuración</h1>
-      <p className="text-sm text-zinc-500 mb-6">
+      <p className="text-sm text-th-text-muted mb-6">
         Datos del restaurante y URL publica.
       </p>
 
@@ -40,7 +40,7 @@ export default async function ConfigPage() {
               pattern="[a-z0-9][a-z0-9\-]*[a-z0-9]"
               className="input font-mono"
             />
-            <p className="text-xs text-zinc-500 mt-1">baryresto.app/<strong>{restaurant.slug}</strong></p>
+            <p className="text-xs text-th-text-muted mt-1">baryresto.app/<strong>{restaurant.slug}</strong></p>
           </div>
         </div>
 
@@ -62,7 +62,7 @@ export default async function ConfigPage() {
               placeholder="5491144445555"
               className="input"
             />
-            <p className="text-xs text-zinc-500 mt-1">Sin + ni espacios. Ej: 5491144445555</p>
+            <p className="text-xs text-th-text-muted mt-1">Sin + ni espacios. Ej: 5491144445555</p>
           </div>
         </div>
 
@@ -81,9 +81,9 @@ export default async function ConfigPage() {
         </div>
       </SafeForm>
 
-      <div className="mt-8 card bg-white/[0.03] border-white/[0.08] text-sm">
+      <div className="mt-8 card bg-surface-elevated border-th-border text-sm">
         <div className="font-semibold mb-2">Datos de la cuenta</div>
-        <dl className="grid grid-cols-[140px_1fr] gap-y-1 text-zinc-400">
+        <dl className="grid grid-cols-[140px_1fr] gap-y-1 text-th-text-muted">
           <dt>Zona horaria</dt>
           <dd>{restaurant.timezone}</dd>
           <dt>Moneda</dt>

@@ -26,13 +26,13 @@ export default async function RestaurantsPage() {
       </div>
 
       {restaurants.length === 0 ? (
-        <div className="rounded-lg border border-white/[0.08] p-8 text-center text-zinc-400">
+        <div className="rounded-lg border border-th-border p-8 text-center text-th-text-muted">
           Todavía no hay restaurantes. Creá el primero.
         </div>
       ) : (
-        <div className="overflow-x-auto rounded-lg border border-white/[0.08]">
+        <div className="overflow-x-auto rounded-lg border border-th-border">
           <table className="min-w-full text-sm">
-            <thead className="bg-white/[0.03] text-zinc-300">
+            <thead className="bg-surface-elevated text-th-text-primary">
               <tr>
                 <th className="text-left px-4 py-3">Nombre</th>
                 <th className="text-left px-4 py-3">Slug</th>
@@ -44,14 +44,14 @@ export default async function RestaurantsPage() {
                 <th className="px-4 py-3" />
               </tr>
             </thead>
-            <tbody className="divide-y divide-white/[0.06]">
+            <tbody className="divide-y divide-th-border">
               {restaurants.map((r) => (
-                <tr key={r.id} className="hover:bg-white/[0.03]">
+                <tr key={r.id} className="hover:bg-surface-elevated">
                   <td className="px-4 py-3 font-medium">{r.name}</td>
-                  <td className="px-4 py-3 text-zinc-400">
+                  <td className="px-4 py-3 text-th-text-muted">
                     <code>{r.slug}</code>
                   </td>
-                  <td className="px-4 py-3 text-zinc-400">
+                  <td className="px-4 py-3 text-th-text-muted">
                     {r.plan?.name ?? "—"}
                   </td>
                   <td className="px-4 py-3">

@@ -42,13 +42,13 @@ export default async function RecetasPage() {
     <div>
       <div className="flex flex-wrap items-baseline justify-between gap-4 mb-2">
         <div>
-          <Link href="/admin/inventario" className="text-sm text-zinc-500 hover:text-zinc-300">
+          <Link href="/admin/inventario" className="text-sm text-th-text-muted hover:text-th-text-primary">
             ← Inventario
           </Link>
           <h1 className="text-2xl font-heading font-bold mt-1">Recetas</h1>
         </div>
       </div>
-      <p className="text-sm text-zinc-500 mb-6">
+      <p className="text-sm text-th-text-muted mb-6">
         Definí cuánta materia prima necesita cada plato. Cuando se cierre una orden, el stock se descuenta automáticamente.
       </p>
 
@@ -61,7 +61,7 @@ export default async function RecetasPage() {
                 <div className="flex-1 min-w-0">
                   <div className="font-medium">{item.name}</div>
                   {item.recipe.length > 0 ? (
-                    <div className="text-sm text-zinc-500 mt-1">
+                    <div className="text-sm text-th-text-muted mt-1">
                       {item.recipe.map((r) => (
                         <span key={r.id} className="inline-block mr-3">
                           {r.quantity} {UNIT_LABELS[r.rawMaterial.unit]} {r.rawMaterial.name}
@@ -69,7 +69,7 @@ export default async function RecetasPage() {
                       ))}
                     </div>
                   ) : (
-                    <div className="text-xs text-zinc-400 mt-1">Sin receta definida</div>
+                    <div className="text-xs text-th-text-muted mt-1">Sin receta definida</div>
                   )}
                 </div>
                 {item.recipe.length > 0 ? (
