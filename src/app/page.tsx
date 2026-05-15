@@ -5,7 +5,9 @@ export const dynamic = "force-dynamic";
 
 export default function LandingPage() {
   const adminUrl = process.env.ADMIN_URL ?? "";
+  const platformUrl = process.env.PLATFORM_URL ?? "";
   const loginUrl = adminUrl ? `${adminUrl}/login` : "/login";
+  const platformLoginUrl = platformUrl ? `${platformUrl}/login` : "/login";
 
   return (
     <main className="min-h-screen bg-surface text-white font-sans overflow-hidden">
@@ -289,8 +291,16 @@ export default function LandingPage() {
             </a>
           </div>
 
-          <div className="text-xs text-zinc-700">
-            &copy; {new Date().getFullYear()}
+          <div className="flex items-center gap-4">
+            <a
+              href={platformLoginUrl}
+              className="text-xs text-zinc-700 hover:text-zinc-500 transition-colors"
+            >
+              Plataforma
+            </a>
+            <span className="text-xs text-zinc-700">
+              &copy; {new Date().getFullYear()}
+            </span>
           </div>
         </div>
       </footer>

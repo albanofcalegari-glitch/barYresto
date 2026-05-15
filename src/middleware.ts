@@ -2,14 +2,19 @@ import { NextResponse, type NextRequest } from "next/server";
 import { getToken } from "next-auth/jwt";
 
 const ADMIN_HOST = process.env.ADMIN_HOST ?? "baryresto-admin.qngine.com.ar";
+const PLATFORM_HOST = process.env.PLATFORM_HOST ?? "platform-baryresto.qngine.com.ar";
 
 export async function middleware(req: NextRequest) {
   const { pathname } = req.nextUrl;
   const host = req.headers.get("host")?.split(":")[0] ?? "";
-  const isAdminHost = host === ADMIN_HOST || host === "localhost";
 
-  // Public host: only allow public routes (slug pages, API, static)
-  if (!isAdminHost) {
+  const isPlatformHost = host === PLATFORM_HOST;
+  const isAdminHost = host === ADMIN_HOST;
+  const isDevHost = host === "localhost";
+  const isPublicHost = !isPlatformHost && !isAdminHost && !isDevHost;
+
+  // ── Public host: only public routes ──
+  if (isPublicHost) {
     const isBlockedOnPublic =
       pathname.startsWith("/admin") ||
       pathname.startsWith("/platform") ||
@@ -22,30 +27,78 @@ export async function middleware(req: NextRequest) {
     return NextResponse.next();
   }
 
-  // Admin host: block slug routes, allow admin/platform/login
-  const isPublicSlugRoute =
-    !pathname.startsWith("/admin") &&
-    !pathname.startsWith("/platform") &&
-    !pathname.startsWith("/login") &&
-    !pathname.startsWith("/login-redirect") &&
-    !pathname.startsWith("/api") &&
-    !pathname.startsWith("/_next") &&
-    pathname !== "/favicon.ico";
+  // ── Platform host: only /platform + /login ──
+  if (isPlatformHost) {
+    const isAllowed =
+      pathname.startsWith("/platform") ||
+      pathname.startsWith("/login") ||
+      pathname.startsWith("/login-redirect") ||
+      pathname.startsWith("/api") ||
+      pathname.startsWith("/_next") ||
+      pathname === "/favicon.ico";
 
-  if (isPublicSlugRoute && pathname !== "/") {
+    if (!isAllowed || pathname === "/") {
+      const url = req.nextUrl.clone();
+      url.pathname = "/platform";
+      return NextResponse.redirect(url);
+    }
+
+    if (pathname.startsWith("/platform")) {
+      const token = await getToken({ req, secret: process.env.AUTH_SECRET, salt: "authjs.session-token" });
+      if (!token) {
+        const url = req.nextUrl.clone();
+        url.pathname = "/login";
+        url.searchParams.set("callbackUrl", pathname);
+        return NextResponse.redirect(url);
+      }
+      if (!token.isPlatformAdmin) {
+        const url = req.nextUrl.clone();
+        url.pathname = "/login";
+        url.searchParams.set("error", "forbidden");
+        return NextResponse.redirect(url);
+      }
+    }
+
+    return NextResponse.next();
+  }
+
+  // ── Admin host (+ localhost dev): /admin + /login, block /platform ──
+  const isAllowed =
+    pathname.startsWith("/admin") ||
+    pathname.startsWith("/login") ||
+    pathname.startsWith("/login-redirect") ||
+    pathname.startsWith("/api") ||
+    pathname.startsWith("/_next") ||
+    pathname === "/favicon.ico";
+
+  // Dev host: also allow /platform for convenience
+  if (isDevHost) {
+    const isDevAllowed = isAllowed || pathname.startsWith("/platform");
+    if (!isDevAllowed && pathname !== "/") {
+      const url = req.nextUrl.clone();
+      url.pathname = "/admin";
+      return NextResponse.redirect(url);
+    }
+  } else if (!isAllowed && pathname !== "/") {
     const url = req.nextUrl.clone();
     url.pathname = "/admin";
     return NextResponse.redirect(url);
   }
 
-  // Redirect root to /admin on admin host
   if (pathname === "/") {
     const url = req.nextUrl.clone();
     url.pathname = "/admin";
     return NextResponse.redirect(url);
   }
 
-  // Auth protection for /admin, /platform
+  // Block /platform on admin host (not dev)
+  if (!isDevHost && pathname.startsWith("/platform")) {
+    const url = req.nextUrl.clone();
+    url.pathname = "/admin";
+    return NextResponse.redirect(url);
+  }
+
+  // Auth protection
   const isProtected =
     pathname.startsWith("/admin") ||
     pathname.startsWith("/platform");
