@@ -99,7 +99,7 @@ export default async function SitePage() {
 
         <Field
           name="addressMapUrl"
-          label="Link de Google Maps (embed)"
+          label="Link de Google Maps (opcional)"
           defaultValue={site?.addressMapUrl ?? ""}
           type="url"
           hint="Copiá el src del iframe de Google Maps → Compartir → Incorporar un mapa."
@@ -107,7 +107,7 @@ export default async function SitePage() {
 
         <Field
           name="instagramUrl"
-          label="Instagram"
+          label="Instagram (opcional)"
           defaultValue={site?.instagramUrl ?? ""}
           type="url"
           placeholder="https://instagram.com/..."
