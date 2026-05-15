@@ -5,6 +5,8 @@ import { requireCurrentRestaurant } from "@/lib/tenant";
 import { SafeForm } from "@/components/safe-form";
 import { safeUpdateSiteContent } from "@/modules/cms/safe-actions";
 import { ImageUpload } from "@/components/image-upload";
+import { CopyUrlBanner } from "@/components/copy-url-banner";
+import { env } from "@/lib/env";
 
 export const metadata = { title: "Sitio web" };
 
@@ -42,6 +44,20 @@ export default async function SitePage() {
             Ver sitio público ↗
           </Link>
         </div>
+      </div>
+
+      <div className="max-w-2xl mb-6">
+        <CopyUrlBanner
+          url={`${env.APP_BASE_URL}/${restaurant.slug}`}
+          slug={restaurant.slug}
+        />
+        <p className="text-xs text-th-text-muted -mt-4 mb-0">
+          Slug actual: <code className="font-mono text-brand-400">{restaurant.slug}</code>
+          {" · "}
+          <Link href="/admin/config" className="text-brand-400 hover:underline">
+            Cambiar slug →
+          </Link>
+        </p>
       </div>
 
       <SafeForm action={safeUpdateSiteContent} className="card max-w-2xl space-y-5" successMessage="Cambios guardados">
