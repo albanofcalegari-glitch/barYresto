@@ -28,7 +28,7 @@ RUN pnpm build
 
 # --- Runner ---
 FROM base AS runner
-RUN apk add --no-cache openssl
+RUN apk add --no-cache openssl vips-dev
 WORKDIR /app
 
 ENV NODE_ENV=production
@@ -43,6 +43,7 @@ COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
 COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
 COPY --from=builder /app/prisma ./prisma
 COPY --from=builder /app/node_modules/.pnpm/@prisma+client*/node_modules/.prisma ./node_modules/.prisma
+COPY --from=builder /app/node_modules/.pnpm/sharp*/node_modules/sharp ./node_modules/sharp
 
 USER nextjs
 EXPOSE 3000

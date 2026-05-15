@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { BrandLogo } from "@/components/brand";
 
 export const dynamic = "force-dynamic";
 
@@ -15,12 +16,7 @@ export default function LandingPage() {
       <header className="fixed top-0 w-full z-50 bg-surface/80 backdrop-blur-md border-b border-brand-500/10">
         <div className="mx-auto max-w-7xl px-6 md:px-[8%] h-16 flex items-center justify-between">
           <Link href="/" className="flex items-center gap-2">
-            <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-brand-500 to-brand-300 flex items-center justify-center">
-              <span className="font-heading font-bold text-sm text-white leading-none">B</span>
-            </div>
-            <span className="font-heading font-semibold text-lg tracking-tight">
-              bary<span className="text-brand-400">resto</span>
-            </span>
+            <BrandLogo size="md" />
           </Link>
           <nav className="flex items-center gap-6">
             <a
@@ -30,7 +26,7 @@ export default function LandingPage() {
               Ingresar
             </a>
             <a
-              href={loginUrl}
+              href={adminUrl ? `${adminUrl}/registro` : "/registro"}
               className="hidden sm:inline-flex items-center gap-2 bg-brand-500 hover:bg-brand-600 text-white text-sm font-medium px-5 py-2.5 rounded-lg transition-all hover:-translate-y-px shadow-glow hover:shadow-glow-lg"
             >
               Empezar
@@ -125,10 +121,10 @@ export default function LandingPage() {
 
           <div className="mt-10 flex flex-col sm:flex-row justify-center gap-4">
             <a
-              href={loginUrl}
+              href={adminUrl ? `${adminUrl}/registro` : "/registro"}
               className="inline-flex items-center justify-center gap-2 bg-brand-500 hover:bg-brand-600 text-white font-heading font-semibold px-8 py-4 rounded-xl text-base transition-all hover:-translate-y-px shadow-glow hover:shadow-glow-lg"
             >
-              Acceso para restaurantes
+              Registra tu restaurante
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
             </a>
             <a
@@ -258,7 +254,7 @@ export default function LandingPage() {
             Registrate, configura tu restaurante y empeza a recibir reservas en minutos.
           </p>
           <a
-            href={loginUrl}
+            href={adminUrl ? `${adminUrl}/registro` : "/registro"}
             className="inline-flex items-center gap-2 bg-brand-500 hover:bg-brand-600 text-white font-heading font-semibold px-10 py-4 rounded-xl text-base transition-all hover:-translate-y-px shadow-glow hover:shadow-glow-lg"
           >
             Comenzar ahora
@@ -270,14 +266,7 @@ export default function LandingPage() {
       {/* ── Footer ── */}
       <footer className="border-t border-brand-500/10 py-10">
         <div className="mx-auto max-w-7xl px-6 md:px-[8%] flex flex-col sm:flex-row items-center justify-between gap-4">
-          <div className="flex items-center gap-2">
-            <div className="w-7 h-7 rounded-lg bg-gradient-to-br from-brand-500 to-brand-300 flex items-center justify-center">
-              <span className="font-heading font-bold text-xs text-white leading-none">B</span>
-            </div>
-            <span className="font-heading font-medium text-sm text-zinc-500">
-              bary<span className="text-zinc-400">resto</span>
-            </span>
-          </div>
+          <BrandLogo size="sm" />
 
           <div className="text-sm text-zinc-600 flex items-center gap-1.5">
             Un producto de{" "}

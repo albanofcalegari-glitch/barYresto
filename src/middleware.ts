@@ -27,6 +27,8 @@ export async function middleware(req: NextRequest) {
     return NextResponse.next();
   }
 
+  if (pathname.startsWith("/registro")) return NextResponse.next();
+
   // ── Platform host: only /platform + /login ──
   if (isPlatformHost) {
     const isAllowed =
@@ -44,7 +46,7 @@ export async function middleware(req: NextRequest) {
     }
 
     if (pathname.startsWith("/platform")) {
-      const token = await getToken({ req, secret: process.env.AUTH_SECRET, salt: "authjs.session-token" });
+      const token = await getToken({ req, secret: process.env.AUTH_SECRET });
       if (!token) {
         const url = req.nextUrl.clone();
         url.pathname = "/login";

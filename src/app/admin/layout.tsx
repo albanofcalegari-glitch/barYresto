@@ -5,6 +5,7 @@ import { signOut } from "@/lib/auth";
 import { ROLE_LABELS } from "@/lib/permissions";
 import type { RoleCode } from "@prisma/client";
 import { MobileSidebar } from "./mobile-sidebar";
+import { BrandLogo } from "@/components/brand";
 
 export const dynamic = "force-dynamic";
 
@@ -54,11 +55,8 @@ export default async function AdminLayout({
           </form>
         }
       >
-        <Link href="/admin" className="flex items-center gap-2.5 mb-8">
-          <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-brand-500 to-brand-300 flex items-center justify-center shadow-glow">
-            <span className="text-white font-bold text-sm">B</span>
-          </div>
-          <span className="text-lg font-heading font-bold text-white">baryresto</span>
+        <Link href="/admin" className="mb-8 inline-flex">
+          <BrandLogo size="md" />
         </Link>
         <nav className="flex flex-col gap-0.5 text-sm">
           {NAV.map((item) => (

@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import { auth, signIn } from "@/lib/auth";
+import { BrandLogo } from "@/components/brand";
 
 export const dynamic = "force-dynamic";
 export const metadata = { title: "Ingresar" };
@@ -8,7 +9,7 @@ export const metadata = { title: "Ingresar" };
 export default async function LoginPage({
   searchParams,
 }: {
-  searchParams: { callbackUrl?: string; error?: string };
+  searchParams: { callbackUrl?: string; error?: string; registered?: string };
 }) {
   const session = await auth();
   if (session?.user) {
@@ -32,11 +33,17 @@ export default async function LoginPage({
 
       <div className="w-full max-w-sm relative z-10">
         <div className="text-center mb-10">
-          <Link href="/" className="font-heading text-3xl bg-gradient-to-r from-brand-500 to-brand-300 bg-clip-text text-transparent tracking-wide">
-            baryresto
+          <Link href="/" className="inline-flex">
+            <BrandLogo size="lg" />
           </Link>
           <p className="mt-3 text-sm text-zinc-500 font-light">Ingresa a tu cuenta</p>
         </div>
+
+        {searchParams.registered === "1" && (
+          <div className="mb-4 rounded-lg bg-emerald-500/10 border border-emerald-500/20 p-3 text-sm text-emerald-400">
+            Restaurante creado. Ingresa con tu email y contraseña.
+          </div>
+        )}
 
         {searchParams.error === "CredentialsSignin" && (
           <div className="mb-4 rounded-lg bg-red-500/10 border border-red-500/20 p-3 text-sm text-red-400">
@@ -78,11 +85,10 @@ export default async function LoginPage({
         </form>
 
         <p className="mt-8 text-center text-xs text-zinc-600">
-          No tenes cuenta? Contactanos en{" "}
-          <a href="mailto:hola@baryresto.app" className="text-brand-400 hover:underline">
-            hola@baryresto.app
-          </a>
-          .
+          No tenes cuenta?{" "}
+          <Link href="/registro" className="text-brand-400 hover:underline">
+            Registra tu restaurante
+          </Link>
         </p>
       </div>
     </main>
