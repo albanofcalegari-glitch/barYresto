@@ -3,6 +3,15 @@ import { getToken } from "next-auth/jwt";
 
 const ADMIN_HOST = process.env.ADMIN_HOST ?? "baryresto-admin.qngine.com.ar";
 const PLATFORM_HOST = process.env.PLATFORM_HOST ?? "platform-baryresto.qngine.com.ar";
+const IS_PROD = process.env.AUTH_URL?.startsWith("https://") ?? false;
+
+function getSessionToken(req: NextRequest) {
+  return getToken({
+    req,
+    secret: process.env.AUTH_SECRET,
+    secureCookie: IS_PROD,
+  });
+}
 
 export async function middleware(req: NextRequest) {
   const { pathname } = req.nextUrl;
@@ -46,7 +55,7 @@ export async function middleware(req: NextRequest) {
     }
 
     if (pathname.startsWith("/platform")) {
-      const token = await getToken({ req, secret: process.env.AUTH_SECRET });
+      const token = await getSessionToken(req);
       if (!token) {
         const url = req.nextUrl.clone();
         url.pathname = "/login";
@@ -107,11 +116,7 @@ export async function middleware(req: NextRequest) {
 
   if (!isProtected) return NextResponse.next();
 
-  const token = await getToken({
-    req,
-    secret: process.env.AUTH_SECRET,
-    salt: "authjs.session-token",
-  });
+  const token = await getSessionToken(req);
 
   if (!token) {
     const url = req.nextUrl.clone();
