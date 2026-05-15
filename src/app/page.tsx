@@ -1,10 +1,11 @@
 import Image from "next/image";
 import Link from "next/link";
 
-const ADMIN_URL = process.env.NEXT_PUBLIC_ADMIN_URL ?? "";
+export const dynamic = "force-dynamic";
 
 export default function LandingPage() {
-  const loginUrl = ADMIN_URL ? `${ADMIN_URL}/login` : "/login";
+  const adminUrl = process.env.ADMIN_URL ?? "";
+  const loginUrl = adminUrl ? `${adminUrl}/login` : "/login";
 
   return (
     <main className="min-h-screen bg-surface text-white font-sans overflow-hidden">
