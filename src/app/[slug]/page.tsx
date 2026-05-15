@@ -219,9 +219,9 @@ export default async function PublicHome({
               )}
             </div>
 
-            {/* Mapa */}
-            {site?.addressMapUrl ? (
-              <div className="flex flex-col justify-center">
+            {/* Mapa + Reservar */}
+            <div className="flex flex-col justify-center gap-6">
+              {site?.addressMapUrl && (
                 <div className="aspect-[4/3] w-full overflow-hidden border border-th-border">
                   <iframe
                     src={site.addressMapUrl}
@@ -230,16 +230,13 @@ export default async function PublicHome({
                     referrerPolicy="no-referrer-when-downgrade"
                   />
                 </div>
+              )}
+              <div className={site?.addressMapUrl ? "" : "flex items-center justify-center h-full"}>
+                <Link href={`${base}/reservar`} className="pub-btn-gold">
+                  Reservar ahora
+                </Link>
               </div>
-            ) : (
-              <div className="flex items-center justify-center">
-                <div className="text-center">
-                  <Link href={`${base}/reservar`} className="pub-btn-gold">
-                    Reservar ahora
-                  </Link>
-                </div>
-              </div>
-            )}
+            </div>
           </div>
         </div>
       </section>
