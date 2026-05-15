@@ -6,6 +6,8 @@ import { SafeForm } from "@/components/safe-form";
 import { safeUpdateSiteContent } from "@/modules/cms/safe-actions";
 import { ImageUpload } from "@/components/image-upload";
 import { CopyUrlBanner } from "@/components/copy-url-banner";
+import { BusinessHoursEditor } from "./horarios/editor";
+import { upsertBusinessHours } from "@/modules/hours/actions";
 import { env } from "@/lib/env";
 
 export const metadata = { title: "Sitio web" };
@@ -14,13 +16,18 @@ export default async function SitePage() {
   await requirePermission("site.edit");
   const { restaurant } = await requireCurrentRestaurant();
 
-  const site = await prisma.siteContent.findUnique({
-    where: { restaurantId: restaurant.id },
-  });
-
-  const galleryCount = await prisma.mediaAsset.count({
-    where: { restaurantId: restaurant.id, kind: "GALLERY" },
-  });
+  const [site, galleryCount, hours] = await Promise.all([
+    prisma.siteContent.findUnique({
+      where: { restaurantId: restaurant.id },
+    }),
+    prisma.mediaAsset.count({
+      where: { restaurantId: restaurant.id, kind: "GALLERY" },
+    }),
+    prisma.businessHours.findMany({
+      where: { restaurantId: restaurant.id },
+      orderBy: [{ weekday: "asc" }, { openTime: "asc" }],
+    }),
+  ]);
 
   return (
     <div>
@@ -91,13 +98,6 @@ export default async function SitePage() {
         />
 
         <Field
-          name="openingInfo"
-          label="Info de horarios (texto libre)"
-          defaultValue={site?.openingInfo ?? ""}
-          hint={'Ej: "Abrimos de martes a domingo, 12 a 15 y 20 a 24."'}
-        />
-
-        <Field
           name="addressMapUrl"
           label="Link de Google Maps (embed)"
           defaultValue={site?.addressMapUrl ?? ""}
@@ -117,9 +117,30 @@ export default async function SitePage() {
           <button className="btn-primary">Guardar cambios</button>
         </div>
       </SafeForm>
+
+      {/* ── Horarios ── */}
+      <div className="max-w-2xl mt-10">
+        <div className="flex items-baseline justify-between mb-4">
+          <h2 className="text-lg font-heading font-semibold">Horarios de atención</h2>
+          <Link href="/admin/sitio/horarios" className="text-sm text-brand-400 hover:underline">
+            Feriados y días especiales →
+          </Link>
+        </div>
+        <BusinessHoursEditor
+          action={upsertBusinessHours}
+          initial={hours.map((h) => ({
+            weekday: h.weekday,
+            openTime: h.openTime,
+            closeTime: h.closeTime,
+          }))}
+          weekdayLabels={WEEKDAYS}
+        />
+      </div>
     </div>
   );
 }
+
+const WEEKDAYS = ["Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"];
 
 function Field({
   name,

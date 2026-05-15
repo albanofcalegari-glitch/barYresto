@@ -1,6 +1,9 @@
 import Link from "next/link";
+import { prisma } from "@/db/client";
 import { getPublicRestaurantBySlug } from "@/lib/tenant";
 import { MobileNav } from "./mobile-nav";
+
+const WEEKDAYS_SHORT = ["Dom", "Lun", "Mar", "Mié", "Jue", "Vie", "Sáb"];
 
 export async function generateMetadata({
   params,
@@ -26,6 +29,17 @@ export default async function PublicSiteLayout({
   const restaurant = await getPublicRestaurantBySlug(params.slug);
   const base = `/${restaurant.slug}`;
   const site = restaurant.siteContent;
+
+  const hours = await prisma.businessHours.findMany({
+    where: { restaurantId: restaurant.id },
+    orderBy: [{ weekday: "asc" }, { openTime: "asc" }],
+  });
+  const hoursByDay = new Map<number, { openTime: string; closeTime: string }[]>();
+  for (const h of hours) {
+    const arr = hoursByDay.get(h.weekday) ?? [];
+    arr.push({ openTime: h.openTime, closeTime: h.closeTime });
+    hoursByDay.set(h.weekday, arr);
+  }
 
   const waLink = restaurant.whatsappPhone
     ? `https://wa.me/${restaurant.whatsappPhone.replace(/\D/g, "")}?text=${encodeURIComponent(
@@ -99,10 +113,22 @@ export default async function PublicSiteLayout({
             {/* Hours summary */}
             <div>
               <h3 className="text-xs uppercase tracking-widest text-gold mb-3">Horarios</h3>
-              {site?.openingInfo ? (
-                <p className="text-sm text-th-text-muted whitespace-pre-line leading-relaxed">
-                  {site.openingInfo}
-                </p>
+              {hours.length > 0 ? (
+                <div className="space-y-1 text-sm">
+                  {WEEKDAYS_SHORT.map((label, d) => {
+                    const slots = hoursByDay.get(d) ?? [];
+                    return (
+                      <div key={d} className="flex justify-between gap-4">
+                        <span className="text-th-text-muted">{label}</span>
+                        <span className="text-th-text-muted font-light">
+                          {slots.length === 0
+                            ? "Cerrado"
+                            : slots.map((s) => `${s.openTime}–${s.closeTime}`).join(" · ")}
+                        </span>
+                      </div>
+                    );
+                  })}
+                </div>
               ) : (
                 <p className="text-sm text-zinc-500">Consultá nuestros horarios.</p>
               )}

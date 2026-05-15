@@ -32,6 +32,7 @@ export async function upsertBusinessHours(formData: FormData) {
     }),
   ]);
 
+  revalidatePath("/admin/sitio");
   revalidatePath("/admin/sitio/horarios");
   revalidatePath(`/${restaurant.slug}`);
 }
